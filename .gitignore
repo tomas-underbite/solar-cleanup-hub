@@ -1,0 +1,25 @@
+# Dev artifacts / Claude Design handoff bundle (not deployed)
+kleen-up-thermal-inspection/
+*.zip
+
+# Saved-page archive (reference, not part of the site)
+Thermal Drone for Solar Panel Inspection.html
+Thermal Drone for Solar Panel Inspection_files/
+
+# Internal strategy / brief docs (keep private)
+*.md
+
+# Unreferenced / superseded assets
+ChatGPT Image *.png
+tmpmtxwxb7w.webp
+DJI_0179_R.webp
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Claude Code local settings
+.claude/
