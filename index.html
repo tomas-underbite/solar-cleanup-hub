@@ -1,731 +1,1332 @@
 <!doctype html>
-<!--
-  Kleen Up Solar — thermal inspection landing page V1
-
-  V1 notes / things to confirm before V2:
-  - Top of page now embeds the React-based animated "video"
-    (Kleen Up Thermal Inspection (1)/Thermal Inspection.html) via an iframe.
-    The video runs ~50s and loops 8 scenes at a 1920x1080 canvas — sized to
-    16:9 on the page, capped at 88vh on desktop. Zip contained no README, so
-    embedding via iframe was the safest interpretation of "implement Thermal
-    Inspection.html." Confirm before V2 whether this is the intended placement.
-  - The static comparison-image hero is kept directly below the video as a
-    skim-friendly elevator pitch + CTA. Drop or merge if redundant.
-  - Sample-report section uses tmpmtxwxb7w.webp (real thermal aerial) as a
-    placeholder for a blurred SiteMark-style screenshot. Swap in a real
-    sample once approved.
-  - Pricing block deliberately has no figure — waiting on mystery-shop data.
-  - Phone number is a placeholder (+27 [placeholder]). Replace before launch.
-  - GA4 Measurement ID is a placeholder (G-XXXXXXX). Replace before launch.
--->
 <html lang="en-GB">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Thermal drone inspections for commercial solar arrays. Pinpoint underperforming panels in 5 business days. Built for EPCs, PPA/IPP funds, and C&amp;I asset owners." />
-  <title>Kleen Up Solar — Thermal drone inspections for commercial solar</title>
+  <meta name="description" content="Commercial solar O&M, South Africa. Thermal drone inspections, professional panel cleaning, and ongoing performance reporting. 80,000+ panels, 120 MW, 70 sites under management." />
+  <title>Kleen Up Solar, Commercial Solar O&M, South Africa</title>
+  <link rel="canonical" href="https://kleenup.solar/" />
 
-  <!-- Google tag (gtag.js) -->
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3NDZYGWCV"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-B3NDZYGWCV');
-  </script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-B3NDZYGWCV');</script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
     :root {
       --navy: #1f445f;
+      --navy-deep: #0b1c2a;
       --blue: #4e99d4;
+      --gold: #c9a84c;
       --bg: #f7f7f7;
+      --bg-cool: #f0f4f7;
       --surface: #ffffff;
       --text: #2c3345;
       --muted: #8c8c8c;
       --border: #e5e7eb;
-      --shadow-sm: 0 1px 2px rgba(31, 68, 95, 0.06);
-      --shadow-md: 0 6px 18px rgba(31, 68, 95, 0.08);
-      --shadow-lg: 0 14px 36px rgba(31, 68, 95, 0.14);
+      --shadow-sm: 0 1px 2px rgba(31,68,95,.06);
+      --shadow-md: 0 6px 18px rgba(31,68,95,.08);
+      --shadow-lg: 0 14px 36px rgba(31,68,95,.14);
       --radius: 10px;
       --max: 1140px;
       --ease: cubic-bezier(.2,.7,.2,1);
     }
-
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     html, body { margin: 0; padding: 0; }
     body {
       font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      font-size: 17px;
-      line-height: 1.55;
-      color: var(--text);
-      background: var(--bg);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      font-size: 17px; line-height: 1.55; color: var(--text);
+      background: var(--bg); -webkit-font-smoothing: antialiased;
     }
     img { max-width: 100%; display: block; }
     a { color: var(--navy); text-decoration: none; }
     a:hover { color: var(--blue); }
-    h1, h2, h3 { color: var(--navy); font-weight: 700; line-height: 1.15; margin: 0 0 0.5em; letter-spacing: -0.01em; }
-    h1 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); letter-spacing: -0.02em; }
+    h1, h2, h3 {
+      font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+      color: var(--navy); font-weight: 700; line-height: 1.15;
+      margin: 0 0 .5em; letter-spacing: -.015em;
+    }
+    h1 { font-size: clamp(2.2rem, 4.8vw, 3.6rem); letter-spacing: -.03em; }
     h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
     h3 { font-size: 1.15rem; font-weight: 600; }
     p { margin: 0 0 1em; }
+    ul { margin: 0 0 1em; padding-left: 1.3em; }
+    li { margin-bottom: .5em; }
 
-    .container {
-      width: 100%;
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 24px;
+    .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    section { padding: 88px 0; scroll-margin-top: 80px; }
+    .eyebrow {
+      display: inline-block; color: var(--blue); font-weight: 600;
+      font-size: .8rem; letter-spacing: .1em; text-transform: uppercase;
+      margin-bottom: 12px;
     }
+    .section-head { margin-bottom: 48px; max-width: 760px; }
+    .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+    .section-head p { color: var(--text); margin: 8px 0 0; font-size: 1.02rem; }
 
-    /* ---------- nav ---------- */
+    .reveal {
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ---------- NAV ---------- */
     .nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 50;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      background: transparent; border-bottom: 1px solid transparent;
       transition: background 250ms var(--ease), box-shadow 250ms var(--ease), border-color 250ms var(--ease);
-      background: transparent;
-      border-bottom: 1px solid transparent;
     }
     .nav.scrolled {
-      background: rgba(255,255,255,0.96);
+      background: rgba(255,255,255,.96);
       backdrop-filter: saturate(140%) blur(8px);
       box-shadow: var(--shadow-sm);
       border-bottom-color: var(--border);
     }
     .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 16px 24px;
-      max-width: var(--max);
-      margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; padding: 16px 24px; max-width: var(--max); margin: 0 auto;
     }
-    /* Light text while nav floats over the dark video; dark once scrolled. */
     .logo {
-      color: #fff;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      font-size: 1.1rem;
-      transition: color 250ms var(--ease);
+      background: #fff; border-radius: 6px; padding: 4px 10px;
     }
-    .nav.scrolled .logo { color: var(--navy); }
+    .logo img {
+      height: 40px; width: auto; display: block;
+    }
     .nav-links {
-      display: flex;
-      gap: 28px;
-      align-items: center;
-      list-style: none;
-      margin: 0;
-      padding: 0;
+      display: flex; gap: 30px; align-items: center;
+      list-style: none; margin: 0; padding: 0;
     }
     .nav-links a {
-      color: rgba(255,255,255,0.92);
-      font-weight: 500;
-      font-size: 0.95rem;
+      color: rgba(255,255,255,.92); font-weight: 500; font-size: .95rem;
       transition: color 250ms var(--ease);
     }
     .nav.scrolled .nav-links a { color: var(--text); }
     .nav-links a:hover { color: var(--blue); }
-    .nav .btn {
-      padding: 10px 16px;
-      font-size: 0.92rem;
-      background: rgba(255,255,255,0.14);
-      border: 1px solid rgba(255,255,255,0.32);
-      transition: background 250ms var(--ease), border-color 250ms var(--ease), color 250ms var(--ease);
-    }
-    .nav.scrolled .btn {
-      background: var(--navy);
-      border-color: var(--navy);
-    }
-    .nav .btn:hover { background: var(--blue); border-color: var(--blue); }
 
     .btn {
-      display: inline-block;
-      background: var(--navy);
-      color: #fff;
-      padding: 14px 22px;
-      border-radius: var(--radius);
-      font-weight: 600;
-      font-size: 1rem;
-      border: 0;
-      cursor: pointer;
+      display: inline-block; background: var(--navy); color: #fff;
+      padding: 14px 22px; border-radius: var(--radius); font-weight: 600; font-size: 1rem;
+      border: 0; cursor: pointer; text-align: center; line-height: 1;
       transition: background 200ms var(--ease), transform 200ms var(--ease), box-shadow 200ms var(--ease);
-      text-align: center;
-      line-height: 1;
     }
     .btn:hover { background: var(--blue); color: #fff; transform: translateY(-1px); box-shadow: var(--shadow-md); }
-    .btn-ghost {
-      background: transparent;
-      color: var(--navy);
-      padding: 14px 22px;
-      font-weight: 600;
-      font-size: 1rem;
-      border-radius: var(--radius);
+    .nav .btn {
+      padding: 11px 20px; font-size: .74rem;
+      font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      border-radius: 2px;
+      background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.34);
     }
-    .btn-ghost:hover { color: var(--blue); }
+    .nav.scrolled .btn { background: var(--navy); border-color: var(--navy); }
+    .nav .btn:hover { background: var(--blue); border-color: var(--blue); }
 
-    /* ---------- video hero (vanilla rebuild of Thermal Inspection.html) ---------- */
-    .video-hero {
+    .btn-ghost {
+      display: inline-block; background: transparent; color: #fff;
+      border: 2px solid rgba(255,255,255,.55); padding: 12px 20px;
+      border-radius: var(--radius); font-weight: 600; font-size: 1rem;
+      text-align: center; line-height: 1;
+      transition: background 200ms var(--ease), border-color 200ms var(--ease);
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.85); color: #fff; }
+
+    /* Prominent CTA variant: uppercase, wide letter-spacing, square corners */
+    .btn-cta {
+      display: inline-block; background: var(--navy); color: #fff;
+      padding: 16px 28px; border-radius: 2px;
+      font-weight: 700; font-size: .82rem;
+      letter-spacing: .14em; text-transform: uppercase;
+      border: 0; cursor: pointer; text-align: center; line-height: 1;
+      transition: background 200ms var(--ease), transform 200ms var(--ease), box-shadow 200ms var(--ease);
+    }
+    .btn-cta:hover {
+      background: var(--blue); color: #fff;
+      transform: translateY(-1px); box-shadow: var(--shadow-md);
+    }
+    .btn-cta--ghost {
+      background: transparent;
+      border: 2px solid rgba(255,255,255,.55);
+      padding: 14px 26px;
+    }
+    .btn-cta--ghost:hover {
+      background: rgba(255,255,255,.1);
+      border-color: rgba(255,255,255,.85);
+    }
+
+    .btn-white {
+      display: inline-block; background: #fff; color: var(--navy);
+      padding: 14px 26px; border-radius: var(--radius); font-weight: 600; font-size: 1rem;
+      transition: background 200ms var(--ease), transform 200ms var(--ease), box-shadow 200ms var(--ease);
+    }
+    .btn-white:hover { background: #e4f0fa; color: var(--navy); transform: translateY(-1px); }
+
+    /* ---------- HAMBURGER (mobile) ---------- */
+    .hamburger {
+      display: none;
+      width: 40px; height: 40px; padding: 8px;
+      background: transparent; border: 0; cursor: pointer;
+    }
+    .hamburger span {
+      display: block; width: 100%; height: 2px;
+      background: #fff; margin: 5px 0;
+      transition: background 200ms var(--ease), transform 200ms var(--ease), opacity 200ms var(--ease);
+    }
+    .nav.scrolled .hamburger span { background: var(--navy); }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      position: relative; min-height: 92vh;
+      display: flex; align-items: center;
+      background: #0b1c2a; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('website%20assets/Goodwood%20HD.png');
+      background-size: cover; background-position: center 38%;
+      will-change: transform;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(6,15,24,.62) 0%, transparent 22%),
+        linear-gradient(105deg, rgba(6,15,24,.92) 0%, rgba(6,15,24,.68) 50%, rgba(6,15,24,.32) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 140px 0 96px; max-width: 760px;
+    }
+    .hero-eyebrow {
+      color: var(--blue); font-weight: 600; font-size: .82rem;
+      letter-spacing: .14em; text-transform: uppercase;
+      margin-bottom: 20px; display: block;
+    }
+    .hero h1 { color: #fff; margin-bottom: 22px; }
+    .hero .sub {
+      color: rgba(255,255,255,.82); font-size: 1.18rem;
+      margin-bottom: 36px; max-width: 620px; line-height: 1.6;
+    }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 52px; }
+
+    .stats {
+      display: flex; gap: 0; flex-wrap: wrap;
+      border: 1px solid rgba(255,255,255,.18); border-radius: var(--radius);
+      overflow: hidden; max-width: 540px;
+      background: rgba(255,255,255,.06); backdrop-filter: blur(10px);
+    }
+    .stat {
+      flex: 1 1 130px; padding: 18px 22px;
+      border-right: 1px solid rgba(255,255,255,.14);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      display: block; color: #fff; font-size: 1.75rem; font-weight: 700;
+      line-height: 1; margin-bottom: 6px; letter-spacing: -.015em;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .stat-label { color: rgba(255,255,255,.6); font-size: .78rem; font-weight: 500; }
+
+    /* ---------- TRUSTED BY (marquee) ---------- */
+    .trusted-by {
+      padding: 40px 0 36px; background: var(--surface);
+      border-bottom: 1px solid var(--border); text-align: center;
+    }
+    .tb-label {
+      color: var(--muted); font-size: .76rem; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase; margin: 0 0 24px;
+    }
+    .marquee {
+      position: relative; overflow: hidden;
+      padding: 8px 0;
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+      mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    }
+    .marquee-track {
+      display: flex; align-items: center;
+      width: max-content;
+      animation: marquee 22s linear infinite;
+      will-change: transform; backface-visibility: hidden;
+    }
+    .marquee-set {
+      display: flex; align-items: center;
+      gap: 64px;
+      padding-right: 64px;
+    }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    .marquee-set img {
+      height: 60px; width: 210px; flex-shrink: 0;
+      object-fit: contain;
+      opacity: .55; filter: grayscale(100%);
+      transition: opacity 200ms var(--ease), filter 200ms var(--ease);
+    }
+    .marquee-set img:hover { opacity: 1; filter: grayscale(0%); }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ---------- VALUE PROPS (Pattern B) ---------- */
+    .value-props { background: var(--bg-cool); }
+    .vp-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 56px; text-align: center;
+    }
+    .vp-item { padding: 0 8px; }
+    .vp-icon {
+      width: 56px; height: 56px;
+      margin: 0 auto 22px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue);
+    }
+    .vp-icon svg { width: 100%; height: 100%; }
+    .vp-label {
+      display: block; font-weight: 700;
+      color: var(--blue); font-size: .76rem;
+      letter-spacing: .14em; text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .vp-copy {
+      color: var(--text); font-size: 1rem;
+      line-height: 1.65; margin: 0;
+      max-width: 280px; margin-left: auto; margin-right: auto;
+    }
+
+    /* ---------- FEATURED TESTIMONIAL (Pattern C) ---------- */
+    .featured-testi {
       position: relative;
-      width: 100%;
-      background: #060f18;
+      padding: 120px 0;
+      background-color: #0b1c2a;
+      background-image: url('website%20assets/Goodwood%20HD.png');
+      background-size: cover; background-position: center;
+      color: #fff;
+      overflow: hidden;
+    }
+    .featured-testi::before {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(0,0,0,.72);
+      z-index: 0;
+    }
+    .featured-testi .container { position: relative; z-index: 1; }
+    .ft-inner {
+      display: flex; align-items: center;
+      gap: 32px; max-width: 920px;
+    }
+    .ft-avatar {
+      flex-shrink: 0;
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: var(--blue);
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,.4);
+    }
+    .ft-avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      display: block;
+    }
+    .ft-bar {
+      flex-shrink: 0;
+      width: 3px; align-self: stretch;
+      min-height: 100px;
+      background: var(--gold);
+    }
+    .ft-body { flex: 1; }
+    .ft-quote {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+      font-weight: 500; color: #fff;
+      line-height: 1.45; margin: 0 0 18px;
+      letter-spacing: -.005em;
+    }
+    .ft-name {
+      display: block; font-weight: 700;
+      color: #fff; font-size: 1rem;
+    }
+    .ft-title {
+      display: block; color: rgba(255,255,255,.7);
+      font-size: .9rem; margin-top: 2px;
+    }
+
+    /* ---------- ABOUT SPLIT (Pattern A) ---------- */
+    .about-split {
+      background: var(--surface);
+      padding: 0;
+      overflow: hidden;
+    }
+    .about-split-inner {
+      display: grid; grid-template-columns: 55% 45%;
+      align-items: center;
+      min-height: 540px;
+    }
+    .about-split-photo {
+      background: var(--bg-cool);
+      height: 100%; min-height: 540px;
+      display: flex; align-items: flex-end; justify-content: center;
+      clip-path: polygon(0 0, 88% 0, 100% 100%, 0 100%);
+      -webkit-clip-path: polygon(0 0, 88% 0, 100% 100%, 0 100%);
       padding: 0;
     }
-    .video-stage {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      max-height: 88vh;
-      overflow: hidden;
-      background: #060f18;
-      font-family: 'DM Sans', 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    .about-split-photo img {
+      max-height: 540px;
+      width: auto; max-width: 100%;
+      object-fit: contain;
+      object-position: bottom center;
     }
-    /* The internal canvas is locked to the design dimensions (1920x1080). It's
-       scaled by JS via transform: scale(...) to fit the stage. All scene element
-       sizes, font sizes and offsets are in the design's native pixel units. */
-    .video-canvas {
-      position: absolute;
-      top: 50%; left: 50%;
-      width: 1920px;
-      height: 1080px;
-      transform: translate(-50%, -50%) scale(1);
-      transform-origin: center center;
-      background: #060f18;
-      overflow: hidden;
-      will-change: transform;
-    }
-    .vs-scene {
-      position: absolute; inset: 0;
-      opacity: 0;
-      will-change: opacity;
-    }
-    .vs-fill { position: absolute; inset: 0; }
-    .vs-bg {
-      position: absolute; inset: 0;
-      background-size: cover;
-      background-repeat: no-repeat;
-      transform-origin: center 40%;
-      will-change: transform;
-    }
-    .vs-grid {
-      position: absolute; inset: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(53,145,204,0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(53,145,204,0.05) 1px, transparent 1px);
-      background-size: 80px 80px;
-    }
-    .vs-scanline {
-      position: absolute; inset: 0;
-      pointer-events: none; overflow: hidden;
-    }
-    .vs-scanline > div {
-      position: absolute; left: 0; right: 0;
-      height: 2px; top: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(53,145,204,0.18) 20%, rgba(53,145,204,0.35) 50%, rgba(53,145,204,0.18) 80%, transparent 100%);
-      will-change: top;
-    }
-
-    /* Soft fade from the dark video into the static hero. */
-    .video-hero::after {
-      content: "";
-      position: absolute;
-      left: 0; right: 0; bottom: 0;
-      height: 80px;
-      pointer-events: none;
-      background: linear-gradient(to bottom, rgba(6,15,24,0) 0%, rgba(255,255,255,0.0) 60%, #ffffff 100%);
-    }
-
-    /* ---------- hero ---------- */
-    .hero {
-      padding: 56px 0 56px;
-      background: linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 1fr;
-      gap: 40px;
-      align-items: center;
-    }
-    .hero-copy { opacity: 0; transform: translateY(8px); animation: fade-up 700ms var(--ease) 80ms forwards; }
-    .hero-visual { opacity: 0; transform: translateY(8px); animation: fade-up 800ms var(--ease) 220ms forwards; }
-    .hero h1 { margin-bottom: 14px; }
-    .hero .subhead {
-      font-size: 1.1rem;
-      color: var(--text);
-      margin-bottom: 22px;
+    .about-split-text {
+      padding: 56px 64px 56px 32px;
       max-width: 540px;
     }
-    .hero .ctas {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-    .hero .secondary-link {
-      color: var(--navy);
-      font-weight: 600;
-      font-size: 0.98rem;
-      border-bottom: 1px solid transparent;
-      padding-bottom: 2px;
-      transition: border-color 200ms var(--ease), color 200ms var(--ease);
-    }
-    .hero .secondary-link:hover { color: var(--blue); border-bottom-color: var(--blue); }
-    .trust {
-      color: var(--muted);
-      font-size: 0.92rem;
-      margin-top: 4px;
+    .about-split-text .eyebrow { margin-bottom: 16px; }
+    .about-split-text h2 { margin-bottom: 18px; }
+    .about-split-text p {
+      color: var(--text); font-size: 1.02rem;
+      line-height: 1.65; margin-bottom: 28px;
     }
 
-    .hero-images {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: var(--shadow-lg);
-      background: #0d1f2c;
-    }
-    .hero-images img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      aspect-ratio: 4 / 5;
-    }
-    .hero-caption {
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 0.86rem;
-      text-align: center;
-      max-width: 480px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    @keyframes fade-up {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ---------- generic section ---------- */
-    section { padding: 64px 0; }
-    .section-head { max-width: 720px; margin-bottom: 32px; }
-    .section-head .eyebrow {
-      display: inline-block;
-      color: var(--blue);
-      font-weight: 600;
-      font-size: 0.8rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-    .section-head p { color: var(--text); font-size: 1.02rem; margin: 0; }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 700ms var(--ease), transform 700ms var(--ease);
-      will-change: opacity, transform;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* ---------- value props ---------- */
-    .value-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
+    .bios-band { background: var(--bg-cool); padding: 88px 0; }
+    .bios-statement {
+      background: var(--navy-deep); color: #fff;
+      padding: 64px 24px; text-align: center;
+      margin: 0 0 64px;
       border-radius: var(--radius);
-      padding: 24px 22px;
-      transition: transform 220ms var(--ease), box-shadow 220ms var(--ease), border-color 220ms var(--ease);
-      box-shadow: var(--shadow-sm);
     }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-      border-color: rgba(78, 153, 212, 0.5);
+    .bios-statement p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700;
+      color: #fff; line-height: 1.35;
+      max-width: 860px; margin: 0 auto;
+      letter-spacing: -.015em;
     }
-    .card .icon {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(78, 153, 212, 0.12);
-      color: var(--navy);
-      border-radius: 10px;
-      margin-bottom: 14px;
-      transition: transform 300ms var(--ease), background 300ms var(--ease);
+    .bio-row {
+      display: grid; grid-template-columns: 320px 1fr;
+      gap: 56px; align-items: start;
+      margin-bottom: 72px;
     }
-    .card:hover .icon { background: rgba(78, 153, 212, 0.22); transform: rotate(-4deg) scale(1.04); }
-    .card h3 { margin-bottom: 8px; }
-    .card p { color: var(--text); margin: 0; font-size: 0.96rem; }
+    .bio-row:last-child { margin-bottom: 0; }
+    .bio-row--flip { grid-template-columns: 1fr 320px; }
+    .bio-photo {
+      width: 100%; border-radius: var(--radius);
+      box-shadow: var(--shadow-lg); object-fit: cover;
+      object-position: center top;
+      aspect-ratio: 4/5;
+    }
+    .bio-text h3 { font-size: 1.3rem; margin-bottom: 6px; }
+    .bio-text .bio-title {
+      color: var(--muted); font-size: .92rem;
+      display: block; margin-bottom: 20px;
+    }
+    .bio-text p {
+      color: var(--text); font-size: .98rem;
+      line-height: 1.7; margin-bottom: 14px;
+    }
 
-    /* ---------- what you get ---------- */
-    .rows { display: grid; gap: 12px; }
-    .row {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px 22px;
+    /* ---------- INSPECTION SECTION ---------- */
+    figure { margin: 0; }
+    .insp-grid {
       display: grid;
-      grid-template-columns: 32px 1fr;
-      gap: 16px;
-      align-items: flex-start;
-      box-shadow: var(--shadow-sm);
+      grid-template-columns: 58% 1fr;
+      grid-template-rows: auto auto;
+      column-gap: 48px;
+      row-gap: 32px;
+      align-items: start;
     }
-    .row .check {
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      background: rgba(78, 153, 212, 0.14);
-      color: var(--navy);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 2px;
-    }
-    .row h3 { margin: 0 0 4px; }
-    .row p { margin: 0; color: var(--text); font-size: 0.96rem; }
-
-    /* ---------- cleaning bridge ---------- */
-    .bridge {
-      background: var(--navy);
-      color: #fff;
-      text-align: center;
-    }
-    .bridge .container { max-width: 820px; }
-    .bridge h2 { color: #fff; margin-bottom: 18px; }
-    .bridge p { color: rgba(255,255,255,0.86); font-size: 1.1rem; margin: 0; }
-
-    /* ---------- pricing ---------- */
-    .pricing-block {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 36px 32px;
-      box-shadow: var(--shadow-sm);
-      max-width: 820px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .pricing-block h2 { margin-bottom: 12px; }
-    .pricing-block p { color: var(--text); margin: 0; font-size: 1.05rem; }
-
-    /* ---------- sample report ---------- */
-    .sample-wrap {
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 36px;
-      align-items: center;
-    }
-    .sample-mock {
-      background: #0d1f2c;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      box-shadow: var(--shadow-lg);
+    .insp-left  { grid-column: 1; grid-row: 1; }
+    .insp-right { grid-column: 2; grid-row: 1; align-self: stretch; padding-top: 210px; }
+    /* Heading area: relative so drone can be absolutely positioned within it */
+    .insp-header-area {
       position: relative;
-      overflow: hidden;
+      padding-right: 170px;
+      margin-bottom: 18px;
     }
-    .mock-image {
-      width: 100%;
-      height: auto;
+    .insp-drone-zone {
+      position: absolute;
+      right: -150px; top: -20px;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .insp-drone-flying-img {
+      height: 140px; width: auto;
+      transform: rotate(42deg);
+      transform-origin: center center;
+    }
+    .insp-drone-label {
+      font-size: .68rem; font-weight: 400;
+      color: rgba(44,51,69,.38); letter-spacing: .08em;
+      text-transform: uppercase; margin-top: 52px; text-align: center;
+    }
+    .insp-left p { color: var(--text); font-size: 1.02rem; }
+    .insp-left ul {
+      margin: 18px 0 0; padding-left: 0; list-style: none;
+    }
+    .insp-left ul li {
+      position: relative; padding-left: 28px; margin-bottom: 10px;
+      color: var(--text); font-size: .98rem;
+    }
+    .insp-left ul li::before {
+      content: ''; position: absolute; left: 0; top: 9px;
+      width: 14px; height: 14px;
+      background: var(--blue);
+      mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='5 12 10 17 19 7'/></svg>") no-repeat center / contain;
+      -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='5 12 10 17 19 7'/></svg>") no-repeat center / contain;
+    }
+    .insp-cta-wrap { text-align: left; margin-top: 24px; }
+    .insp-operator-img {
+      display: block; width: 100%; height: auto;
+      max-height: 520px; object-fit: contain; object-position: top center;
+    }
+    /* Stats bar — horizontal, spans full section width */
+    .insp-blue-strip {
+      grid-column: 1 / -1; grid-row: 2;
+      background: var(--navy); border-radius: var(--radius);
+      padding: 28px 40px;
+      display: flex; flex-direction: row;
+      justify-content: space-evenly; align-items: center;
+    }
+    .strip-item { flex: 1; text-align: center; }
+    .strip-value {
+      display: block; font-size: 1.4rem; font-weight: 700;
+      font-family: 'DM Sans', 'Inter', sans-serif;
+      color: #fff; letter-spacing: -.02em; margin-bottom: 4px;
+    }
+    .strip-label {
+      font-size: .82rem; color: rgba(255,255,255,.52); letter-spacing: .02em;
       display: block;
     }
-    .sample-copy h2 { margin-bottom: 10px; }
-    .sample-copy p { color: var(--text); }
-    .sample-copy .small {
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin-top: 6px;
+    .strip-divider {
+      display: block;
+      width: 1px; height: 44px;
+      background: rgba(255,255,255,.18);
+      flex-shrink: 0;
     }
 
-    /* ---------- form ---------- */
-    .form-wrap {
-      background: var(--surface);
-      border: 1px solid var(--border);
+    /* ---------- REPORT SECTION (navy band) ---------- */
+    .report-band {
+      background: var(--navy-deep); color: #fff;
+    }
+    .report-band .eyebrow { color: var(--blue); }
+    .report-band h2 { color: #fff; }
+    .report-rows { display: grid; gap: 22px; margin-bottom: 40px; }
+    .report-row {
+      display: flex; gap: 18px; align-items: flex-start;
+      padding: 22px 24px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.1);
       border-radius: var(--radius);
-      padding: 32px 30px;
-      box-shadow: var(--shadow-md);
-      max-width: 720px;
-      margin: 0 auto;
     }
-    .form-wrap h2 { text-align: center; margin-bottom: 6px; }
-    .form-wrap .lede {
-      color: var(--text);
-      text-align: center;
-      margin-bottom: 22px;
+    .report-row .check {
+      flex-shrink: 0; width: 32px; height: 32px;
+      background: var(--blue); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
     }
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+    .report-row .check svg { width: 16px; height: 16px; color: #fff; }
+    .report-row h3 { color: #fff; font-size: 1.08rem; margin-bottom: 6px; }
+    .report-row p {
+      color: rgba(255,255,255,.74); font-size: .96rem;
+      margin: 0; line-height: 1.55;
     }
-    .form-grid .full { grid-column: 1 / -1; }
-    .field label {
-      display: block;
-      font-size: 0.86rem;
-      font-weight: 500;
-      color: var(--text);
+    .cert-strip {
+      display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+      padding: 24px 0; margin-bottom: 40px;
+      border-top: 1px solid rgba(255,255,255,.1);
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .cert-strip img {
+      height: 56px; width: auto;
+      filter: brightness(0) invert(1);
+      opacity: .85;
+    }
+    .report-gallery {
+      display: flex; overflow-x: auto; gap: 16px;
+      padding-bottom: 12px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .report-gallery img {
+      scroll-snap-align: start;
+      flex: 0 0 auto;
+      width: 320px; height: auto;
+      border-radius: 8px;
+      box-shadow: 0 14px 36px rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.1);
+    }
+    .report-gallery::-webkit-scrollbar { height: 8px; }
+    .report-gallery::-webkit-scrollbar-track { background: rgba(255,255,255,.05); border-radius: 4px; }
+    .report-gallery::-webkit-scrollbar-thumb { background: rgba(255,255,255,.2); border-radius: 4px; }
+    .report-caption {
+      margin-top: 18px; color: rgba(255,255,255,.6);
+      font-size: .9rem; font-style: italic;
+    }
+
+    /* ---------- SERVICES TEASER STRIP ---------- */
+    .svc-teaser { padding: 56px 0; }
+    .svc-teaser-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+    }
+    .svc-teaser-item h3 { font-size: 1.05rem; margin-bottom: 8px; }
+    .svc-teaser-item h3 a { color: var(--navy); border-bottom: 1px solid var(--border); padding-bottom: 1px; }
+    .svc-teaser-item h3 a:hover { color: var(--blue); border-bottom-color: var(--blue); }
+    .svc-teaser-item p { color: var(--text); font-size: .95rem; margin: 0; }
+
+    /* ---------- SCALE BAND ---------- */
+    .scale-band {
+      background: var(--navy); color: #fff;
+      padding: 88px 0; text-align: center;
+      background-image:
+        radial-gradient(circle at 20% 0%, rgba(78,153,212,.12), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(78,153,212,.08), transparent 60%);
+    }
+    .scale-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px;
+    }
+    .scale-num {
+      font-family: 'DM Sans', sans-serif;
+      display: block; font-size: clamp(2.6rem, 5.5vw, 4rem); font-weight: 700;
+      color: #fff; line-height: 1; margin-bottom: 14px;
+      letter-spacing: -.025em;
+    }
+    .scale-label {
+      color: rgba(255,255,255,.92); font-weight: 700;
+      font-size: .76rem; display: block;
+      letter-spacing: .14em; text-transform: uppercase;
       margin-bottom: 6px;
     }
-    .field input,
-    .field textarea {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font: inherit;
-      color: var(--text);
-      background: #fff;
-      transition: border-color 180ms var(--ease), box-shadow 180ms var(--ease);
+    .scale-desc {
+      color: rgba(255,255,255,.55); font-size: .9rem;
     }
-    .field input:focus,
-    .field textarea:focus {
+
+    /* ---------- TESTIMONIALS ---------- */
+    .testi-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+    }
+    .testi {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px 26px;
+      box-shadow: var(--shadow-sm);
+    }
+    .testi blockquote {
+      margin: 0 0 22px; padding: 0;
+      color: var(--text); font-size: 1rem; line-height: 1.65;
+    }
+    .testi blockquote::before {
+      content: '\201C'; color: var(--blue);
+      font-family: 'DM Sans', serif;
+      font-size: 2.6rem; font-weight: 700;
+      line-height: .4; vertical-align: -.4em; margin-right: 4px;
+    }
+    .testi-name {
+      font-weight: 700; color: var(--navy);
+      font-size: .96rem; display: block;
+    }
+    .testi-title {
+      color: var(--muted); font-size: .86rem;
+      display: block; margin-top: 2px;
+    }
+
+    /* ---------- CALCULATOR (navy section) ---------- */
+    .calc-section {
+      background: var(--navy-deep);
+      padding-top: 0;
+    }
+    .calc-section .eyebrow { color: var(--blue); }
+    .calc-section h2 { color: #fff; }
+    .calc-section .section-head p { color: rgba(255,255,255,.7); }
+
+    .calc-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 44px 40px;
+      box-shadow: var(--shadow-lg);
+      max-width: 720px; margin: 0 auto;
+    }
+    .calc-fields {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+      margin-bottom: 22px;
+    }
+    .calc-field { display: flex; flex-direction: column; }
+    .calc-field label,
+    .calc-gate label {
+      font-size: .86rem; font-weight: 600;
+      color: var(--text); margin-bottom: 8px;
+    }
+    .calc-field select,
+    .calc-gate input {
+      padding: 13px 14px;
+      font: inherit; color: var(--text);
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      transition: border-color 180ms var(--ease);
+      width: 100%;
+    }
+    .calc-field select:focus,
+    .calc-gate input:focus {
       outline: none;
       border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(78, 153, 212, 0.18);
     }
-    .field textarea { min-height: 90px; resize: vertical; }
-    .form-submit { margin-top: 18px; text-align: center; }
-    .form-submit .btn { width: 100%; padding: 16px 22px; font-size: 1.02rem; }
-    .reassure {
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.88rem;
-      margin: 10px 0 0;
+    .calc-gate {
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 12px; align-items: end;
+      margin-bottom: 24px;
     }
-    .form-success {
-      text-align: center;
-      padding: 24px 0;
+    .calc-gate > div { display: flex; flex-direction: column; }
+    .calc-gate button {
+      background: var(--navy); color: #fff;
+      padding: 13px 22px;
+      border: 0; border-radius: 2px;
+      font: inherit; font-weight: 700; font-size: .82rem;
+      letter-spacing: .14em; text-transform: uppercase;
+      cursor: pointer;
+      transition: background 180ms var(--ease), transform 180ms var(--ease);
+      height: 48px;
     }
-    .form-success h3 { color: var(--navy); margin-bottom: 6px; }
-    .form-success p { color: var(--text); margin: 0; }
-
-    /* ---------- contact prefooter ---------- */
-    .prefooter {
-      text-align: center;
-      padding: 28px 0;
+    .calc-gate button:hover { background: var(--blue); transform: translateY(-1px); }
+    .calc-result {
+      display: none;
       border-top: 1px solid var(--border);
-      background: var(--bg);
+      padding-top: 28px;
+      animation: fadeUp 400ms var(--ease);
     }
-    .prefooter p { margin: 0; color: var(--text); font-size: 1rem; }
-    .prefooter a { color: var(--navy); font-weight: 600; }
-    .prefooter a:hover { color: var(--blue); }
+    .calc-result.visible { display: block; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .result-range {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 700; color: var(--navy);
+      letter-spacing: -.015em; line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .result-label { color: var(--muted); font-size: .88rem; margin-bottom: 18px; }
+    .result-breakdown { margin-bottom: 18px; }
+    .rb-row {
+      display: flex; justify-content: space-between;
+      padding: 6px 0; font-size: .94rem; color: var(--text);
+    }
+    .calc-disclaimer {
+      color: var(--muted); font-size: .82rem;
+      line-height: 1.55; margin: 0;
+    }
 
-    /* ---------- footer ---------- */
+    /* ---------- FAQ ---------- */
+    .faq-list {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0; list-style: none;
+      display: grid; grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(4, auto);
+      grid-auto-flow: column;
+      gap: 10px 22px;
+      align-items: start;
+    }
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+    .faq-item summary {
+      padding: 20px 24px;
+      font-weight: 600; font-size: 1rem;
+      color: var(--navy);
+      cursor: pointer; list-style: none;
+      display: flex; justify-content: space-between;
+      align-items: center; gap: 16px;
+      user-select: none;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+';
+      font-size: 1.4rem; font-weight: 300;
+      color: var(--blue); flex-shrink: 0; line-height: 1;
+      transition: transform 200ms var(--ease);
+    }
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-item .faq-body {
+      padding: 0 24px 20px;
+      color: var(--text); font-size: .97rem; line-height: 1.65;
+      border-top: 1px solid var(--border);
+    }
+    .faq-item .faq-body p { margin: 14px 0 0; }
+
+    /* ---------- CONTACT ---------- */
+    .contact-grid {
+      display: grid; grid-template-columns: 1.2fr 1fr;
+      gap: 56px; align-items: start;
+    }
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .contact-field { display: flex; flex-direction: column; }
+    .contact-field label {
+      font-size: .86rem; font-weight: 600;
+      color: var(--text); margin-bottom: 6px;
+    }
+    .contact-field input,
+    .contact-field select,
+    .contact-field textarea {
+      padding: 13px 14px; font: inherit; color: var(--text);
+      background: #fff;
+      border: 1.5px solid var(--border); border-radius: 8px;
+      transition: border-color 180ms var(--ease);
+      width: 100%;
+    }
+    .contact-field textarea { min-height: 130px; resize: vertical; }
+    .contact-field input:focus,
+    .contact-field select:focus,
+    .contact-field textarea:focus {
+      outline: none; border-color: var(--blue);
+    }
+    .contact-form button {
+      align-self: flex-start;
+      background: var(--navy); color: #fff;
+      padding: 16px 30px; border: 0;
+      border-radius: 2px;
+      font: inherit; font-weight: 700; font-size: .82rem;
+      letter-spacing: .14em; text-transform: uppercase;
+      cursor: pointer; margin-top: 8px;
+      transition: background 180ms var(--ease), transform 180ms var(--ease);
+    }
+    .contact-form button:hover { background: var(--blue); transform: translateY(-1px); }
+    .contact-details {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px 28px;
+      box-shadow: var(--shadow-sm);
+    }
+    .contact-details h3 {
+      font-size: 1.04rem; margin-bottom: 18px;
+      color: var(--navy);
+    }
+    .contact-detail-row {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 0; border-bottom: 1px solid var(--border);
+    }
+    .contact-detail-row:last-child { border-bottom: none; }
+    .contact-detail-row svg {
+      flex-shrink: 0; width: 18px; height: 18px;
+      color: var(--blue); margin-top: 2px;
+    }
+    .contact-detail-row .label {
+      display: block; color: var(--muted);
+      font-size: .78rem; text-transform: uppercase;
+      letter-spacing: .06em; font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .contact-detail-row .value {
+      display: block; color: var(--text);
+      font-size: .96rem; font-weight: 500;
+    }
+    .contact-detail-row a:hover { color: var(--blue); }
+
+    /* ---------- FOOTER ---------- */
     footer {
-      background: var(--navy);
-      color: rgba(255,255,255,0.82);
-      padding: 26px 0;
+      background: var(--navy-deep); padding: 56px 0 36px;
+      color: rgba(255,255,255,.6);
     }
     .foot-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      flex-wrap: wrap;
+      display: grid; grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 40px; align-items: start;
     }
-    .foot-logo { color: #fff; font-weight: 700; font-size: 1rem; }
-    .socials { display: flex; gap: 14px; }
-    .socials a {
-      width: 36px; height: 36px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.08);
-      color: #fff;
-      transition: background 200ms var(--ease), transform 200ms var(--ease);
+    .foot-brand { max-width: 320px; }
+    .foot-logo {
+      display: inline-block; background: #fff;
+      border-radius: 6px; padding: 4px 8px; margin-bottom: 16px;
     }
-    .socials a:hover { background: var(--blue); transform: translateY(-1px); color: #fff; }
-    .copy { color: rgba(255,255,255,0.65); font-size: 0.86rem; margin: 0; }
+    .foot-logo img { height: 32px; }
+    .foot-tagline {
+      color: #fff; font-weight: 600;
+      font-size: 1rem; margin-bottom: 8px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .foot-loc {
+      color: rgba(255,255,255,.5); font-size: .86rem;
+      margin: 0;
+    }
+    .foot-col h4 {
+      color: #fff; font-size: .82rem;
+      text-transform: uppercase; letter-spacing: .1em;
+      font-weight: 700; margin-bottom: 16px;
+    }
+    .foot-nav {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .foot-nav a {
+      color: rgba(255,255,255,.6); font-size: .9rem;
+      transition: color 200ms var(--ease);
+    }
+    .foot-nav a:hover { color: #fff; }
+    .foot-socials { display: flex; gap: 12px; }
+    .foot-socials a {
+      display: flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 50%; color: rgba(255,255,255,.7);
+      transition: background 200ms var(--ease), color 200ms var(--ease), border-color 200ms var(--ease);
+    }
+    .foot-socials a:hover {
+      background: var(--blue); color: #fff; border-color: var(--blue);
+    }
+    .foot-socials svg { width: 16px; height: 16px; }
+    .foot-bottom {
+      margin-top: 40px; padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,.1);
+      color: rgba(255,255,255,.4); font-size: .82rem;
+      text-align: center;
+    }
 
-    /* ---------- responsive ---------- */
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 960px) {
+      .insp-grid { grid-template-columns: 1fr; grid-template-rows: auto auto auto; }
+      .insp-left  { grid-column: 1; grid-row: 1; padding-bottom: 0; }
+      .insp-right { grid-column: 1; grid-row: 2; align-self: start; }
+      .insp-blue-strip { grid-column: 1; grid-row: 3; flex-direction: column; gap: 20px; padding: 28px 24px; }
+      .insp-header-area { padding-right: 0; }
+      .insp-drone-zone { position: static; margin: 16px 0 4px; }
+      .insp-operator-img { max-height: 360px; }
+      .strip-divider { width: 48px; height: 1px; }
+      .svc-teaser-grid { grid-template-columns: 1fr 1fr; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .scale-grid { grid-template-columns: 1fr; gap: 40px; }
+      .bio-row,
+      .bio-row--flip { grid-template-columns: 1fr; gap: 28px; }
+      .bio-row--flip .bio-photo { order: -1; }
+      .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+      .vp-grid { grid-template-columns: 1fr; gap: 40px; }
+      .faq-list { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; }
+      .about-split-inner {
+        grid-template-columns: 1fr; min-height: auto;
+      }
+      .about-split-photo {
+        clip-path: none; -webkit-clip-path: none;
+        min-height: 360px; padding: 32px 0 0;
+      }
+      .about-split-photo img { max-height: 360px; }
+      .about-split-text { padding: 48px 24px; max-width: none; }
+      .ft-inner { flex-direction: column; align-items: flex-start; text-align: left; }
+      .ft-bar { width: 60px; height: 3px; min-height: 3px; align-self: flex-start; }
+      .featured-testi { padding: 80px 0; }
+      .foot-inner { grid-template-columns: 1fr 1fr; }
+      .foot-brand { grid-column: 1 / -1; }
+    }
     @media (max-width: 768px) {
       body { font-size: 16px; }
-      section { padding: 48px 0; }
-      .nav-links { display: none; }
-      .hero { padding: 40px 0 40px; }
-      .hero-grid { grid-template-columns: 1fr; gap: 28px; }
-      .video-hero .video-frame { aspect-ratio: 16 / 10; max-height: none; }
-      .value-grid { grid-template-columns: 1fr; }
-      .sample-wrap { grid-template-columns: 1fr; gap: 24px; }
-      .form-grid { grid-template-columns: 1fr; }
-      .pricing-block { padding: 28px 22px; }
-      .form-wrap { padding: 24px 20px; }
-      .foot-inner { justify-content: center; text-align: center; }
-      .copy { width: 100%; text-align: center; }
+      section { padding: 60px 0; }
+      .hero-content { padding: 120px 0 72px; }
+      .hero { min-height: 100svh; }
+      .stats { max-width: 100%; }
+      .stat { flex: 1 1 100%; border-right: none; border-bottom: 1px solid rgba(255,255,255,.14); }
+      .stat:last-child { border-bottom: none; }
+      .nav-links {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        flex-direction: column; gap: 0;
+        background: rgba(255,255,255,.98);
+        backdrop-filter: blur(10px);
+        padding: 16px 24px; border-top: 1px solid var(--border);
+        box-shadow: var(--shadow-md);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { color: var(--text); padding: 12px 0; width: 100%; border-bottom: 1px solid var(--border); }
+      .nav-links li:last-child a { border-bottom: none; }
+      .nav .btn { display: none; }
+      .hamburger { display: block; }
+      .svc-teaser-grid { grid-template-columns: 1fr; }
+      .insp-drone-flying-img { height: 110px; }
+      .insp-operator-img { max-height: 280px; }
+      .calc-fields { grid-template-columns: 1fr; }
+      .calc-gate { grid-template-columns: 1fr; }
+      .calc-gate button { width: 100%; }
+      .calc-card { padding: 32px 24px; }
+      .foot-inner { grid-template-columns: 1fr; }
+      .report-row { flex-direction: row; }
+      .report-gallery img { width: 260px; }
     }
-
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
       }
       .reveal { opacity: 1; transform: none; }
+      .marquee-track { animation: none; flex-wrap: wrap; justify-content: center; }
+      .marquee-set { flex-wrap: wrap; justify-content: center; gap: 36px; padding-right: 0; }
+      .cert-marquee__track { animation: none; flex-wrap: wrap; justify-content: center; gap: 48px; padding: 0 24px; }
+    }
+
+    /* ---------- CERTIFICATION MARQUEE ---------- */
+    .cert-marquee-wrap {
+      background: var(--surface);
+      padding: 64px 0 44px;
+      border-top: 1px solid var(--border);
+    }
+    .cert-marquee-heading {
+      color: var(--muted);
+      font-size: 12px; font-weight: 600;
+      font-family: 'DM Sans', 'Inter', sans-serif;
+      letter-spacing: .1em; text-transform: uppercase;
+      text-align: center;
+      margin: 0 0 28px;
+    }
+    .cert-marquee {
+      overflow: hidden;
+      width: 100%;
+    }
+    .cert-marquee__track {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      width: max-content;
+      animation: certScroll 24s linear infinite;
+      will-change: transform;
+      backface-visibility: hidden;
+    }
+    .cert-marquee__item {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 16px;
+      flex-shrink: 0;
+      min-width: 300px;
+    }
+    .cert-marquee__item img {
+      width: 96px; height: auto; display: block;
+    }
+    .cert-marquee__item span {
+      color: var(--navy);
+      font-family: 'DM Sans', 'Inter', sans-serif;
+      font-weight: 600; font-size: 14px;
+      letter-spacing: .06em; text-transform: uppercase;
+      text-align: center; white-space: nowrap;
+    }
+    @keyframes certScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
     }
   </style>
+
+  <!-- LocalBusiness JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Kleen Up Solar",
+    "description": "Commercial solar operations and maintenance company offering IEC-compliant thermal drone inspections and professional panel cleaning across South Africa.",
+    "url": "https://kleenup.solar",
+    "logo": "https://kleenup.solar/website%20assets/Kleen%20Up%20Solar%20Logo.webp",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Cape Town",
+      "addressRegion": "Western Cape",
+      "addressCountry": "ZA"
+    },
+    "areaServed": "South Africa",
+    "email": "info@kleenup.solar",
+    "telephone": "+27674095945",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "reviewCount": "3"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Justin Cackett" },
+        "reviewBody": "Kleen Up Solar caught our eye due to their holistic and long term approach to solar asset management.",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5" }
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Michael Pritchard" },
+        "reviewBody": "O&M is a poorly neglected part of the South African solar market. KUS is leading the way.",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5" }
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Donovan Dorney" },
+        "reviewBody": "KUS have a quality service and reporting system that allows us to deploy them to our sites at the first signs of efficiency loss.",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5" }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
   <!-- ============ NAV ============ -->
   <header class="nav" id="nav">
     <div class="nav-inner">
-      <a href="#top" class="logo" aria-label="Kleen Up Solar — home">Kleen Up Solar</a>
-      <nav aria-label="Primary">
-        <ul class="nav-links">
-          <li><a href="#top">Home</a></li>
-          <li><a href="#services">Services</a></li>
+      <a href="#" class="logo" aria-label="Kleen Up Solar, home">
+        <img src="website%20assets/Kleen%20Up%20Solar%20Logo.webp" alt="Kleen Up Solar" />
+      </a>
+      <nav aria-label="Primary navigation">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#inspection">Inspection</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="faq.html">FAQ</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-      <a href="#quote" class="btn">Get a quote in 24 hours</a>
+      <a href="#calculator" class="btn">Get a quote</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
-  <main id="top">
-
-    <!-- ============ VIDEO HERO ============ -->
-    <!-- Vanilla-JS reimplementation of Thermal Inspection.html (Claude Design handoff).
-         Same 1920x1080 design canvas, same 8 scenes, same easing/timing as the React prototype. -->
-    <section class="video-hero" aria-label="Thermal drone inspection promo">
-      <div class="video-stage" id="videoStage">
-        <div class="video-canvas" id="videoCanvas">
-          <!-- Scenes are built and animated by the videoEngine script at the bottom of the page. -->
-        </div>
-      </div>
-    </section>
+  <main>
 
     <!-- ============ HERO ============ -->
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <h1>Your commercial solar array is probably losing 10 to 40% to dirt and faults.</h1>
-          <p class="subhead">We&rsquo;ll show you exactly which panels, exactly how much, in 5 business days. Then help you fix it.</p>
-          <div class="ctas">
-            <a href="#quote" class="btn">Get a quote in 24 hours</a>
-            <a href="#sample" class="secondary-link">See a sample report &rarr;</a>
-          </div>
-          <p class="trust">Used by EPCs and asset owners across South Africa. 9+ commercial sites inspected to date.</p>
-        </div>
-
-        <div class="hero-visual">
-          <div class="hero-images" role="group" aria-label="Thermal and visible-light comparison of a commercial solar installation">
-            <img src="tmpm3g__nm9.webp" alt="Side-by-side comparison of a commercial rooftop solar array. Top half is a visible-light photo of clean-looking panels; bottom half is the thermal capture of the same panels, revealing several hot anomalies." />
-            <img src="assets/DJI_0179_R.webp" alt="Colour thermal heatmap of a large commercial solar array captured from a drone, with hot cells highlighted in yellow and white against cooler purple panels." />
-          </div>
-          <p class="hero-caption">Same panels. RGB on top, thermal below. The hot cells are losing you money.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ VALUE PROPS ============ -->
-    <section id="services">
+    <section class="hero" aria-label="Hero">
+      <div class="hero-bg" id="heroBg" aria-hidden="true"></div>
+      <div class="hero-overlay" aria-hidden="true"></div>
       <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">Why Kleen Up Solar</span>
-          <h2>Faster, cleaner, built for commercial portfolios.</h2>
-        </div>
-
-        <div class="value-grid">
-          <div class="card reveal">
-            <div class="icon" aria-hidden="true">
-              <!-- magnifier with target -->
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="11" cy="11" r="6.5"></circle>
-                <line x1="11" y1="8" x2="11" y2="14"></line>
-                <line x1="8" y1="11" x2="14" y2="11"></line>
-                <line x1="20" y1="20" x2="16" y2="16"></line>
-              </svg>
-            </div>
-            <h3>Find faults in hours, not weeks</h3>
-            <p>Up to 97% faster than manual inspections, no plant downtime.</p>
+        <div class="hero-content">
+          <span class="hero-eyebrow">Commercial Solar O&amp;M, South Africa</span>
+          <h1>Your solar portfolio is probably underperforming. We will show you exactly why.</h1>
+          <p class="sub">We find every fault your monitoring system can't see, mapped to GPS coordinates, classified by severity, at R&nbsp;7,500 flat, well below market rates.</p>
+          <div class="hero-ctas">
+            <a href="#calculator" class="btn-cta">Request a thermal inspection</a>
+            <a href="#report" class="btn-cta btn-cta--ghost">See a sample report</a>
           </div>
-
-          <div class="card reveal">
-            <div class="icon" aria-hidden="true">
-              <!-- 5-day clock -->
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="9"></circle>
-                <polyline points="12 7 12 12 15.5 14"></polyline>
-              </svg>
+          <div class="stats" role="list" aria-label="Portfolio statistics">
+            <div class="stat" role="listitem">
+              <span class="stat-num">80,000+</span>
+              <span class="stat-label">Panels</span>
             </div>
-            <h3>Report in 5 business days</h3>
-            <p>Most competitors take 2 weeks. We deliver inside one working week.</p>
-          </div>
-
-          <div class="card reveal">
-            <div class="icon" aria-hidden="true">
-              <!-- portfolio building -->
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="3" y="9" width="7" height="12" rx="1"></rect>
-                <rect x="14" y="4" width="7" height="17" rx="1"></rect>
-                <line x1="5.5" y1="13" x2="7.5" y2="13"></line>
-                <line x1="5.5" y1="17" x2="7.5" y2="17"></line>
-                <line x1="16.5" y1="9" x2="18.5" y2="9"></line>
-                <line x1="16.5" y1="13" x2="18.5" y2="13"></line>
-                <line x1="16.5" y1="17" x2="18.5" y2="17"></line>
-              </svg>
+            <div class="stat" role="listitem">
+              <span class="stat-num">120 MW</span>
+              <span class="stat-label">Portfolio</span>
             </div>
-            <h3>Built for commercial assets</h3>
-            <p>Designed for EPCs, PPA/IPP funds, and C&amp;I asset owners managing real portfolios.</p>
+            <div class="stat" role="listitem">
+              <span class="stat-num">70</span>
+              <span class="stat-label">Sites</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ============ WHAT YOU GET ============ -->
-    <section style="background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <!-- ============ TRUSTED BY (animated marquee) ============ -->
+    <section class="trusted-by">
       <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">What you actually get</span>
-          <h2>A report you can act on, not a PDF you&rsquo;ll never open.</h2>
+        <p class="tb-label">Trusted by commercial solar operators across South Africa</p>
+      </div>
+      <div class="marquee" aria-label="Partner and client brands">
+        <div class="marquee-track">
+          <div class="marquee-set">
+            <img src="website%20assets/Affiliated%20Brands%20Logos/Rensol%20Africa%20Logo.png" alt="Rensol Africa" />
+            <img src="website%20assets/Affiliated%20Brands%20Logos/Nuvo%20Energy.png" alt="Nuvo Energy" />
+            <img src="website%20assets/Affiliated%20Brands%20Logos/Blume%20Logo.png" alt="Blume" />
+            <img src="website%20assets/Affiliated%20Brands%20Logos/Blue%20Sky%20Energy%20Logo.png" alt="Blue Sky Energy" />
+            <img src="website%20assets/Affiliated%20Brands%20Logos/Daisy%20Logo.png" alt="Daisy" />
+          </div>
+          <div class="marquee-set" aria-hidden="true">
+            <img src="website%20assets/Affiliated%20Brands%20Logos/Rensol%20Africa%20Logo.png" alt="" />
+            <img src="website%20assets/Affiliated%20Brands%20Logos/Nuvo%20Energy.png" alt="" />
+            <img src="website%20assets/Affiliated%20Brands%20Logos/Blume%20Logo.png" alt="" />
+            <img src="website%20assets/Affiliated%20Brands%20Logos/Blue%20Sky%20Energy%20Logo.png" alt="" />
+            <img src="website%20assets/Affiliated%20Brands%20Logos/Daisy%20Logo.png" alt="" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ VALUE PROPS (Pattern B) ============ -->
+    <section class="value-props">
+      <div class="container">
+        <div class="vp-grid">
+          <div class="vp-item reveal">
+            <div class="vp-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="22" cy="22" r="13"/>
+                <line x1="22" y1="16" x2="22" y2="28"/>
+                <line x1="16" y1="22" x2="28" y2="22"/>
+                <line x1="40" y1="40" x2="32" y2="32"/>
+              </svg>
+            </div>
+            <span class="vp-label">Fault detection</span>
+            <p class="vp-copy">Up to 97% faster than manual inspection. No plant downtime.</p>
+          </div>
+          <div class="vp-item reveal">
+            <div class="vp-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="24" cy="24" r="18"/>
+                <polyline points="24 13 24 24 31 28"/>
+              </svg>
+            </div>
+            <span class="vp-label">Report in 10-14 days</span>
+            <p class="vp-copy">SiteMark fault report delivered to your inbox within 10-14 days of the inspection flight.</p>
+          </div>
+          <div class="vp-item reveal">
+            <div class="vp-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="6" y="18" width="14" height="24" rx="1"/>
+                <rect x="28" y="8" width="14" height="34" rx="1"/>
+                <line x1="10" y1="26" x2="14" y2="26"/>
+                <line x1="10" y1="34" x2="14" y2="34"/>
+                <line x1="32" y1="18" x2="38" y2="18"/>
+                <line x1="32" y1="26" x2="38" y2="26"/>
+                <line x1="32" y1="34" x2="38" y2="34"/>
+              </svg>
+            </div>
+            <span class="vp-label">Built for commercial assets</span>
+            <p class="vp-copy">Designed for EPCs, PPA funds, and C&amp;I asset owners managing real portfolios.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ THERMAL INSPECTION ============ -->
+    <section id="inspection" style="background:var(--surface);padding-top:64px;">
+      <div class="container">
+
+        <div class="insp-grid">
+
+          <!-- COL 1 ROW 1: text content -->
+          <div class="insp-left reveal">
+            <div class="insp-header-area">
+              <h2>Thermal drone inspection.</h2>
+              <div class="insp-drone-zone">
+                <img src="website%20assets/drone%20flying.png"
+                     alt="DJI Mavic 3 Thermal in flight"
+                     class="insp-drone-flying-img" />
+                <span class="insp-drone-label">DJI Mavic 3 Thermal</span>
+              </div>
+            </div>
+            <p>We find every fault your monitoring system cannot see: string open circuits, hotspots, soiling shadows, bypass diode failures. Each fault mapped to GPS coordinates and classified by severity, all from a single flight.</p>
+            <ul>
+              <li>IEC&nbsp;TS&nbsp;62446-3:2017 compliant on every site</li>
+              <li>SACAA certified pilot, licensed Remote Operating Certificate</li>
+              <li>Georeferenced thermal map and panel-level fault list</li>
+              <li>Prioritised repair recommendations with temperature delta</li>
+              <li>Delivered via SiteMark interactive report within 10-14 days</li>
+              <li>Accepted for insurance submissions and lender due diligence</li>
+            </ul>
+            <div class="insp-cta-wrap">
+              <a href="#calculator" class="btn-cta">Request an inspection</a>
+            </div>
+          </div>
+
+          <!-- COL 2 ROW 1: operator image -->
+          <div class="insp-right reveal">
+            <img src="website%20assets/KleenUp_Drone_Operator_no_bg.png"
+                 alt="SACAA-certified drone operator on site"
+                 class="insp-operator-img" />
+          </div>
+
+          <!-- FULL WIDTH ROW 2: stats bar -->
+          <div class="insp-blue-strip reveal">
+            <div class="strip-item">
+              <span class="strip-value">R 7,500 / day</span>
+              <span class="strip-label">Flat-rate pricing, nationwide</span>
+            </div>
+            <div class="strip-divider" aria-hidden="true"></div>
+            <div class="strip-item">
+              <span class="strip-value">10-14 days</span>
+              <span class="strip-label">From flight to report in your inbox</span>
+            </div>
+            <div class="strip-divider" aria-hidden="true"></div>
+            <div class="strip-item">
+              <span class="strip-value">70+ sites</span>
+              <span class="strip-label">Commercial installations across South Africa</span>
+            </div>
+          </div>
+
         </div>
 
-        <div class="rows">
-          <div class="row reveal">
+      </div>
+
+      <!-- ============ CERTIFICATION MARQUEE ============ -->
+      <div class="cert-marquee-wrap">
+        <p class="cert-marquee-heading">Certifications &amp; Compliance</p>
+        <div class="cert-marquee" aria-label="Certifications and compliance">
+          <div class="cert-marquee__track">
+            <div class="cert-marquee__item">
+              <img src="website%20assets/Cert%20Clip%20Arts/SACAA%20Licensed%20Pilot%20Clip%20Art.png" alt="SACAA Licensed Pilot" />
+              <span>SACAA Licensed Pilot</span>
+            </div>
+            <div class="cert-marquee__item">
+              <img src="website%20assets/Cert%20Clip%20Arts/SACAA%20Certified%20Operator%20-%20ROC%20Clip%20Art.png" alt="SACAA Certified Operator" />
+              <span>SACAA Certified Operator</span>
+            </div>
+            <div class="cert-marquee__item">
+              <img src="website%20assets/Cert%20Clip%20Arts/IEC%20TS%2062446-32017%20-%20Thermal%20Imaging%20Compliant%20Clip%20Art.png" alt="IEC TS 62446-3:2017 Compliant" />
+              <span>IEC TS 62446-3:2017 Compliant</span>
+            </div>
+            <div class="cert-marquee__item">
+              <img src="website%20assets/Cert%20Clip%20Arts/Public%20Liability%20Cover%20Clip%20Art.png" alt="Public Liability Insured" />
+              <span>Public Liability Insured</span>
+            </div>
+            <div class="cert-marquee__item">
+              <img src="website%20assets/Cert%20Clip%20Arts/B-BBEE%20Certified%20Clip%20Art.png" alt="B-BBEE Certified" />
+              <span>B-BBEE Certified</span>
+            </div>
+            <!-- cloned for seamless loop -->
+            <div class="cert-marquee__item" aria-hidden="true">
+              <img src="website%20assets/Cert%20Clip%20Arts/SACAA%20Licensed%20Pilot%20Clip%20Art.png" alt="" />
+              <span>SACAA Licensed Pilot</span>
+            </div>
+            <div class="cert-marquee__item" aria-hidden="true">
+              <img src="website%20assets/Cert%20Clip%20Arts/SACAA%20Certified%20Operator%20-%20ROC%20Clip%20Art.png" alt="" />
+              <span>SACAA Certified Operator</span>
+            </div>
+            <div class="cert-marquee__item" aria-hidden="true">
+              <img src="website%20assets/Cert%20Clip%20Arts/IEC%20TS%2062446-32017%20-%20Thermal%20Imaging%20Compliant%20Clip%20Art.png" alt="" />
+              <span>IEC TS 62446-3:2017 Compliant</span>
+            </div>
+            <div class="cert-marquee__item" aria-hidden="true">
+              <img src="website%20assets/Cert%20Clip%20Arts/Public%20Liability%20Cover%20Clip%20Art.png" alt="" />
+              <span>Public Liability Insured</span>
+            </div>
+            <div class="cert-marquee__item" aria-hidden="true">
+              <img src="website%20assets/Cert%20Clip%20Arts/B-BBEE%20Certified%20Clip%20Art.png" alt="" />
+              <span>B-BBEE Certified</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============ INSPECTION REPORT ============ -->
+    <section id="report" class="report-band">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Inside the report</span>
+          <h2>A report built for asset owners, lenders, and insurers.</h2>
+        </div>
+
+        <div class="report-rows">
+          <div class="report-row reveal">
             <div class="check" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"></polyline></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"></polyline></svg>
             </div>
             <div>
               <h3>Pinpoint the exact panels losing you money</h3>
               <p>AI-driven anomaly detection at cell, module, string, and system level.</p>
             </div>
           </div>
-
-          <div class="row reveal">
+          <div class="report-row reveal">
             <div class="check" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"></polyline></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"></polyline></svg>
             </div>
             <div>
               <h3>Insurance and refinancing-grade documentation</h3>
               <p>IEC TS 62446-3:2017 compliant hardware. Reports accepted by insurers and lenders.</p>
             </div>
           </div>
-
-          <div class="row reveal">
+          <div class="report-row reveal">
             <div class="check" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"></polyline></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"></polyline></svg>
             </div>
             <div>
               <h3>Interactive fault maps you can act on</h3>
               <p>Annotated thermal imagery with repair prioritisation, not a PDF you&rsquo;ll never open.</p>
             </div>
           </div>
-
-          <div class="row reveal">
+          <div class="report-row reveal">
             <div class="check" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"></polyline></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"></polyline></svg>
             </div>
             <div>
               <h3>A baseline you can track year over year</h3>
@@ -733,125 +1334,289 @@
             </div>
           </div>
         </div>
+
+        <div class="report-gallery reveal" aria-label="Sample inspection report screenshots">
+          <img src="website%20assets/SiteMark%20Report/Map%20Overview.png" alt="SiteMark report screenshot,site map overview" />
+          <img src="website%20assets/SiteMark%20Report/Screenshot%202026-05-12%20132106.png" alt="SiteMark report screenshot,site overview" />
+          <img src="website%20assets/SiteMark%20Report/Screenshot%202026-05-12%20132114.png" alt="SiteMark report screenshot,thermal aerial map" />
+          <img src="website%20assets/SiteMark%20Report/Screenshot%202026-05-12%20132123.png" alt="SiteMark report screenshot,fault classification" />
+          <img src="website%20assets/SiteMark%20Report/Screenshot%202026-05-12%20132130.png" alt="SiteMark report screenshot,panel-level detail" />
+          <img src="website%20assets/SiteMark%20Report/Screenshot%202026-05-12%20132150.png" alt="SiteMark report screenshot,fault detail with severity classification" />
+          <img src="website%20assets/SiteMark%20Report/Screenshot%202026-05-12%20132156.png" alt="SiteMark report screenshot,RGB and thermal comparison" />
+          <img src="website%20assets/SiteMark%20Report/Screenshot%202026-05-12%20132204.png" alt="SiteMark report screenshot,temperature delta readings" />
+          <img src="website%20assets/SiteMark%20Report/Screenshot%202026-05-12%20132211.png" alt="SiteMark report screenshot,repair prioritisation list" />
+          <img src="website%20assets/SiteMark%20Report/Screenshot%202026-05-12%20132218.png" alt="SiteMark report screenshot,performance impact summary" />
+          <img src="website%20assets/SiteMark%20Report/Screenshot%202026-05-12%20132228.png" alt="SiteMark report screenshot,annotated thermal map" />
+        </div>
+        <p class="report-caption">Commercial building report, Cape Town, April 2026.</p>
       </div>
     </section>
 
-    <!-- ============ CLEANING BRIDGE ============ -->
-    <section class="bridge reveal">
+    <!-- ============ QUOTE CALCULATOR ============ -->
+    <section id="calculator" class="calc-section">
       <div class="container">
-        <h2>Most inspections reveal panels operating below capacity.</h2>
-        <p>We&rsquo;ll show you the lift available from cleaning your array, with no obligation to use our cleaning service. The decision is always yours, the data is always honest.</p>
-      </div>
-    </section>
+        <div class="section-head center reveal">
+          <span class="eyebrow">Inspection pricing</span>
+          <h2>Get a price.</h2>
+          <p>Get a ballpark figure in seconds. We&rsquo;ll send the full quote to your inbox within 24 hours.</p>
+        </div>
 
-    <!-- ============ PRICING ============ -->
-    <section>
-      <div class="container">
-        <div class="pricing-block reveal">
-          <span class="eyebrow" style="display:inline-block;color:var(--blue);font-weight:600;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:14px;">Pricing</span>
-          <h2>Transparent flat-rate pricing. No per-panel surprises.</h2>
-          <p>Most thermal inspections in South Africa are quoted per megawatt with hidden extras. We quote a flat fee based on your site, agreed before we fly. Quotes returned within 24 hours of enquiry.</p>
+        <div class="calc-card reveal">
+          <div class="calc-fields">
+            <div class="calc-field">
+              <label for="calcPanels">Number of panels</label>
+              <select id="calcPanels">
+                <option value="">Select a range...</option>
+                <option value="0.5">Up to 500 panels</option>
+                <option value="1">500 to 2,000 panels</option>
+                <option value="1.5">2,000 to 5,000 panels</option>
+                <option value="2">5,000 to 10,000 panels</option>
+                <option value="3">10,000 to 20,000 panels</option>
+              </select>
+            </div>
+            <div class="calc-field">
+              <label for="calcCity">Nearest major city to site</label>
+              <select id="calcCity">
+                <option value="">Select a city...</option>
+                <option value="50">Cape Town metro (within 50 km)</option>
+                <option value="250">Paarl / Stellenbosch / Franschhoek area</option>
+                <option value="400">George / Mossel Bay / Garden Route</option>
+                <option value="760">Port Elizabeth / Gqeberha</option>
+                <option value="980">East London</option>
+                <option value="500">Durban / eThekwini</option>
+                <option value="60">Johannesburg / Ekurhuleni</option>
+                <option value="20">Pretoria / Tshwane metro</option>
+                <option value="300">Polokwane / Limpopo</option>
+                <option value="350">Nelspruit / Mbombela</option>
+                <option value="500">Bloemfontein / Free State</option>
+                <option value="700">Kimberley / Northern Cape</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="calc-gate">
+            <div>
+              <label for="calcEmail">Your work email, we&rsquo;ll send the full quote here</label>
+              <input id="calcEmail" type="email" placeholder="you@company.com" autocomplete="email" />
+            </div>
+            <button type="button" id="calcSubmit">See estimate &rarr;</button>
+          </div>
+
+          <div class="calc-result" id="calcResult" aria-live="polite">
+            <div class="result-range" id="calcRange"></div>
+            <div class="result-label">Estimated inspection cost, incl. travel and report. Excl. VAT.</div>
+            <div class="result-breakdown" id="calcBreakdown"></div>
+            <p class="calc-disclaimer">
+              This is an indicative estimate based on a current flat-rate day rate. The formal quote we send to your inbox will be binding.
+              Prices exclude VAT. Travel billed at R6/km from the nearest Kleen Up Solar base.
+              Large sites (&gt;20,000 panels) are quoted separately, <a href="#contact">contact us</a>.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ============ SAMPLE REPORT ============ -->
-    <section id="sample" style="background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <!-- ============ SERVICES TEASER ============ -->
+    <section class="svc-teaser" style="background:var(--bg-cool);">
       <div class="container">
-        <div class="sample-wrap">
-          <div class="sample-mock reveal">
-            <img src="sample%20report.png" alt="Reference mock-up of a Kleen Up Solar thermal inspection report. Shows panel-condition categories (nominal, warm anomaly, hot priority repair), an annotated thermal site map with a temperature scale, an overview of total panels and detected anomalies, a top-priority repairs list with severity and temperature readings, and a mobile companion view." class="mock-image" />
+        <div class="svc-teaser-grid">
+          <div class="svc-teaser-item reveal">
+            <h3><a href="services.html#cleaning">Panel cleaning</a></h3>
+            <p>Water-driven disc brush cleaning using filtered water. Up to 2,000 panels per day, minimal disruption.</p>
           </div>
+          <div class="svc-teaser-item reveal">
+            <h3><a href="services.html#consultancy">O&amp;M consultancy</a></h3>
+            <p>Performance reviews, maintenance programme design, and technical advisory for EPCs and asset owners.</p>
+          </div>
+          <div class="svc-teaser-item reveal">
+            <h3><a href="services.html#reporting">Performance reporting</a></h3>
+            <p>IEC-compliant reporting formatted for lenders, insurers, and board-level review.</p>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:32px;">
+          <a href="services.html" class="btn-cta">See all services &rarr;</a>
+        </div>
+      </div>
+    </section>
 
-          <div class="sample-copy reveal">
-            <span class="eyebrow" style="display:inline-block;color:var(--blue);font-weight:600;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:14px;">Sample report</span>
-            <h2>What you receive.</h2>
-            <p>An interactive thermal map of your site, panel-level fault detection, and prioritised repair recommendations.</p>
-            <p class="small">Request a real sample on the form below.</p>
+    <!-- ============ SCALE BAND ============ -->
+    <section class="scale-band">
+      <div class="container">
+        <div class="scale-grid">
+          <div class="reveal">
+            <span class="scale-num">80,000+</span>
+            <span class="scale-label">Panels managed</span>
+            <span class="scale-desc">Commercial rooftop and ground-mount sites</span>
+          </div>
+          <div class="reveal">
+            <span class="scale-num">120 MW</span>
+            <span class="scale-label">Portfolio managed</span>
+            <span class="scale-desc">C&amp;I, PPA-backed, and EPC-managed</span>
+          </div>
+          <div class="reveal">
+            <span class="scale-num">70</span>
+            <span class="scale-label">Commercial sites served</span>
+            <span class="scale-desc">Inspected, cleaned, or maintained since 2024</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ============ FORM ============ -->
-    <section id="quote">
+    <!-- ============ FEATURED TESTIMONIAL (Pattern C) ============ -->
+    <section class="featured-testi" aria-label="Featured client testimonial">
       <div class="container">
-        <div class="form-wrap reveal" id="formWrap">
-          <h2>Request a quote</h2>
-          <p class="lede">Quotes returned within 24 hours. Inspection delivered in 5 business days.</p>
+        <div class="ft-inner reveal">
+          <div class="ft-avatar">
+            <img src="website%20assets/Justin%20Cacket%20Headshot%20-%20testimonial.jpg" alt="Justin Cackett" />
+          </div>
+          <div class="ft-bar" aria-hidden="true"></div>
+          <div class="ft-body">
+            <p class="ft-quote">Kleen Up Solar caught our eye due to their holistic and long term approach to solar asset management.</p>
+            <span class="ft-name">Justin Cackett</span>
+            <span class="ft-title">Director, Blume</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-          <form id="leadForm" novalidate>
-            <div class="form-grid">
-              <div class="field">
-                <label for="name">Full name</label>
-                <input id="name" name="name" type="text" autocomplete="name" required />
-              </div>
-              <div class="field">
-                <label for="company">Company</label>
-                <input id="company" name="company" type="text" autocomplete="organization" required />
-              </div>
-              <div class="field">
-                <label for="email">Email</label>
-                <input id="email" name="email" type="email" autocomplete="email" required />
-              </div>
-              <div class="field">
-                <label for="phone">Phone</label>
-                <input id="phone" name="phone" type="tel" autocomplete="tel" required />
-              </div>
-              <div class="field full">
-                <label for="site">Tell us about your site</label>
-                <textarea id="site" name="site" placeholder="Approx panels, location, anything urgent"></textarea>
-              </div>
-            </div>
+    <!-- ============ SECONDARY TESTIMONIALS ============ -->
+    <section style="background:var(--surface);padding-top:72px;padding-bottom:72px;">
+      <div class="container">
+        <div class="testi-grid" style="grid-template-columns: 1fr 1fr;">
+          <div class="testi reveal">
+            <blockquote>O&amp;M is a poorly neglected part of the South African solar market. KUS is leading the way.</blockquote>
+            <span class="testi-name">Michael Pritchard</span>
+            <span class="testi-title">Director, STS</span>
+          </div>
+          <div class="testi reveal">
+            <blockquote>KUS have a quality service and reporting system that allows us to deploy them to our sites at the first signs of efficiency loss.</blockquote>
+            <span class="testi-name">Donovan Dorney</span>
+            <span class="testi-title">Daisy Energy</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <div class="form-submit">
-              <button type="submit" class="btn">Request a quote</button>
-              <p class="reassure">We&rsquo;ll respond within one business day with available inspection dates.</p>
+
+    <!-- ============ CONTACT ============ -->
+    <section id="contact" style="background:var(--surface);padding-top:48px;">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Ready to inspect your site?</h2>
+          <p>Quote within 24 hours. Report delivered within 10-14 days. Flat-rate pricing, no per-panel surprises.</p>
+        </div>
+
+        <div class="contact-grid">
+          <!--
+            FORMSPREE INTEGRATION:
+            Replace PLACEHOLDER below with your Formspree form ID before launch.
+            Sign up at https://formspree.io, create a form, copy the form ID
+            (looks like "xyzpqrwo") and paste it in place of PLACEHOLDER.
+          -->
+          <form class="contact-form reveal" action="https://formspree.io/f/PLACEHOLDER" method="POST">
+            <div class="contact-field">
+              <label for="cf-name">Name</label>
+              <input id="cf-name" type="text" name="name" autocomplete="name" required />
             </div>
+            <div class="contact-field">
+              <label for="cf-company">Company</label>
+              <input id="cf-company" type="text" name="company" autocomplete="organization" required />
+            </div>
+            <div class="contact-field">
+              <label for="cf-email">Work email</label>
+              <input id="cf-email" type="email" name="email" autocomplete="email" required />
+            </div>
+            <div class="contact-field">
+              <label for="cf-panels">Number of panels</label>
+              <select id="cf-panels" name="panels" required>
+                <option value="">Select a range...</option>
+                <option>Up to 500 panels</option>
+                <option>500 to 2,000 panels</option>
+                <option>2,000 to 5,000 panels</option>
+                <option>5,000 to 10,000 panels</option>
+                <option>10,000 to 20,000 panels</option>
+                <option>More than 20,000 panels</option>
+              </select>
+            </div>
+            <div class="contact-field">
+              <label for="cf-message">Message</label>
+              <textarea id="cf-message" name="message" placeholder="Site location, anything urgent, sample report request, etc."></textarea>
+            </div>
+            <button type="submit">Send enquiry</button>
           </form>
 
-          <div class="form-success" id="formSuccess" hidden>
-            <h3>Thanks. We&rsquo;ll be in touch within one business day.</h3>
-            <p>If it&rsquo;s urgent, call us on the number below.</p>
-          </div>
+          <aside class="contact-details reveal">
+            <h3>Or get in touch directly</h3>
+            <div class="contact-detail-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><polyline points="3 7 12 13 21 7"></polyline></svg>
+              <div>
+                <span class="label">Email</span>
+                <a href="mailto:info@kleenup.solar" class="value">info@kleenup.solar</a>
+              </div>
+            </div>
+            <div class="contact-detail-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <div>
+                <span class="label">Phone</span>
+                <a href="tel:+27674095945" class="value">067 409 5945</a>
+              </div>
+            </div>
+            <div class="contact-detail-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              <div>
+                <span class="label">Instagram</span>
+                <a href="https://instagram.com/kleenup.solar" target="_blank" rel="noopener" class="value">@kleenup.solar</a>
+              </div>
+            </div>
+            <div class="contact-detail-row">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"></path></svg>
+              <div>
+                <span class="label">LinkedIn</span>
+                <a href="https://www.linkedin.com/company/kleen-up-solar/" target="_blank" rel="noopener" class="value">/company/kleen-up-solar</a>
+              </div>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- ============ PREFOOTER CONTACT ============ -->
-  <section id="contact" class="prefooter">
-    <div class="container">
-      <p>Prefer to call? <a href="tel:+27000000000" id="phoneLink">+27 [placeholder]</a></p>
-    </div>
-  </section>
-
   <!-- ============ FOOTER ============ -->
   <footer>
-    <div class="container foot-inner">
-      <div class="foot-logo">Kleen Up Solar</div>
-
-      <div class="socials" aria-label="Social links">
-        <a href="#" aria-label="LinkedIn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v14H.22V8zm7.4 0h4.37v1.92h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.47 3.04 5.47 6.99V22h-4.56v-6.18c0-1.47-.03-3.36-2.05-3.36-2.06 0-2.38 1.6-2.38 3.25V22H7.62V8z"/>
-          </svg>
-        </a>
-        <a href="#" aria-label="X (Twitter)">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M18.244 2H21.5l-7.5 8.57L23 22h-6.69l-5.24-6.86L4.99 22H1.73l8.02-9.16L1 2h6.85l4.74 6.27L18.24 2zm-1.17 18h1.85L7.02 4H5.05l12.02 16z"/>
-          </svg>
-        </a>
-        <a href="mailto:hello@kleenupsolar.example" aria-label="Email">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-            <polyline points="3 7 12 13 21 7"></polyline>
-          </svg>
-        </a>
+    <div class="container">
+      <div class="foot-inner">
+        <div class="foot-brand">
+          <a href="#" class="foot-logo" aria-label="Kleen Up Solar home">
+            <img src="website%20assets/Kleen%20Up%20Solar%20Logo.webp" alt="Kleen Up Solar" />
+          </a>
+          <p class="foot-tagline">Cleaning Today. Powering Tomorrow.</p>
+          <p class="foot-loc">Cape Town, South Africa</p>
+        </div>
+        <div class="foot-col">
+          <h4>Navigate</h4>
+          <ul class="foot-nav">
+            <li><a href="#inspection">Inspection</a></li>
+            <li><a href="services.html">Other Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h4>Follow</h4>
+          <div class="foot-socials">
+            <a href="https://instagram.com/kleenup.solar" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="https://www.linkedin.com/company/kleen-up-solar/" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"></path></svg>
+            </a>
+          </div>
+        </div>
       </div>
-
-      <p class="copy">&copy; 2026 Kleen Up Solar. All rights reserved.</p>
+      <p class="foot-bottom">&copy; <script>document.write(new Date().getFullYear())</script> Kleen Up Solar. All rights reserved.</p>
     </div>
   </footer>
 
@@ -859,16 +1624,33 @@
     // -------- sticky nav state --------
     (function () {
       var nav = document.getElementById('nav');
-      // Switch to solid nav once user scrolls past the dark video hero.
-      var anchor = document.querySelector('.video-hero') || document.querySelector('.hero');
+      var hero = document.querySelector('.hero');
       function onScroll() {
-        var threshold = anchor ? anchor.offsetHeight - 80 : 200;
-        if (window.scrollY > threshold) nav.classList.add('scrolled');
-        else nav.classList.remove('scrolled');
+        var threshold = 80;
+        nav.classList.toggle('scrolled', window.scrollY > threshold);
       }
       onScroll();
       window.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('resize', onScroll, { passive: true });
+    })();
+
+    // -------- mobile hamburger --------
+    (function () {
+      var btn = document.getElementById('hamburger');
+      var links = document.getElementById('navLinks');
+      if (!btn || !links) return;
+      btn.addEventListener('click', function () {
+        var isOpen = links.classList.toggle('open');
+        btn.classList.toggle('open', isOpen);
+        btn.setAttribute('aria-expanded', String(isOpen));
+      });
+      links.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+          links.classList.remove('open');
+          btn.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
     })();
 
     // -------- reveal on scroll --------
@@ -889,655 +1671,83 @@
       els.forEach(function (el) { io.observe(el); });
     })();
 
-    // -------- form submission (placeholder) --------
+    // -------- subtle hero parallax --------
     (function () {
-      var form = document.getElementById('leadForm');
-      var success = document.getElementById('formSuccess');
-      if (!form) return;
-
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        // Minimal client-side validation — real validation belongs server-side.
-        var required = form.querySelectorAll('[required]');
-        var ok = true;
-        required.forEach(function (input) {
-          if (!input.value.trim()) {
-            input.style.borderColor = '#e98a8a';
-            ok = false;
-          } else {
-            input.style.borderColor = '';
-          }
-        });
-        if (!ok) return;
-
-        // Placeholder event for GA4 wiring — replace with real backend POST.
-        if (typeof gtag === 'function') {
-          gtag('event', 'form_submit', {
-            event_category: 'lead',
-            event_label: 'thermal_inspection_quote'
-          });
+      var bg = document.getElementById('heroBg');
+      if (!bg) return;
+      function onScroll() {
+        var y = window.scrollY;
+        if (y < window.innerHeight) {
+          bg.style.transform = 'translateY(' + (y * 0.28) + 'px)';
         }
-        document.dispatchEvent(new CustomEvent('form_submit_placeholder'));
-
-        form.hidden = true;
-        success.hidden = false;
-      });
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
     })();
 
-    // -------- phone click event --------
+    // -------- quote calculator --------
     (function () {
-      var phone = document.getElementById('phoneLink');
-      if (!phone) return;
-      phone.addEventListener('click', function () {
+      var btnCalc = document.getElementById('calcSubmit');
+      var resultBox = document.getElementById('calcResult');
+      var rangeEl = document.getElementById('calcRange');
+      var breakdownEl = document.getElementById('calcBreakdown');
+      if (!btnCalc) return;
+
+      // ---- Configuration ----
+      // DAY_RATE: R7,500 flat rate per inspection day.
+      // TRAVEL_PER_KM: R6 per km, one-way from nearest KUS base.
+      var DAY_RATE = 7500;
+      var TRAVEL_PER_KM = 6;
+
+      function fmt(n) {
+        return 'R ' + Math.round(n).toLocaleString('en-ZA');
+      }
+
+      btnCalc.addEventListener('click', function () {
+        var panelVal = document.getElementById('calcPanels').value;
+        var cityVal = document.getElementById('calcCity').value;
+        var emailVal = document.getElementById('calcEmail').value.trim();
+
+        if (!panelVal) { document.getElementById('calcPanels').focus(); return; }
+        if (!cityVal) { document.getElementById('calcCity').focus(); return; }
+        if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+          var emailInput = document.getElementById('calcEmail');
+          emailInput.style.borderColor = '#e98a8a';
+          emailInput.focus();
+          setTimeout(function () { emailInput.style.borderColor = ''; }, 2000);
+          return;
+        }
+
+        var days = parseFloat(panelVal);
+        var distKm = parseFloat(cityVal);
+        var inspectionCost = days * DAY_RATE;
+        var travelCost = distKm * TRAVEL_PER_KM;
+        var base = inspectionCost + travelCost;
+        var low = Math.round(base * 0.9 / 100) * 100;
+        var high = Math.round(base * 1.1 / 100) * 100;
+
+        rangeEl.textContent = fmt(low) + ' – ' + fmt(high);
+        breakdownEl.innerHTML =
+          '<div class="rb-row"><span>Inspection (' + (days < 1 ? 'half-day' : days + (days === 1 ? ' day' : ' days')) + ')</span><span>' + fmt(inspectionCost) + '</span></div>' +
+          '<div class="rb-row"><span>Travel (' + distKm + ' km \xd7 R' + TRAVEL_PER_KM + ')</span><span>' + fmt(travelCost) + '</span></div>' +
+          '<div class="rb-row" style="border-top:1px solid var(--border);padding-top:10px;margin-top:6px;font-weight:700;color:var(--navy)"><span>Estimated total</span><span>' + fmt(base) + ' excl. VAT</span></div>';
+
+        resultBox.classList.add('visible');
+        resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
         if (typeof gtag === 'function') {
-          gtag('event', 'phone_click', {
+          gtag('event', 'calculator_quote', {
             event_category: 'lead',
-            event_label: 'footer_phone'
+            event_label: 'quote_calculator',
+            value: Math.round(base)
           });
         }
+
+        // Pre-fill the contact form email field so the user doesn't retype it
+        var contactEmail = document.getElementById('cf-email');
+        if (contactEmail && !contactEmail.value) contactEmail.value = emailVal;
       });
-    })();
-
-    // ============================================================
-    // Video engine — vanilla rebuild of Thermal Inspection.html
-    // (Claude Design React/Babel prototype). Same 1920x1080 canvas,
-    // same 8 scenes, same easing curves and timing fractions. No
-    // playback chrome / no Tweaks panel — production only.
-    // ============================================================
-    (function () {
-      var stage = document.getElementById('videoStage');
-      var canvas = document.getElementById('videoCanvas');
-      if (!stage || !canvas) return;
-
-      // ── Constants (from prototype) ──
-      var ASSETS = 'assets/';
-      var ACCENT = '#3591cc';
-      var NAVY   = '#0d2d4a';
-      var DARK   = '#060f18';
-      var DURATION = 50;     // seconds
-      var FS = 1.0;          // text scale factor (textSize/100 in prototype)
-      var XFADE = 0.018;
-      var SCENE_FRACS = [
-        [0.00, 0.10], [0.09, 0.23], [0.22, 0.38], [0.37, 0.54],
-        [0.53, 0.69], [0.68, 0.82], [0.81, 0.94], [0.93, 1.00],
-      ];
-
-      // Preload images so scenes don't pop in.
-      ['img1.webp','img5.webp','img7.webp','thermal2.webp','DJI_0179_R.webp','chatgpt_render.png']
-        .forEach(function (n) { var im = new Image(); im.src = ASSETS + n; });
-
-      // ── Easing (subset used by prototype) ──
-      var Easing = {
-        linear: function (t) { return t; },
-        easeOutCubic: function (t) { return (--t)*t*t + 1; },
-        easeInOutCubic: function (t) { return t<0.5 ? 4*t*t*t : (t-1)*(2*t-2)*(2*t-2)+1; },
-        easeOutExpo: function (t) { return t===1 ? 1 : 1 - Math.pow(2, -10*t); },
-        easeInOutSine: function (t) { return -(Math.cos(Math.PI*t)-1)/2; },
-        easeOutBack: function (t) {
-          var c1 = 1.70158, c3 = c1 + 1;
-          return 1 + c3 * Math.pow(t-1, 3) + c1 * Math.pow(t-1, 2);
-        }
-      };
-
-      // ── interpolate: keyframe sampling matching the prototype's helper ──
-      function interpolate(t, input, output, ease) {
-        ease = ease || Easing.linear;
-        if (t <= input[0]) return output[0];
-        if (t >= input[input.length-1]) return output[output.length-1];
-        for (var i = 0; i < input.length-1; i++) {
-          if (t >= input[i] && t <= input[i+1]) {
-            var span = input[i+1] - input[i];
-            var local = span === 0 ? 0 : (t - input[i]) / span;
-            var eased = ease(local);
-            return output[i] + (output[i+1] - output[i]) * eased;
-          }
-        }
-        return output[output.length-1];
-      }
-
-      function safeLocal(t, dur, sf, ef) {
-        var span = (ef - sf) * dur;
-        if (!isFinite(span) || span <= 0) return 0;
-        var raw = (t - sf*dur) / span;
-        return Math.max(0, Math.min(1, raw));
-      }
-
-      function sceneOpacity(t, dur, sf, ef, xfDur) {
-        if (!isFinite(dur) || dur <= 0) return 0;
-        var s = sf*dur, e = ef*dur;
-        var fade = Math.max(0.001, xfDur * dur);
-        if (t < s || t > e) return 0;
-        if (t < s + fade) return Math.max(0, Math.min(1, (t-s)/fade));
-        if (t > e - fade) return Math.max(0, Math.min(1, (e-t)/fade));
-        return 1;
-      }
-
-      // ── DOM helpers ──
-      function el(tag, cls, text) {
-        var e = document.createElement(tag);
-        if (cls) e.className = cls;
-        if (text != null) e.textContent = text;
-        return e;
-      }
-      function setS(e, s) { Object.assign(e.style, s); return e; }
-      function fillBg(image, posY) {
-        var d = el('div', 'vs-bg');
-        d.style.backgroundImage = "url('" + ASSETS + image + "')";
-        d.style.backgroundPosition = 'center ' + (posY || '40%');
-        return d;
-      }
-      function vignette(grad) {
-        var d = el('div', 'vs-fill');
-        d.style.background = grad;
-        d.style.pointerEvents = 'none';
-        return d;
-      }
-      function gridLines() { return el('div', 'vs-grid'); }
-      function scanLine() {
-        var w = el('div', 'vs-scanline');
-        var line = el('div');
-        w.appendChild(line);
-        w._line = line;
-        return w;
-      }
-
-      // ── Scene 1: Hook ──
-      function buildS1() {
-        var root = el('div', 'vs-scene');
-        var bg = fillBg('img1.webp', '38%');
-        var overlay = vignette('linear-gradient(to bottom, rgba(6,15,24,0.55) 0%, rgba(6,15,24,0.75) 100%)');
-        var center = el('div', 'vs-fill');
-        setS(center, { display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', padding:'0 140px', textAlign:'center', gap:'20px' });
-
-        var eyebrow = el('div', null, 'Kleen Up Solar · Thermal Drone Inspection');
-        setS(eyebrow, { color: ACCENT, fontSize: (16*FS)+'px', letterSpacing:'0.22em', fontWeight:'600', textTransform:'uppercase', willChange:'opacity, transform' });
-
-        var h1 = el('div');
-        h1.innerHTML = 'Your solar asset is generating <em style="font-style:italic;color:'+ACCENT+';">less</em> than you think.';
-        setS(h1, { color:'#fff', fontSize:(72*FS)+'px', lineHeight:'1.07', fontWeight:'700', textWrap:'balance', willChange:'opacity, transform' });
-
-        center.appendChild(eyebrow);
-        center.appendChild(h1);
-        root.appendChild(bg); root.appendChild(overlay); root.appendChild(center);
-        canvas.appendChild(root);
-
-        return { root: root, tick: function (local) {
-          var imgScale = interpolate(local, [0,1], [1.0, 1.08], Easing.easeInOutSine);
-          bg.style.transform = 'scale(' + imgScale + ')';
-          var tagO = interpolate(local, [0.10, 0.28, 0.72, 0.90], [0,1,1,0]);
-          var tagY = interpolate(local, [0.10, 0.28], [20, 0], Easing.easeOutCubic);
-          eyebrow.style.opacity = tagO;
-          eyebrow.style.transform = 'translateY(' + tagY + 'px)';
-          var h1O = interpolate(local, [0.20, 0.38, 0.72, 0.90], [0,1,1,0]);
-          var h1Y = interpolate(local, [0.20, 0.38], [30, 0], Easing.easeOutCubic);
-          h1.style.opacity = h1O;
-          h1.style.transform = 'translateY(' + h1Y + 'px)';
-        }};
-      }
-
-      // ── Scene 2: Aerial ──
-      function buildS2() {
-        var root = el('div', 'vs-scene');
-        var bg = fillBg('img1.webp', '30%');
-        var overlay = vignette('linear-gradient(to bottom, rgba(6,15,24,0.1) 0%, rgba(6,15,24,0.65) 100%)');
-        var thermalHint = vignette('linear-gradient(135deg, rgba(45,0,110,0.28) 0%, rgba(123,0,180,0.12) 100%)');
-        thermalHint.style.mixBlendMode = 'color';
-        thermalHint.style.opacity = 0;
-
-        var label = el('div');
-        setS(label, { position:'absolute', bottom:'88px', left:'80px', willChange:'opacity, transform' });
-
-        var pill = el('div', null, 'Live site · Goodwood, Cape Town');
-        setS(pill, { background: ACCENT, color:'#fff', fontSize:(12*FS)+'px', letterSpacing:'0.16em', textTransform:'uppercase', fontWeight:'600', padding:'5px 14px', display:'inline-block', marginBottom:'10px' });
-
-        var counter = el('div');
-        setS(counter, { color:'#fff', fontSize:(70*FS)+'px', fontWeight:'700', lineHeight:'1' });
-        var num = el('span', null, '0');
-        var unit = el('span', null, ' kW installed');
-        setS(unit, { fontSize:(30*FS)+'px', fontWeight:'400', opacity:'0.6' });
-        counter.appendChild(num); counter.appendChild(unit);
-
-        label.appendChild(pill); label.appendChild(counter);
-        root.appendChild(bg); root.appendChild(overlay); root.appendChild(thermalHint); root.appendChild(label);
-        canvas.appendChild(root);
-
-        return { root: root, tick: function (local) {
-          var imgScale = interpolate(local, [0,1], [1.03, 1.11], Easing.easeInOutSine);
-          bg.style.transform = 'scale(' + imgScale + ')';
-          thermalHint.style.opacity = interpolate(local, [0.60, 0.85], [0, 0.3], Easing.easeInOutSine);
-          var labelO = interpolate(local, [0.18, 0.34, 0.76, 0.92], [0,1,1,0]);
-          var labelX = interpolate(local, [0.18, 0.34], [-30, 0], Easing.easeOutCubic);
-          label.style.opacity = labelO;
-          label.style.transform = 'translateX(' + labelX + 'px)';
-          var count = Math.round(interpolate(local, [0.25, 0.60], [0, 820], Easing.easeOutExpo));
-          num.textContent = count;
-        }};
-      }
-
-      // ── Scene 3: Thermal wipe ──
-      function buildS3() {
-        var root = el('div', 'vs-scene');
-
-        var before = fillBg('thermal2.webp', '50%');
-        before.style.filter = 'saturate(0.15) brightness(0.7)';
-        before.style.transformOrigin = 'center center';
-
-        var afterClip = el('div', 'vs-fill');
-        afterClip.style.willChange = 'clip-path';
-        var afterImg = fillBg('DJI_0179_R.webp', '50%');
-        afterImg.style.transformOrigin = 'center center';
-        var afterTint = vignette('linear-gradient(135deg, rgba(45,0,110,0.3) 0%, rgba(123,0,180,0.18) 40%, rgba(204,51,0,0.12) 100%)');
-        afterTint.style.mixBlendMode = 'color';
-        afterClip.appendChild(afterImg); afterClip.appendChild(afterTint);
-
-        var glow = el('div');
-        setS(glow, { position:'absolute', top:'0', bottom:'0', width:'4px',
-          background:'linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.85) 50%, transparent 100%)',
-          boxShadow:'0 0 24px 6px rgba(255,255,255,0.45)', transform:'translateX(-50%)', opacity:'0', willChange:'left, opacity' });
-
-        var darkBottom = vignette('linear-gradient(to bottom, rgba(6,15,24,0) 55%, rgba(6,15,24,0.72) 100%)');
-
-        var label = el('div');
-        setS(label, { position:'absolute', bottom:'80px', left:'0', right:'0', textAlign:'center', willChange:'opacity, transform' });
-        var labelEyebrow = el('div', null, 'Thermal imaging reveals what the eye cannot');
-        setS(labelEyebrow, { color: ACCENT, fontSize:(14*FS)+'px', letterSpacing:'0.18em', textTransform:'uppercase', fontWeight:'600', marginBottom:'8px' });
-        var labelTitle = el('div', null, 'Every panel. Every anomaly. Detected.');
-        setS(labelTitle, { color:'#fff', fontSize:(48*FS)+'px', fontWeight:'700' });
-        label.appendChild(labelEyebrow); label.appendChild(labelTitle);
-
-        root.appendChild(before); root.appendChild(afterClip); root.appendChild(glow); root.appendChild(darkBottom); root.appendChild(label);
-        canvas.appendChild(root);
-
-        return { root: root, tick: function (local) {
-          var wipe = interpolate(local, [0.10, 0.55], [0, 100], Easing.easeInOutCubic);
-          var imgZoom = interpolate(local, [0,1], [1.0, 1.07], Easing.easeInOutSine);
-          before.style.transform = 'scale(' + imgZoom + ')';
-          afterImg.style.transform = 'scale(' + imgZoom + ')';
-          afterClip.style.clipPath = 'inset(0 ' + (100 - wipe) + '% 0 0)';
-          if (wipe > 1 && wipe < 99) {
-            glow.style.opacity = '1';
-            glow.style.left = wipe + '%';
-          } else {
-            glow.style.opacity = '0';
-          }
-          var labelO = interpolate(local, [0.52, 0.66, 0.82, 0.95], [0,1,1,0]);
-          var labelY = interpolate(local, [0.52, 0.66], [18, 0], Easing.easeOutCubic);
-          label.style.opacity = labelO;
-          label.style.transform = 'translateY(' + labelY + 'px)';
-        }};
-      }
-
-      // ── Scene 4: Hotspot callout ──
-      function buildS4() {
-        var root = el('div', 'vs-scene');
-        var bg = fillBg('chatgpt_render.png', '55%');
-        bg.style.transformOrigin = '44% 54%';
-        var dim = vignette('rgba(6,15,24,0.30)');
-
-        var crossWrap = el('div');
-        setS(crossWrap, { position:'absolute', left:'43%', top:'51%', willChange:'opacity, transform' });
-
-        var pulseRing = el('div');
-        setS(pulseRing, { position:'absolute', width:'88px', height:'88px', top:'-44px', left:'-44px', borderRadius:'50%', border:'2px solid rgba(255,100,0,1)', willChange:'transform, border-color' });
-
-        var bracketStyles = [
-          { top:'0', left:'0', borderTop:'2px solid #fff', borderLeft:'2px solid #fff' },
-          { top:'0', right:'0', borderTop:'2px solid #fff', borderRight:'2px solid #fff' },
-          { bottom:'0', left:'0', borderBottom:'2px solid #fff', borderLeft:'2px solid #fff' },
-          { bottom:'0', right:'0', borderBottom:'2px solid #fff', borderRight:'2px solid #fff' }
-        ];
-        var brackets = bracketStyles.map(function (s) {
-          var b = el('div');
-          setS(b, Object.assign({ position:'absolute', width:'16px', height:'16px' }, s));
-          return b;
-        });
-
-        var centre = el('div');
-        setS(centre, { position:'absolute', width:'6px', height:'6px', background:'#ff6400', borderRadius:'50%',
-          top:'50%', left:'50%', transform:'translate(-50%, -50%)', boxShadow:'0 0 12px 5px rgba(255,100,0,0.55)' });
-
-        var temp = el('div', null, '20 °C');
-        setS(temp, { position:'absolute', top:'-38px', left:'50%', transform:'translateX(-50%)',
-          background:'rgba(255,100,0,0.92)', color:'#fff', fontSize:(14*FS)+'px', fontWeight:'700',
-          padding:'3px 10px', borderRadius:'3px', whiteSpace:'nowrap' });
-
-        crossWrap.appendChild(pulseRing);
-        brackets.forEach(function (b) { crossWrap.appendChild(b); });
-        crossWrap.appendChild(centre);
-        crossWrap.appendChild(temp);
-
-        var card = el('div');
-        setS(card, { position:'absolute', left:'72px', bottom:'88px',
-          background:'rgba(13,45,74,0.88)', backdropFilter:'blur(10px)', WebkitBackdropFilter:'blur(10px)',
-          border:'1px solid rgba(53,145,204,0.35)', padding:'20px 28px', borderRadius:'4px', maxWidth:'360px',
-          willChange:'opacity, transform' });
-
-        var cardHead = el('div');
-        setS(cardHead, { display:'flex', alignItems:'center', gap:'10px', marginBottom:'10px' });
-        var cardDot = el('div');
-        setS(cardDot, { width:'9px', height:'9px', borderRadius:'50%', background:'#e63000', flexShrink:'0' });
-        var cardEyebrow = el('div', null, 'Critical Anomaly Detected');
-        setS(cardEyebrow, { color:'#ff8060', fontSize:(12*FS)+'px', letterSpacing:'0.14em', fontWeight:'700', textTransform:'uppercase' });
-        cardHead.appendChild(cardDot); cardHead.appendChild(cardEyebrow);
-
-        var cardTitle = el('div', null, 'Hot spot · Panel cluster B-14');
-        setS(cardTitle, { color:'#fff', fontSize:(24*FS)+'px', fontWeight:'600', marginBottom:'6px' });
-
-        var cardBody = el('div');
-        cardBody.innerHTML = 'Temperature delta: <strong style="color:#ff8060">+48&deg;C above baseline</strong><br/>Output loss: <strong style="color:#ff8060">~12%</strong> on affected string';
-        setS(cardBody, { color:'rgba(255,255,255,0.58)', fontSize:(13*FS)+'px', lineHeight:'1.65' });
-
-        card.appendChild(cardHead); card.appendChild(cardTitle); card.appendChild(cardBody);
-
-        root.appendChild(bg); root.appendChild(dim); root.appendChild(crossWrap); root.appendChild(card);
-        canvas.appendChild(root);
-
-        return { root: root, tick: function (local, t) {
-          bg.style.transform = 'scale(' + interpolate(local, [0,1], [1.0, 1.10], Easing.easeInOutSine) + ')';
-          var crossO  = interpolate(local, [0.22, 0.40], [0, 1], Easing.easeOutCubic);
-          var crossSc = interpolate(local, [0.22, 0.40], [1.9, 1.0], Easing.easeOutBack);
-          crossWrap.style.opacity = crossO;
-          crossWrap.style.transform = 'translate(-50%, -50%) scale(' + crossSc + ')';
-          var pulse = Math.sin(t * 4) * 0.5 + 0.5;
-          pulseRing.style.borderColor = 'rgba(255,100,0,' + (0.25 + pulse * 0.75) + ')';
-          pulseRing.style.transform = 'scale(' + (1 + pulse * 0.38) + ')';
-          var tempVal = Math.round(interpolate(local, [0.40, 0.66], [20, 68], Easing.easeOutCubic));
-          temp.textContent = tempVal + ' °C';
-          var cardO = interpolate(local, [0.40, 0.54, 0.80, 0.94], [0,1,1,0]);
-          var cardX = interpolate(local, [0.40, 0.54], [-20, 0], Easing.easeOutCubic);
-          card.style.opacity = cardO;
-          card.style.transform = 'translateX(' + cardX + 'px)';
-        }};
-      }
-
-      // ── Scene 5: Stats ──
-      function buildS5() {
-        var root = el('div', 'vs-scene');
-        var bg = fillBg('img7.webp', '50%');
-        bg.style.filter = 'brightness(0.22) saturate(0.15)';
-        var grad = vignette('linear-gradient(135deg, rgba(6,15,24,0.88) 0%, rgba(13,45,74,0.68) 100%)');
-        var grid = gridLines();
-
-        var stack = el('div', 'vs-fill');
-        setS(stack, { display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', padding:'0 80px', gap:'36px' });
-
-        var topEyebrow = el('div', null, 'Inspection snapshot · 500 kW C&I portfolio');
-        setS(topEyebrow, { color:'rgba(255,255,255,0.42)', fontSize:(14*FS)+'px', letterSpacing:'0.2em', textTransform:'uppercase' });
-
-        var cardsRow = el('div');
-        setS(cardsRow, { display:'flex', gap:'22px', width:'100%' });
-
-        function makeCard(unit, label, color) {
-          var c = el('div');
-          setS(c, { flex:'1', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center',
-            padding:'32px 20px', background:'rgba(13,45,74,0.52)', backdropFilter:'blur(8px)', WebkitBackdropFilter:'blur(8px)',
-            border:'1px solid rgba(53,145,204,0.18)', borderRadius:'4px', willChange:'opacity, transform' });
-          var v = el('div');
-          setS(v, { fontSize:(80*FS)+'px', fontWeight:'700', color: color, lineHeight:'1' });
-          var num = el('span', null, '0');
-          var u = el('span', null, unit);
-          setS(u, { fontSize:(32*FS)+'px', fontWeight:'300', opacity:'0.55' });
-          v.appendChild(num); v.appendChild(u);
-          var lab = el('div', null, label);
-          setS(lab, { color:'rgba(255,255,255,0.5)', fontSize:(14*FS)+'px', marginTop:'10px', textTransform:'uppercase', letterSpacing:'0.12em', textAlign:'center' });
-          c.appendChild(v); c.appendChild(lab);
-          c._num = num;
-          return c;
-        }
-
-        var cardA = makeCard('',       'Panels scanned',                 '#fff');
-        var cardB = makeCard(' found', 'Anomalies detected',             '#ff8060');
-        var cardC = makeCard('%',      'Output recovered after repair',  ACCENT);
-        cardsRow.appendChild(cardA); cardsRow.appendChild(cardB); cardsRow.appendChild(cardC);
-
-        var line = el('div');
-        line.innerHTML = 'Invisible degradation costs your portfolio <span style="color:'+ACCENT+';font-weight:700">every single day</span>.';
-        setS(line, { color:'#fff', fontSize:(30*FS)+'px', fontWeight:'500', textAlign:'center', textWrap:'balance', maxWidth:'680px', willChange:'opacity' });
-
-        stack.appendChild(topEyebrow); stack.appendChild(cardsRow); stack.appendChild(line);
-        root.appendChild(bg); root.appendChild(grad); root.appendChild(grid); root.appendChild(stack);
-        canvas.appendChild(root);
-
-        return { root: root, tick: function (local) {
-          var panels    = Math.round(interpolate(local, [0.12, 0.45], [0, 1248], Easing.easeOutExpo));
-          var anomalies = Math.round(interpolate(local, [0.24, 0.54], [0, 3], Easing.easeOutCubic));
-          var pct       = Math.round(interpolate(local, [0.36, 0.63], [0, 12], Easing.easeOutCubic));
-          cardA._num.textContent = panels.toLocaleString();
-          cardB._num.textContent = anomalies;
-          cardC._num.textContent = pct;
-          [cardA, cardB, cardC].forEach(function (c, i) {
-            var p = interpolate(local, [0.12 + i*0.10, 0.30 + i*0.10], [0,1], Easing.easeOutCubic);
-            c.style.opacity = p;
-            c.style.transform = 'translateY(' + interpolate(p, [0,1], [26, 0], Easing.easeOutCubic) + 'px)';
-          });
-          line.style.opacity = interpolate(local, [0.60, 0.73, 0.82, 0.95], [0,1,1,0]);
-        }};
-      }
-
-      // ── Scene 6: Report ──
-      function buildS6() {
-        var root = el('div', 'vs-scene');
-        setS(root, { display:'flex', alignItems:'center', justifyContent:'center' });
-        var bg = vignette('linear-gradient(135deg, ' + DARK + ' 0%, ' + NAVY + ' 100%)');
-        var grid = gridLines();
-        var sl = scanLine();
-
-        var card = el('div');
-        setS(card, { position:'relative', zIndex:'2', background:'rgba(13,45,74,0.72)',
-          backdropFilter:'blur(14px)', WebkitBackdropFilter:'blur(14px)',
-          border:'1px solid rgba(53,145,204,0.32)', borderRadius:'6px',
-          width:'700px', padding:'40px 50px', willChange:'opacity, transform' });
-
-        var head = el('div');
-        setS(head, { display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'28px' });
-        var headLeft = el('div');
-        var headEyebrow = el('div', null, 'What you receive');
-        setS(headEyebrow, { color: ACCENT, fontSize:(12*FS)+'px', letterSpacing:'0.16em', textTransform:'uppercase', marginBottom:'6px' });
-        var headTitle = el('div', null, 'Thermal Inspection Report');
-        setS(headTitle, { color:'#fff', fontSize:(34*FS)+'px', fontWeight:'700' });
-        headLeft.appendChild(headEyebrow); headLeft.appendChild(headTitle);
-        var badge = el('div', null, 'KU');
-        setS(badge, { background:'rgba(53,145,204,0.15)', border:'1px solid rgba(53,145,204,0.28)',
-          borderRadius:'4px', padding:'10px 18px', color: ACCENT, fontWeight:'700', fontSize:(18*FS)+'px', letterSpacing:'0.06em' });
-        head.appendChild(headLeft); head.appendChild(badge);
-
-        var rows = el('div');
-        setS(rows, { display:'flex', flexDirection:'column' });
-        var ROWS = [
-          { label:'Licensed pilot + thermal drone flight',                status:'✓ Included',   color:'#5ec85e' },
-          { label:'AI-powered hot spot detection',                        status:'✓ Included',   color:'#5ec85e' },
-          { label:'SiteMark interactive photo report',                    status:'✓ Included',   color:'#5ec85e' },
-          { label:'5-business-day delivery SLA',                          status:'✓ Guaranteed', color: ACCENT },
-          { label:'Historical baseline data for year-on-year tracking',   status:'✓ Included',   color:'#5ec85e' }
-        ];
-        var rowEls = ROWS.map(function (r, i) {
-          var row = el('div');
-          setS(row, { display:'flex', alignItems:'center', justifyContent:'space-between',
-            padding:'13px 0',
-            borderBottom: i < ROWS.length-1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
-            willChange:'opacity, transform' });
-          var lab = el('div', null, r.label);
-          setS(lab, { color:'rgba(255,255,255,0.72)', fontSize:(15*FS)+'px' });
-          var st = el('div', null, r.status);
-          setS(st, { color: r.color, fontSize:(13*FS)+'px', fontWeight:'600', whiteSpace:'nowrap', marginLeft:'16px' });
-          row.appendChild(lab); row.appendChild(st);
-          rows.appendChild(row);
-          return row;
-        });
-
-        card.appendChild(head); card.appendChild(rows);
-
-        var bot = el('div', null, 'Powered by SiteMark · Delivered in 5 business days');
-        setS(bot, { position:'absolute', bottom:'70px', left:'0', right:'0', textAlign:'center',
-          color:'rgba(255,255,255,0.38)', fontSize:(14*FS)+'px', letterSpacing:'0.12em', textTransform:'uppercase', willChange:'opacity' });
-
-        root.appendChild(bg); root.appendChild(grid); root.appendChild(sl); root.appendChild(card); root.appendChild(bot);
-        canvas.appendChild(root);
-
-        return { root: root, tick: function (local, t) {
-          var cardO = interpolate(local, [0.08, 0.26], [0, 1], Easing.easeOutCubic);
-          var cardY = interpolate(local, [0.08, 0.26], [50, 0], Easing.easeOutCubic);
-          card.style.opacity = cardO;
-          card.style.transform = 'translateY(' + cardY + 'px)';
-          rowEls.forEach(function (re, i) {
-            var p = interpolate(local, [0.28 + i*0.07, 0.40 + i*0.07], [0,1], Easing.easeOutCubic);
-            re.style.opacity = p;
-            re.style.transform = 'translateX(' + interpolate(p, [0,1], [-18, 0], Easing.easeOutCubic) + 'px)';
-          });
-          bot.style.opacity = interpolate(local, [0.68, 0.80, 0.85, 0.96], [0,1,1,0]);
-          // scan line drift (uses global t like the prototype's ScanLine)
-          sl._line.style.top = (((t * 120) % 100)) + '%';
-        }};
-      }
-
-      // ── Scene 7: Price ──
-      function buildS7() {
-        var root = el('div', 'vs-scene');
-        setS(root, { display:'flex', alignItems:'center', justifyContent:'center' });
-        var bg = vignette('linear-gradient(160deg, ' + DARK + ' 0%, #091d30 100%)');
-        var grid = gridLines();
-
-        var stack = el('div');
-        setS(stack, { position:'relative', zIndex:'2', textAlign:'center', padding:'0 80px' });
-
-        var topEyebrow = el('div', null, 'Transparent flat-rate pricing');
-        setS(topEyebrow, { color:'rgba(255,255,255,0.38)', fontSize:(14*FS)+'px', letterSpacing:'0.2em', textTransform:'uppercase', marginBottom:'20px' });
-
-        var strikeRow = el('div');
-        setS(strikeRow, { display:'flex', alignItems:'center', justifyContent:'center', gap:'14px', marginBottom:'18px', willChange:'opacity' });
-        var strikeLabel = el('div', null, 'Market rate');
-        setS(strikeLabel, { color:'rgba(255,255,255,0.24)', fontSize:(26*FS)+'px' });
-        var strikeWrap = el('div');
-        setS(strikeWrap, { position:'relative', display:'inline-block' });
-        var strikeAmount = el('div', null, 'R12k – R15k');
-        setS(strikeAmount, { color:'rgba(255,255,255,0.24)', fontSize:(26*FS)+'px' });
-        var strikeLine = el('div');
-        setS(strikeLine, { position:'absolute', top:'52%', left:'0', height:'2px', background:'rgba(230,48,0,0.75)', width:'0%', marginTop:'-1px', willChange:'width' });
-        strikeWrap.appendChild(strikeAmount); strikeWrap.appendChild(strikeLine);
-        strikeRow.appendChild(strikeLabel); strikeRow.appendChild(strikeWrap);
-
-        var priceWrap = el('div');
-        setS(priceWrap, { willChange:'opacity, transform' });
-        var priceFrom = el('div', null, 'from');
-        setS(priceFrom, { color:'rgba(255,255,255,0.42)', fontSize:(22*FS)+'px', marginBottom:'4px' });
-        var priceVal = el('div', null, 'R7,500');
-        setS(priceVal, { color:'#fff', fontSize:(118*FS)+'px', fontWeight:'700', lineHeight:'1', letterSpacing:'-0.02em' });
-        priceWrap.appendChild(priceFrom); priceWrap.appendChild(priceVal);
-
-        var ctx = el('div');
-        ctx.innerHTML = 'Per site · licensed pilot · drone flight · AI analysis · SiteMark report<br/><span style="color:'+ACCENT+';font-weight:500">No hidden costs. No surprises.</span>';
-        setS(ctx, { marginTop:'22px', color:'rgba(255,255,255,0.42)', fontSize:(15*FS)+'px', lineHeight:'1.75', willChange:'opacity' });
-
-        stack.appendChild(topEyebrow); stack.appendChild(strikeRow); stack.appendChild(priceWrap); stack.appendChild(ctx);
-        root.appendChild(bg); root.appendChild(grid); root.appendChild(stack);
-        canvas.appendChild(root);
-
-        return { root: root, tick: function (local) {
-          var priceO  = interpolate(local, [0.10, 0.30], [0, 1], Easing.easeOutCubic);
-          var priceSc = interpolate(local, [0.10, 0.30], [0.55, 1.0], Easing.easeOutBack);
-          priceWrap.style.opacity = priceO;
-          priceWrap.style.transform = 'scale(' + priceSc + ')';
-          strikeRow.style.opacity = interpolate(local, [0.35, 0.52], [0, 1]);
-          strikeLine.style.width = interpolate(local, [0.35, 0.60], [0, 100]) + '%';
-          ctx.style.opacity = interpolate(local, [0.52, 0.68, 0.82, 0.96], [0,1,1,0]);
-        }};
-      }
-
-      // ── Scene 8: CTA ──
-      function buildS8() {
-        var root = el('div', 'vs-scene');
-        setS(root, { display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center' });
-        var bg = vignette('linear-gradient(160deg, ' + NAVY + ' 0%, ' + DARK + ' 60%)');
-        var glow = el('div');
-        setS(glow, { position:'absolute', top:'50%', left:'50%', transform:'translate(-50%, -50%)',
-          width:'700px', height:'700px', borderRadius:'50%', willChange:'background' });
-        var grid = gridLines();
-
-        var stack = el('div');
-        setS(stack, { position:'relative', zIndex:'2', textAlign:'center', display:'flex', flexDirection:'column', alignItems:'center', gap:'30px' });
-
-        var logoWrap = el('div');
-        setS(logoWrap, { willChange:'opacity' });
-        var logo = el('img');
-        logo.src = ASSETS + 'img5.webp';
-        logo.alt = 'Kleen Up Solar';
-        setS(logo, { height:'68px', objectFit:'contain' });
-        logoWrap.appendChild(logo);
-
-        var ctaWrap = el('div');
-        setS(ctaWrap, { willChange:'opacity, transform' });
-        var ctaBox = el('div', null, 'Get your inspection report');
-        setS(ctaBox, { background: ACCENT, color:'#fff', fontSize:(26*FS)+'px', fontWeight:'700',
-          padding:'22px 58px', borderRadius:'4px', letterSpacing:'0.04em', willChange:'box-shadow' });
-        ctaWrap.appendChild(ctaBox);
-
-        var url = el('div', null, 'kleenup.solar');
-        setS(url, { color:'rgba(255,255,255,0.38)', fontSize:(18*FS)+'px', letterSpacing:'0.1em', willChange:'opacity' });
-
-        stack.appendChild(logoWrap); stack.appendChild(ctaWrap); stack.appendChild(url);
-        root.appendChild(bg); root.appendChild(glow); root.appendChild(grid); root.appendChild(stack);
-        canvas.appendChild(root);
-
-        return { root: root, tick: function (local, t) {
-          var glowPulse = Math.sin(t * 1.8) * 0.15 + 0.85;
-          glow.style.background = 'radial-gradient(circle, rgba(53,145,204,' + (0.10 * glowPulse) + ') 0%, transparent 70%)';
-          logoWrap.style.opacity = interpolate(local, [0.10, 0.36], [0, 1], Easing.easeOutCubic);
-          var ctaO = interpolate(local, [0.28, 0.54], [0, 1], Easing.easeOutCubic);
-          var ctaSc = interpolate(local, [0.28, 0.54], [0.82, 1.0], Easing.easeOutBack);
-          ctaWrap.style.opacity = ctaO;
-          ctaWrap.style.transform = 'scale(' + ctaSc + ')';
-          ctaBox.style.boxShadow = '0 0 50px rgba(53,145,204,' + (0.38 * glowPulse) + ')';
-          url.style.opacity = interpolate(local, [0.50, 0.72], [0, 1]);
-        }};
-      }
-
-      // Build all scenes once.
-      var scenes = [buildS1(), buildS2(), buildS3(), buildS4(), buildS5(), buildS6(), buildS7(), buildS8()];
-
-      // Auto-scale 1920x1080 canvas to fit the stage.
-      function resize() {
-        var sw = stage.clientWidth;
-        var sh = stage.clientHeight;
-        if (sw <= 0 || sh <= 0) return;
-        var s = Math.min(sw / 1920, sh / 1080);
-        canvas.style.transform = 'translate(-50%, -50%) scale(' + s + ')';
-      }
-      resize();
-      if ('ResizeObserver' in window) new ResizeObserver(resize).observe(stage);
-      window.addEventListener('resize', resize);
-
-      // Pause when tab hidden so the loop doesn't accumulate offscreen.
-      var t = 0, last = null, raf = null, paused = false;
-      document.addEventListener('visibilitychange', function () {
-        paused = document.hidden;
-        if (!paused) { last = null; if (raf == null) raf = requestAnimationFrame(frame); }
-      });
-
-      function frame(ts) {
-        raf = null;
-        if (paused) return;
-        if (last == null) last = ts;
-        var dt = (ts - last) / 1000;
-        last = ts;
-        // Clamp dt so the playhead never jumps after a long pause.
-        if (dt > 0.25) dt = 0.25;
-        t = (t + dt) % DURATION;
-
-        for (var i = 0; i < scenes.length; i++) {
-          var sf = SCENE_FRACS[i][0], ef = SCENE_FRACS[i][1];
-          var op = sceneOpacity(t, DURATION, sf, ef, XFADE);
-          if (op <= 0) {
-            if (scenes[i].root.style.opacity !== '0') scenes[i].root.style.opacity = '0';
-            continue;
-          }
-          scenes[i].root.style.opacity = op;
-          scenes[i].tick(safeLocal(t, DURATION, sf, ef), t);
-        }
-        raf = requestAnimationFrame(frame);
-      }
-      raf = requestAnimationFrame(frame);
     })();
   </script>
+
 </body>
 </html>

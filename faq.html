@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Frequently asked questions about Kleen Up Solar's thermal drone inspections and panel cleaning services for commercial solar assets." />
+  <title>FAQ, Kleen Up Solar</title>
+  <link rel="canonical" href="https://kleenup.solar/faq" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3NDZYGWCV"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-B3NDZYGWCV');</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --navy: #1f445f;
+      --navy-deep: #0b1c2a;
+      --blue: #4e99d4;
+      --bg: #f7f7f7;
+      --bg-cool: #f0f4f7;
+      --surface: #ffffff;
+      --text: #2c3345;
+      --muted: #8c8c8c;
+      --border: #e5e7eb;
+      --shadow-sm: 0 1px 2px rgba(31,68,95,.06);
+      --shadow-md: 0 6px 18px rgba(31,68,95,.08);
+      --radius: 10px;
+      --max: 1140px;
+      --ease: cubic-bezier(.2,.7,.2,1);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      font-size: 17px; line-height: 1.55; color: var(--text);
+      background: var(--bg); -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--navy); text-decoration: none; }
+    a:hover { color: var(--blue); }
+    h1, h2, h3 {
+      font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+      color: var(--navy); font-weight: 700; line-height: 1.15;
+      margin: 0 0 .5em; letter-spacing: -.015em;
+    }
+    h1 { font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -.03em; }
+    h2 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); }
+    h3 { font-size: 1.1rem; font-weight: 600; }
+    p { margin: 0 0 1em; }
+    ul { margin: 0 0 1em; padding-left: 1.3em; }
+    li { margin-bottom: .5em; }
+
+    .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    section { padding: 72px 0; scroll-margin-top: 80px; }
+    .eyebrow {
+      display: inline-block; color: var(--blue); font-weight: 600;
+      font-size: .8rem; letter-spacing: .1em; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ---------- NAV ---------- */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      background: rgba(255,255,255,.96);
+      backdrop-filter: saturate(140%) blur(8px);
+      box-shadow: var(--shadow-sm);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; padding: 16px 24px; max-width: var(--max); margin: 0 auto;
+    }
+    .logo img { height: 40px; width: auto; display: block; }
+    .nav-links {
+      display: flex; gap: 30px; align-items: center;
+      list-style: none; margin: 0; padding: 0;
+    }
+    .nav-links a {
+      color: var(--text); font-weight: 500; font-size: .95rem;
+      transition: color 250ms var(--ease);
+    }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-links a.active { color: var(--navy); font-weight: 600; }
+    .btn {
+      display: inline-block; background: var(--navy); color: #fff;
+      padding: 11px 20px; border-radius: 2px; font-weight: 700;
+      font-size: .74rem; letter-spacing: .14em; text-transform: uppercase;
+      border: 1px solid var(--navy); cursor: pointer;
+      transition: background 200ms var(--ease);
+    }
+    .btn:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .btn-cta {
+      display: inline-block; background: var(--navy); color: #fff;
+      padding: 14px 24px; border-radius: 2px;
+      font-weight: 700; font-size: .82rem;
+      letter-spacing: .14em; text-transform: uppercase;
+      border: 0; cursor: pointer; line-height: 1;
+      transition: background 200ms var(--ease);
+    }
+    .btn-cta:hover { background: var(--blue); color: #fff; }
+    .hamburger {
+      display: none; width: 40px; height: 40px; padding: 8px;
+      background: transparent; border: 0; cursor: pointer;
+    }
+    .hamburger span {
+      display: block; width: 100%; height: 2px; background: var(--navy);
+      margin: 5px 0; transition: transform 200ms var(--ease), opacity 200ms var(--ease);
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ---------- INTRO SECTION ---------- */
+    .faq-intro {
+      background: var(--surface);
+      padding-top: 120px; padding-bottom: 72px;
+      overflow: hidden;
+    }
+    .faq-intro-inner {
+      display: grid; grid-template-columns: 1fr 420px;
+      gap: 0; align-items: flex-end;
+    }
+    .faq-intro-text {
+      padding-right: 48px; padding-bottom: 16px;
+    }
+    .faq-intro-text h1 { margin-bottom: 20px; }
+    .faq-intro-text p { color: var(--text); font-size: 1.02rem; margin-bottom: 16px; }
+    .faq-intro-text p:last-of-type { margin-bottom: 28px; }
+    .faq-intro-text .contact-hint {
+      font-size: .95rem; color: var(--muted);
+    }
+    .faq-intro-text .contact-hint a { color: var(--navy); font-weight: 600; border-bottom: 1px solid var(--border); }
+    .faq-intro-text .contact-hint a:hover { color: var(--blue); border-bottom-color: var(--blue); }
+    .faq-man {
+      display: flex; align-items: flex-end; justify-content: center;
+      /* white bg on image blends with white section bg */
+    }
+    .faq-man img {
+      max-height: 460px; width: auto; display: block;
+    }
+
+    /* ---------- FAQ ACCORDION ---------- */
+    .faq-section { background: var(--bg-cool); }
+    .faq-section + .faq-section { background: var(--surface); }
+    .faq-section-head {
+      margin-bottom: 32px;
+    }
+    .faq-list {
+      list-style: none; margin: 0; padding: 0;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    details { }
+    summary {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 0; cursor: pointer;
+      font-weight: 600; font-size: 1rem; color: var(--navy);
+      list-style: none; gap: 16px;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: '+'; flex-shrink: 0;
+      font-size: 1.4rem; font-weight: 400; color: var(--blue);
+      transition: transform 200ms var(--ease);
+    }
+    details[open] summary::after {
+      transform: rotate(45deg);
+    }
+    .faq-body {
+      padding: 0 0 20px; color: var(--text);
+      font-size: .97rem; line-height: 1.65;
+      max-width: 760px;
+    }
+    .faq-body p { margin: 0; }
+
+    /* ---------- CTA STRIP ---------- */
+    .faq-cta-strip {
+      background: var(--navy); padding: 56px 0; text-align: center;
+    }
+    .faq-cta-strip h2 { color: #fff; margin-bottom: 12px; }
+    .faq-cta-strip p { color: rgba(255,255,255,.72); margin-bottom: 28px; }
+    .faq-cta-strip .btn-cta { background: #fff; color: var(--navy); }
+    .faq-cta-strip .btn-cta:hover { background: var(--bg-cool); color: var(--navy); }
+
+    /* ---------- FOOTER ---------- */
+    footer { background: var(--navy-deep); color: rgba(255,255,255,.6); }
+    .foot-inner {
+      display: grid; grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 40px; align-items: start; padding: 64px 0 40px;
+    }
+    .foot-brand { max-width: 320px; }
+    .foot-logo { display: inline-block; background: #fff; border-radius: 6px; padding: 4px 8px; margin-bottom: 14px; }
+    .foot-logo img { height: 32px; }
+    .foot-tagline { color: rgba(255,255,255,.55); font-size: .9rem; margin: 0 0 4px; }
+    .foot-loc { color: rgba(255,255,255,.35); font-size: .82rem; margin: 0; }
+    .foot-col h4 {
+      color: #fff; font-size: .82rem;
+      text-transform: uppercase; letter-spacing: .1em;
+      font-weight: 700; margin-bottom: 16px;
+    }
+    .foot-nav { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+    .foot-nav a { color: rgba(255,255,255,.6); font-size: .9rem; transition: color 200ms var(--ease); }
+    .foot-nav a:hover { color: #fff; }
+    .foot-socials { display: flex; gap: 12px; }
+    .foot-socials a { color: rgba(255,255,255,.5); display: flex; align-items: center; transition: color 200ms var(--ease); }
+    .foot-socials a:hover { color: #fff; }
+    .foot-socials svg { width: 16px; height: 16px; }
+    .foot-bottom { padding: 24px 0; border-top: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.3); font-size: .82rem; }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 960px) {
+      .faq-intro-inner { grid-template-columns: 1fr; }
+      .faq-intro-text { padding-right: 0; }
+      .faq-man { display: none; }
+      .foot-inner { grid-template-columns: 1fr 1fr; }
+      .foot-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 768px) {
+      body { font-size: 16px; }
+      section { padding: 56px 0; }
+      .faq-intro { padding-top: 100px; }
+      .nav-links {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        flex-direction: column; gap: 0; background: rgba(255,255,255,.98);
+        backdrop-filter: blur(10px); padding: 16px 24px;
+        border-top: 1px solid var(--border); box-shadow: var(--shadow-md);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { color: var(--text); padding: 12px 0; width: 100%; border-bottom: 1px solid var(--border); }
+      .nav-links li:last-child a { border-bottom: none; }
+      .nav .btn { display: none; }
+      .hamburger { display: block; }
+      .foot-inner { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo" aria-label="Kleen Up Solar, home">
+        <img src="website%20assets/Kleen%20Up%20Solar%20Logo.webp" alt="Kleen Up Solar" />
+      </a>
+      <nav aria-label="Primary navigation">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html#inspection">Inspection</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="faq.html" class="active">FAQ</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <a href="index.html#calculator" class="btn">Get a quote</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ INTRO ============ -->
+    <section class="faq-intro">
+      <div class="container">
+        <div class="faq-intro-inner">
+          <div class="faq-intro-text reveal">
+            <span class="eyebrow">Before you call</span>
+            <h1>Common questions.</h1>
+            <p>We work with commercial asset owners, EPCs, and PPA funds across South Africa. These are the questions we hear most often about our thermal drone inspections and panel cleaning services.</p>
+            <p>If you can&rsquo;t find what you&rsquo;re looking for, reach out directly and we will come back to you within 24 hours.</p>
+            <p class="contact-hint">Need further assistance? <a href="index.html#contact">Contact our team</a> and we&rsquo;ll work together to find the best solution for your site.</p>
+            <a href="index.html#calculator" class="btn-cta">Get an instant inspection quote &rarr;</a>
+          </div>
+          <div class="faq-man" aria-hidden="true">
+            <img src="website%20assets/faq%20desk%20man.png" alt="" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ THERMAL INSPECTION FAQ ============ -->
+    <section class="faq-section">
+      <div class="container">
+        <div class="faq-section-head reveal">
+          <span class="eyebrow">Thermal inspection</span>
+          <h2>Inspection questions.</h2>
+        </div>
+        <ul class="faq-list reveal" role="list">
+          <li class="faq-item">
+            <details>
+              <summary>What does the thermal inspection report contain?</summary>
+              <div class="faq-body">
+                <p>A georeferenced thermal map of your entire site, panel-level fault classification (nominal, warm anomaly, hot for priority repair), top-priority repair recommendations with temperature delta readings, and a performance impact summary. All reports comply with IEC TS 62446-3:2017. Delivered digitally within 10-14 days of the flight.</p>
+              </div>
+            </details>
+          </li>
+          <li class="faq-item">
+            <details>
+              <summary>What types of faults does thermal imaging detect?</summary>
+              <div class="faq-body">
+                <p>Hotspots, bypass diode failures, shading losses, string open circuits, soiling patterns, and cell-level defects that are invisible to the naked eye and undetectable by string-level inverter monitoring. These are the faults that cause the most significant and sustained yield losses.</p>
+              </div>
+            </details>
+          </li>
+          <li class="faq-item">
+            <details>
+              <summary>Does the system need to go offline for the inspection?</summary>
+              <div class="faq-body">
+                <p>No. The inspection is performed in flight during normal operating hours. We require daylight and at least 200 W/m2 of irradiance. The site continues generating throughout the inspection.</p>
+              </div>
+            </details>
+          </li>
+          <li class="faq-item">
+            <details>
+              <summary>How long does an inspection take?</summary>
+              <div class="faq-body">
+                <p>A single-day flight covers most commercial sites up to around 10,000 panels. Larger sites may require two days. We quote the number of inspection days upfront, and the day rate is fixed at R7,500 regardless of panel count within the tier.</p>
+              </div>
+            </details>
+          </li>
+          <li class="faq-item">
+            <details>
+              <summary>Why is your pricing a flat day rate and not per panel?</summary>
+              <div class="faq-body">
+                <p>Most competitors charge per panel, which can exceed R20,000 for larger sites. Our flat day rate of R7,500 means the more panels you have on one site, the lower your effective cost per panel. Use the instant quote tool on the homepage to see your site-specific price in seconds.</p>
+              </div>
+            </details>
+          </li>
+          <li class="faq-item">
+            <details>
+              <summary>What certifications does your pilot and equipment hold?</summary>
+              <div class="faq-body">
+                <p>Our pilot holds a SACAA Remote Pilot Licence (RPL) and Kleen Up Solar operates under a SACAA Remote Operator Certificate (ROC). All inspections use IEC TS 62446-3:2017 compliant hardware and methodology. Reports are accepted by insurers and lenders.</p>
+              </div>
+            </details>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ PANEL CLEANING FAQ ============ -->
+    <section class="faq-section">
+      <div class="container">
+        <div class="faq-section-head reveal">
+          <span class="eyebrow">Panel cleaning</span>
+          <h2>Cleaning questions.</h2>
+        </div>
+        <ul class="faq-list reveal" role="list">
+          <li class="faq-item">
+            <details>
+              <summary>Why do I need to clean my solar panels?</summary>
+              <div class="faq-body">
+                <p>Dust, sap, pollution, and bird droppings are common causes of dirt build-up on solar panels. This dirt blocks sunlight, reducing system performance and efficiency, leading to lower energy output and financial loss. Similar to how power from a full battery drains into a dead battery, energy from clean cells gets wasted in shaded areas, reducing generation.</p>
+              </div>
+            </details>
+          </li>
+          <li class="faq-item">
+            <details>
+              <summary>What are the efficiency gains from cleaning?</summary>
+              <div class="faq-body">
+                <p>Based on customer feedback, we have seen efficiency improvements ranging from 10% to 40%, depending on how dirty the panels were before cleaning.</p>
+              </div>
+            </details>
+          </li>
+          <li class="faq-item">
+            <details>
+              <summary>Doesn&rsquo;t rain wash my panels?</summary>
+              <div class="faq-body">
+                <p>No. Like a car, rain can remove some loose dirt, but for a proper clean, a more thorough scrub is required to remove grime, bird droppings, and mineral deposits.</p>
+              </div>
+            </details>
+          </li>
+          <li class="faq-item">
+            <details>
+              <summary>Why do you use filtered water?</summary>
+              <div class="faq-body">
+                <p>Tap water contains minerals that, after drying, form limescale and stain deposits on your panel glass. This decreases energy production and can damage panels through hotspots and corrosion. We use mineral-free filtered water to eliminate this risk.</p>
+              </div>
+            </details>
+          </li>
+          <li class="faq-item">
+            <details>
+              <summary>How often should I clean my panels?</summary>
+              <div class="faq-body">
+                <p>Optimal cleaning frequency depends on your location and environment. We are seeing more sites where more frequent cleaning delivers a clear return on investment. Contact us about the right frequency for your system.</p>
+              </div>
+            </details>
+          </li>
+          <li class="faq-item">
+            <details>
+              <summary>How long does the cleaning process take for large solar arrays?</summary>
+              <div class="faq-body">
+                <p>The cleaning time depends on the size of the system and its location. We can currently clean up to 2,000 panels per day, ensuring efficient service to minimise energy generation losses.</p>
+              </div>
+            </details>
+          </li>
+          <li class="faq-item">
+            <details>
+              <summary>Will cleaning disrupt our daily operations?</summary>
+              <div class="faq-body">
+                <p>No. Our cleaning service is designed to be minimally disruptive. We can schedule cleanings during off-peak hours or weekends to ensure your business operations continue smoothly.</p>
+              </div>
+            </details>
+          </li>
+          <li class="faq-item">
+            <details>
+              <summary>Will cleaning damage the panels or void warranties?</summary>
+              <div class="faq-body">
+                <p>No. Our cleaning process uses soft brushes and purified water. Our methods comply with manufacturer guidelines, so panel warranties are not affected.</p>
+              </div>
+            </details>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ CTA STRIP ============ -->
+    <section class="faq-cta-strip">
+      <div class="container">
+        <h2>Still have questions?</h2>
+        <p>Our team is always available. Reach out and we will come back to you within 24 hours.</p>
+        <a href="index.html#contact" class="btn-cta">Contact us &rarr;</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="container">
+      <div class="foot-inner">
+        <div class="foot-brand">
+          <a href="index.html" class="foot-logo" aria-label="Kleen Up Solar home">
+            <img src="website%20assets/Kleen%20Up%20Solar%20Logo.webp" alt="Kleen Up Solar" />
+          </a>
+          <p class="foot-tagline">Cleaning Today. Powering Tomorrow.</p>
+          <p class="foot-loc">Cape Town, South Africa</p>
+        </div>
+        <div class="foot-col">
+          <h4>Navigate</h4>
+          <ul class="foot-nav">
+            <li><a href="index.html#inspection">Inspection</a></li>
+            <li><a href="services.html">Other Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h4>Follow</h4>
+          <div class="foot-socials">
+            <a href="https://instagram.com/kleenup.solar" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="https://www.linkedin.com/company/kleen-up-solar/" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"></path></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <p class="foot-bottom">&copy; <script>document.write(new Date().getFullYear())</script> Kleen Up Solar. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var btn = document.getElementById('hamburger');
+      var links = document.getElementById('navLinks');
+      if (!btn || !links) return;
+      btn.addEventListener('click', function () {
+        var isOpen = links.classList.toggle('open');
+        btn.classList.toggle('open', isOpen);
+        btn.setAttribute('aria-expanded', String(isOpen));
+      });
+      links.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+          links.classList.remove('open');
+          btn.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) { els.forEach(function(el){ el.classList.add('visible'); }); return; }
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) { entry.target.classList.add('visible'); io.unobserve(entry.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(function(el){ io.observe(el); });
+    })();
+  </script>
+
+</body>
+</html>

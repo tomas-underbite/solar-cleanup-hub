@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="About Kleen Up Solar. Meet Bradley Eachus and Gareth Hayden, the team behind Cape Town's commercial solar O&M company." />
+  <title>About, Kleen Up Solar</title>
+  <link rel="canonical" href="https://kleenup.solar/about" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3NDZYGWCV"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-B3NDZYGWCV');</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --navy: #1f445f;
+      --navy-deep: #0b1c2a;
+      --blue: #4e99d4;
+      --gold: #c9a84c;
+      --bg: #f7f7f7;
+      --bg-cool: #f0f4f7;
+      --surface: #ffffff;
+      --text: #2c3345;
+      --muted: #8c8c8c;
+      --border: #e5e7eb;
+      --shadow-sm: 0 1px 2px rgba(31,68,95,.06);
+      --shadow-md: 0 6px 18px rgba(31,68,95,.08);
+      --shadow-lg: 0 14px 36px rgba(31,68,95,.14);
+      --radius: 10px;
+      --max: 1140px;
+      --ease: cubic-bezier(.2,.7,.2,1);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      font-size: 17px; line-height: 1.55; color: var(--text);
+      background: var(--bg); -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--navy); text-decoration: none; }
+    a:hover { color: var(--blue); }
+    h1, h2, h3 {
+      font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+      color: var(--navy); font-weight: 700; line-height: 1.15;
+      margin: 0 0 .5em; letter-spacing: -.015em;
+    }
+    h1 { font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -.03em; }
+    h2 { font-size: clamp(1.5rem, 2.8vw, 2rem); }
+    h3 { font-size: 1.15rem; font-weight: 600; }
+    p { margin: 0 0 1em; }
+    ul { margin: 0 0 1em; padding-left: 1.3em; }
+    li { margin-bottom: .5em; }
+
+    .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    section { padding: 88px 0; scroll-margin-top: 80px; }
+    .eyebrow {
+      display: inline-block; color: var(--blue); font-weight: 600;
+      font-size: .8rem; letter-spacing: .1em; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ---------- NAV ---------- */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      background: rgba(255,255,255,.96);
+      backdrop-filter: saturate(140%) blur(8px);
+      box-shadow: var(--shadow-sm);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; padding: 16px 24px; max-width: var(--max); margin: 0 auto;
+    }
+    .logo img { height: 40px; width: auto; display: block; }
+    .nav-links {
+      display: flex; gap: 30px; align-items: center;
+      list-style: none; margin: 0; padding: 0;
+    }
+    .nav-links a {
+      color: var(--text); font-weight: 500; font-size: .95rem;
+      transition: color 250ms var(--ease);
+    }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-links a.active { color: var(--navy); font-weight: 600; }
+    .btn {
+      display: inline-block; background: var(--navy); color: #fff;
+      padding: 11px 20px; border-radius: 2px; font-weight: 700;
+      font-size: .74rem; letter-spacing: .14em; text-transform: uppercase;
+      border: 1px solid var(--navy); cursor: pointer;
+      transition: background 200ms var(--ease);
+    }
+    .btn:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .btn-cta {
+      display: inline-block; background: var(--navy); color: #fff;
+      padding: 16px 28px; border-radius: 2px;
+      font-weight: 700; font-size: .82rem;
+      letter-spacing: .14em; text-transform: uppercase;
+      border: 0; cursor: pointer; text-align: center; line-height: 1;
+      transition: background 200ms var(--ease), transform 200ms var(--ease);
+    }
+    .btn-cta:hover { background: var(--blue); color: #fff; transform: translateY(-1px); }
+    .hamburger {
+      display: none; width: 40px; height: 40px; padding: 8px;
+      background: transparent; border: 0; cursor: pointer;
+    }
+    .hamburger span {
+      display: block; width: 100%; height: 2px; background: var(--navy);
+      margin: 5px 0; transition: transform 200ms var(--ease), opacity 200ms var(--ease);
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ---------- PAGE TITLE BAND ---------- */
+    .page-title-band {
+      background: var(--navy-deep); color: #fff;
+      padding: 120px 0 0; overflow: hidden;
+    }
+    .page-title-inner {
+      display: flex; align-items: flex-end;
+      justify-content: space-between; gap: 48px;
+    }
+    .page-title-text { flex: 1; padding-bottom: 72px; }
+    .page-title-band h1 { color: #fff; }
+    .page-title-band p {
+      color: rgba(255,255,255,.72); font-size: 1.05rem;
+      max-width: 560px; margin: 16px 0 0;
+    }
+    .page-title-workers {
+      flex-shrink: 0; width: 400px; align-self: flex-end;
+    }
+    .page-title-workers img { width: 100%; height: auto; display: block; }
+
+    /* ---------- TEAM INTRO ---------- */
+    .team-intro {
+      background: var(--surface);
+    }
+    .team-intro-text {
+      max-width: 700px; margin: 0 auto; text-align: center;
+      margin-bottom: 48px;
+    }
+    .meet-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .meet-grid img {
+      width: 100%; aspect-ratio: 3/4;
+      object-fit: cover; object-position: center top;
+      border-radius: var(--radius);
+      display: block;
+      box-shadow: var(--shadow-md);
+    }
+
+    /* ---------- STATEMENT BAND ---------- */
+    .statement-band {
+      background: var(--navy); color: #fff;
+      padding: 72px 0; text-align: center;
+    }
+    .statement-band blockquote {
+      margin: 0; font-family: 'DM Sans', sans-serif;
+      font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700;
+      color: #fff; line-height: 1.3; max-width: 820px; margin: 0 auto;
+      letter-spacing: -.02em;
+    }
+
+    /* ---------- MISSION / VISION / VALUES ---------- */
+    .mvv-section { background: var(--bg-cool); }
+    .mvv-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+    }
+    .mvv-block {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px 28px;
+    }
+    .mvv-block h3 {
+      font-size: 1rem; text-transform: uppercase; letter-spacing: .08em;
+      color: var(--blue); margin-bottom: 14px;
+    }
+    .mvv-block p { font-size: .97rem; color: var(--text); margin: 0; }
+
+    /* ---------- BIOS ---------- */
+    .bios-section { background: var(--surface); }
+    .bio-row {
+      display: grid; grid-template-columns: 280px 1fr;
+      gap: 48px; align-items: start;
+      padding-bottom: 56px; margin-bottom: 56px;
+      border-bottom: 1px solid var(--border);
+    }
+    .bio-row:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+    .bio-row--flip { grid-template-columns: 1fr 280px; }
+    .bio-photo {
+      width: 100%; aspect-ratio: 3/4; object-fit: cover;
+      border-radius: var(--radius);
+    }
+    .bio-row--flip .bio-photo { order: 1; }
+    .bio-row--flip .bio-text { order: 0; }
+    .bio-text h3 { font-size: 1.4rem; margin-bottom: 4px; }
+    .bio-title { display: block; color: var(--blue); font-size: .9rem; font-weight: 600; margin-bottom: 20px; }
+
+    /* ---------- TIMELINE ---------- */
+    .timeline-section { background: var(--bg-cool); }
+    .timeline {
+      position: relative; max-width: 720px; margin: 0 auto;
+      padding-left: 32px;
+    }
+    .timeline::before {
+      content: ''; position: absolute;
+      left: 7px; top: 6px; bottom: 6px;
+      width: 2px; background: var(--border);
+    }
+    .tl-item {
+      position: relative; margin-bottom: 36px;
+    }
+    .tl-item:last-child { margin-bottom: 0; }
+    .tl-dot {
+      position: absolute; left: -28px; top: 5px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--blue); border: 2px solid var(--surface);
+      box-shadow: 0 0 0 2px var(--blue);
+    }
+    .tl-year {
+      display: inline-block; font-weight: 700; font-size: .82rem;
+      color: var(--blue); letter-spacing: .06em; text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .tl-item p { margin: 0; color: var(--text); font-size: .97rem; }
+
+    /* ---------- CREDENTIALS ---------- */
+    .credentials-section { background: var(--surface); }
+    .credentials-strip {
+      display: flex; align-items: flex-start; justify-content: center;
+      gap: 40px; flex-wrap: wrap;
+    }
+    .cred-item {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 14px; text-align: center;
+    }
+    .cred-item img { width: 90px; height: auto; display: block; }
+    .cred-item span {
+      color: var(--navy);
+      font-family: 'DM Sans', 'Inter', sans-serif;
+      font-weight: 600; font-size: 12px;
+      letter-spacing: .07em; text-transform: uppercase;
+      max-width: 130px; line-height: 1.4;
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer { background: var(--navy-deep); color: rgba(255,255,255,.6); }
+    .foot-inner {
+      display: grid; grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 40px; align-items: start;
+      padding: 64px 0 40px;
+    }
+    .foot-brand { max-width: 320px; }
+    .foot-logo { display: inline-block; background: #fff; border-radius: 6px; padding: 4px 8px; margin-bottom: 14px; }
+    .foot-logo img { height: 32px; }
+    .foot-tagline { color: rgba(255,255,255,.55); font-size: .9rem; margin: 0 0 4px; }
+    .foot-loc { color: rgba(255,255,255,.35); font-size: .82rem; margin: 0; }
+    .foot-col h4 {
+      color: #fff; font-size: .82rem;
+      text-transform: uppercase; letter-spacing: .1em;
+      font-weight: 700; margin-bottom: 16px;
+    }
+    .foot-nav {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .foot-nav a { color: rgba(255,255,255,.6); font-size: .9rem; transition: color 200ms var(--ease); }
+    .foot-nav a:hover { color: #fff; }
+    .foot-socials { display: flex; gap: 12px; }
+    .foot-socials a { color: rgba(255,255,255,.5); display: flex; align-items: center; transition: color 200ms var(--ease); }
+    .foot-socials a:hover { color: #fff; }
+    .foot-socials svg { width: 16px; height: 16px; }
+    .foot-bottom {
+      padding: 24px 0; border-top: 1px solid rgba(255,255,255,.1);
+      color: rgba(255,255,255,.3); font-size: .82rem; margin-top: 0;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 960px) {
+      .meet-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .mvv-grid { grid-template-columns: 1fr; gap: 20px; }
+      .bio-row { grid-template-columns: 1fr; gap: 28px; }
+      .bio-row--flip { grid-template-columns: 1fr; }
+      .bio-row--flip .bio-photo { order: 0; }
+      .bio-row--flip .bio-text { order: 1; }
+      .bio-photo { width: 200px; aspect-ratio: 1/1; border-radius: 50%; }
+      .foot-inner { grid-template-columns: 1fr 1fr; }
+      .foot-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 768px) {
+      body { font-size: 16px; }
+      section { padding: 60px 0; }
+      .page-title-band { padding: 100px 0 0; }
+      .page-title-inner { flex-direction: column; gap: 24px; }
+      .page-title-text { padding-bottom: 0; }
+      .page-title-workers { width: 200px; align-self: center; }
+      .meet-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-links {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        flex-direction: column; gap: 0; background: rgba(255,255,255,.98);
+        backdrop-filter: blur(10px); padding: 16px 24px;
+        border-top: 1px solid var(--border); box-shadow: var(--shadow-md);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { color: var(--text); padding: 12px 0; width: 100%; border-bottom: 1px solid var(--border); }
+      .nav-links li:last-child a { border-bottom: none; }
+      .nav .btn { display: none; }
+      .hamburger { display: block; }
+      .foot-inner { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo" aria-label="Kleen Up Solar, home">
+        <img src="website%20assets/Kleen%20Up%20Solar%20Logo.webp" alt="Kleen Up Solar" />
+      </a>
+      <nav aria-label="Primary navigation">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html#inspection">Inspection</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html" class="active">About</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <a href="index.html#calculator" class="btn">Get a quote</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ PAGE TITLE ============ -->
+    <div class="page-title-band">
+      <div class="container">
+        <div class="page-title-inner">
+          <div class="page-title-workers">
+            <img src="website%20assets/KleenUp_Solar_Workers_no_bg.png" alt="Kleen Up Solar team" />
+          </div>
+          <div class="page-title-text">
+            <h1>The team.</h1>
+            <p>Cape Town-based. Built for commercial solar. Focused on the gap between commissioning and performance.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ TEAM INTRO ============ -->
+    <section class="team-intro">
+      <div class="container">
+        <div class="team-intro-text reveal">
+          <p>Kleen Up Solar is your trusted partner for professional solar panel cleaning, inspection, and maintenance. We specialise in keeping commercial solar assets in peak condition using advanced, non-abrasive high-pressure cleaning technology with filtered water — sourced from your borehole or municipal tap, for an eco-friendly, damage-free clean every time. Beyond cleaning, our services include water flow system and panel bracket inspections, earth leakage testing, temperature anomaly detection, and responsible decommissioning. Since launching in 2023, we have grown to manage over 70 sites and 80,000 panels across South Africa.</p>
+        </div>
+        <div class="meet-grid">
+          <img src="website%20assets/meet%20the%20team%20%231.png" alt="Kleen Up Solar team" class="reveal" />
+          <img src="website%20assets/meet%20the%20team%20%232.png" alt="Kleen Up Solar team" class="reveal" />
+          <img src="website%20assets/meet%20the%20team%20%233.png" alt="Kleen Up Solar team" class="reveal" />
+          <img src="website%20assets/meet%20the%20team%20%234.png" alt="Kleen Up Solar team" class="reveal" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STATEMENT ============ -->
+    <section class="statement-band">
+      <div class="container">
+        <blockquote class="reveal">&ldquo;South Africa is building solar faster than anyone is maintaining it. We built Kleen Up Solar to change that.&rdquo;</blockquote>
+      </div>
+    </section>
+
+    <!-- ============ MISSION / VISION / VALUES ============ -->
+    <section class="mvv-section">
+      <div class="container">
+        <div class="mvv-grid">
+          <div class="mvv-block reveal">
+            <h3>Vision</h3>
+            <p>To be South Africa&rsquo;s most trusted solar O&amp;M partner, the first call for every asset owner who wants their portfolio performing at full capacity.</p>
+          </div>
+          <div class="mvv-block reveal">
+            <h3>Mission</h3>
+            <p>We protect the performance of commercial solar assets through disciplined, IEC-compliant thermal inspections and professional panel cleaning. Fast turnaround, flat-rate pricing, and no surprises.</p>
+          </div>
+          <div class="mvv-block reveal">
+            <h3>Values</h3>
+            <p>Transparency: flat-rate quotes, agreed before we fly. Rigour: IEC TS 62446-3:2017 compliant inspections on every site. Partnership: we work with EPCs and asset managers as a long-term O&amp;M partner, not a one-off vendor.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BIOS ============ -->
+    <section class="bios-section">
+      <div class="container">
+        <div class="bio-row reveal">
+          <img src="website%20assets/Bradley%20Headshot.png" alt="Bradley Eachus, Founder and Company Owner, Kleen Up Solar" class="bio-photo" />
+          <div class="bio-text">
+            <h3>Bradley Eachus</h3>
+            <span class="bio-title">Company Owner</span>
+            <p>Bradley spent a decade in solar across South Africa, Canada, and international markets before founding Kleen Up Solar in 2024. As Director of Business Development at Solar Earth Technologies for five years, and prior to that in the same role at Ergosun Integrated Solar Roof Tiles in Ontario, he worked across pricing, strategic partnerships, and market entry for solar companies in multiple countries. He was selected as a speaker at the National Renewable Energy Laboratory&rsquo;s Beyond The Panel Conference in Denver.</p>
+            <p>What that experience made clear was a structural gap in the market: assets were being commissioned and then left to degrade, with owners relying on rain and annual checkups rather than systematic monitoring. Performance losses of 10 to 40 percent were common and largely invisible without proper inspection. Kleen Up Solar was built to close that gap.</p>
+            <p>Bradley holds a BA in Socio-Informatics from Stellenbosch University and is a native Afrikaans and English speaker.</p>
+          </div>
+        </div>
+
+        <div class="bio-row bio-row--flip reveal">
+          <div class="bio-text">
+            <h3>Gareth Hayden</h3>
+            <span class="bio-title">Director, Operations</span>
+            <p>Gareth is the founder and director of Kleen Up, the commercial cleaning company that Kleen Up Solar grew out of. He studied Business Science (Accounting and Finance) at the University of Cape Town and spent over a decade as a partner at South Seas Import Export before launching Kleen Up in 2016, building it into an established Cape Town operation over nearly a decade.</p>
+            <p>The move into solar O&amp;M was a natural extension. South Africa&rsquo;s commercial solar sector was expanding rapidly, but the maintenance infrastructure was not keeping pace. Gareth recognised that a disciplined, operationally focused cleaning business was exactly what the market needed, and that Kleen Up already had the systems, the teams, and the standards to do it properly.</p>
+            <p>As Director of Kleen Up Solar, Gareth oversees fulfilment across the company&rsquo;s growing portfolio of commercial solar clients, ensuring every inspection and every clean meets the standards that built Kleen Up&rsquo;s reputation.</p>
+          </div>
+          <img src="website%20assets/Gareth%20Headshot.png" alt="Gareth Hayden, Director of Operations, Kleen Up Solar" class="bio-photo" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TIMELINE ============ -->
+    <section class="timeline-section">
+      <div class="container">
+        <div style="max-width:720px;margin:0 auto 48px;">
+          <span class="eyebrow">Our history</span>
+          <h2 class="reveal">How we got here.</h2>
+        </div>
+        <div class="timeline reveal">
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <span class="tl-year">2016</span>
+            <p>Kleen Up founded in Cape Town by Gareth Hayden.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <span class="tl-year">2023</span>
+            <p>Kleen Up Solar launched. Bradley Eachus joins as company owner. First thermal drone inspections completed.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <span class="tl-year">2025</span>
+            <p>70 sites under management. 80,000 panels inspected, cleaned, or maintained. 120 MW portfolio.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CREDENTIALS ============ -->
+    <section class="credentials-section">
+      <div class="container">
+        <div class="credentials-strip reveal">
+          <div class="cred-item">
+            <img src="website%20assets/Cert%20Clip%20Arts/SACAA%20Licensed%20Pilot%20Clip%20Art.png" alt="SACAA Licensed Pilot" />
+            <span>SACAA Licensed Pilot</span>
+          </div>
+          <div class="cred-item">
+            <img src="website%20assets/Cert%20Clip%20Arts/SACAA%20Certified%20Operator%20-%20ROC%20Clip%20Art.png" alt="SACAA Certified Operator" />
+            <span>SACAA Certified Operator</span>
+          </div>
+          <div class="cred-item">
+            <img src="website%20assets/Cert%20Clip%20Arts/IEC%20TS%2062446-32017%20-%20Thermal%20Imaging%20Compliant%20Clip%20Art.png" alt="IEC TS 62446-3:2017 Compliant" />
+            <span>IEC TS 62446-3:2017 Compliant</span>
+          </div>
+          <div class="cred-item">
+            <img src="website%20assets/Cert%20Clip%20Arts/Public%20Liability%20Cover%20Clip%20Art.png" alt="Public Liability Insured" />
+            <span>Public Liability Insured</span>
+          </div>
+          <div class="cred-item">
+            <img src="website%20assets/Cert%20Clip%20Arts/B-BBEE%20Certified%20Clip%20Art.png" alt="B-BBEE Certified" />
+            <span>B-BBEE Certified</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="container">
+      <div class="foot-inner">
+        <div class="foot-brand">
+          <a href="index.html" class="foot-logo" aria-label="Kleen Up Solar home">
+            <img src="website%20assets/Kleen%20Up%20Solar%20Logo.webp" alt="Kleen Up Solar" />
+          </a>
+          <p class="foot-tagline">Cleaning Today. Powering Tomorrow.</p>
+          <p class="foot-loc">Cape Town, South Africa</p>
+        </div>
+        <div class="foot-col">
+          <h4>Navigate</h4>
+          <ul class="foot-nav">
+            <li><a href="index.html#inspection">Inspection</a></li>
+            <li><a href="services.html">Other Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h4>Follow</h4>
+          <div class="foot-socials">
+            <a href="https://instagram.com/kleenup.solar" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="https://www.linkedin.com/company/kleen-up-solar/" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"></path></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <p class="foot-bottom">&copy; <script>document.write(new Date().getFullYear())</script> Kleen Up Solar. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var btn = document.getElementById('hamburger');
+      var links = document.getElementById('navLinks');
+      if (!btn || !links) return;
+      btn.addEventListener('click', function () {
+        var isOpen = links.classList.toggle('open');
+        btn.classList.toggle('open', isOpen);
+        btn.setAttribute('aria-expanded', String(isOpen));
+      });
+      links.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+          links.classList.remove('open');
+          btn.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) { els.forEach(function(el){ el.classList.add('visible'); }); return; }
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) { entry.target.classList.add('visible'); io.unobserve(entry.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(function(el){ io.observe(el); });
+    })();
+  </script>
+</body>
+</html>
