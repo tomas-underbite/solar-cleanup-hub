@@ -979,6 +979,12 @@
       .foot-inner { grid-template-columns: 1fr; }
       .report-row { flex-direction: row; }
       .report-gallery img { width: 260px; }
+      /* Trusted brands: static grid instead of animated marquee */
+      .marquee { overflow: visible; -webkit-mask-image: none; mask-image: none; padding: 0 16px; }
+      .marquee-track { animation: none; width: auto; flex-wrap: wrap; justify-content: center; gap: 20px 28px; }
+      .marquee-set { flex-wrap: wrap; justify-content: center; gap: 20px 28px; padding-right: 0; }
+      .marquee-set + .marquee-set { display: none; }
+      .marquee-set img { width: 130px; height: 42px; opacity: .7; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
