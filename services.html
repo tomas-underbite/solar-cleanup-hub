@@ -188,7 +188,7 @@
     /* ---------- HAMBURGER ---------- */
     .hamburger {
       display: none;
-      width: 40px; height: 40px; padding: 8px;
+      width: 44px; height: 44px; padding: 8px;
       background: transparent; border: 0; cursor: pointer;
     }
     .hamburger span {
@@ -266,6 +266,9 @@
       width: 100%; aspect-ratio: 4/3;
       object-fit: cover; border-radius: var(--radius);
       display: block;
+    }
+    .svc-collage-sub {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;
     }
     .contact-form { display: flex; flex-direction: column; gap: 16px; }
     .contact-field { display: flex; flex-direction: column; }
@@ -350,6 +353,7 @@
       body { font-size: 16px; }
       section { padding: 60px 0; }
       .page-title-band { padding: 100px 0 56px; }
+      .svc-collage-sub { grid-template-columns: 1fr; }
       .nav-links {
         display: none; position: absolute; top: 100%; left: 0; right: 0;
         flex-direction: column; gap: 0;
@@ -522,7 +526,7 @@
           <!-- Right: photo collage -->
           <div>
             <img src="website%20assets/services-1.png" alt="Kleen Up Solar services" class="svc-collage__main" />
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;">
+            <div class="svc-collage-sub">
               <img src="website%20assets/services-2.png" alt="Kleen Up Solar panel cleaning" class="svc-collage__sub" />
               <img src="website%20assets/services-3.png" alt="Kleen Up Solar thermal inspection" class="svc-collage__sub" />
             </div>

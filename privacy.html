@@ -48,6 +48,7 @@
     li { margin-bottom: .4em; }
 
     /* ---------- NAV ---------- */
+    .priv-navlinks { display: flex; gap: 24px; align-items: center; }
     .nav {
       background: rgba(255,255,255,.96);
       backdrop-filter: saturate(140%) blur(8px);
@@ -89,6 +90,11 @@
     .foot-nav a:hover { color: #fff; }
     .foot-copy { color: rgba(255,255,255,.35); font-size: .82rem; }
 
+    @media (max-width: 768px) {
+      body { font-size: 15px; }
+      .prose { padding: 48px 20px 64px; }
+      .priv-navlinks { display: none; }
+    }
     @media (max-width: 600px) {
       .foot-inner { flex-direction: column; text-align: center; }
       .foot-nav { justify-content: center; }
@@ -103,7 +109,7 @@
       <a href="index.html" class="logo" aria-label="Kleen Up Solar — home">
         <img src="website%20assets/Kleen%20Up%20Solar%20Logo.webp" alt="Kleen Up Solar" />
       </a>
-      <nav aria-label="Primary navigation" style="display:flex;gap:24px;align-items:center;">
+      <nav aria-label="Primary navigation" class="priv-navlinks">
         <a href="index.html#inspection" style="color:#2c3345;font-weight:500;font-size:.95rem;">Inspection</a>
         <a href="services.html" style="color:#2c3345;font-weight:500;font-size:.95rem;">Services</a>
         <a href="index.html#about" style="color:#2c3345;font-weight:500;font-size:.95rem;">About</a>
