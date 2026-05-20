@@ -985,6 +985,13 @@
       .marquee-set { flex-wrap: wrap; justify-content: center; gap: 20px 28px; padding-right: 0; }
       .marquee-set + .marquee-set { display: none; }
       .marquee-set img { width: 130px; height: 42px; opacity: .7; }
+      /* Certifications marquee: static grid on mobile */
+      .cert-marquee { overflow: visible; }
+      .cert-marquee__track { animation: none; width: auto; flex-wrap: wrap; justify-content: center; gap: 28px 32px; padding: 0 16px; }
+      .cert-marquee__item { min-width: 100px; }
+      .cert-marquee__item[aria-hidden="true"] { display: none; }
+      /* Hide drone operator image on mobile */
+      .insp-right { display: none; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
