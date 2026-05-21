@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Planned and reactive maintenance for commercial solar assets across South Africa. Detailed reports with panel counts, keeping assets generating year round." />
+  <title>Maintenance | Kleen Up Solar</title>
+  <link rel="canonical" href="https://kleenup.solar/maintenance" />
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kleenup.solar/maintenance" />
+  <meta property="og:title" content="Maintenance | Kleen Up Solar" />
+  <meta property="og:description" content="Planned and reactive maintenance for commercial solar assets across South Africa. Detailed reports with panel counts, keeping assets generating year round." />
+  <meta property="og:image" content="https://kleenup.solar/website%20assets/Good%20Wood%20og.webp" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Maintenance | Kleen Up Solar" />
+  <meta name="twitter:description" content="Planned and reactive maintenance for commercial solar assets across South Africa." />
+  <meta name="twitter:image" content="https://kleenup.solar/website%20assets/Good%20Wood%20og.webp" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3NDZYGWCV"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-B3NDZYGWCV');</script>
+
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wthgh4efst");
+  </script>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script>
+    var _sbClient = supabase.createClient(
+      'https://ghjchtelgcgnlxtjajrj.supabase.co',
+      'sb_publishable_3Nb8dpkVX2CJEup0ezXiIA_6yuRMEw2'
+    );
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --navy: #1f445f;
+      --navy-deep: #0b1c2a;
+      --blue: #4e99d4;
+      --gold: #c9a84c;
+      --bg: #f7f7f7;
+      --bg-cool: #f0f4f7;
+      --surface: #ffffff;
+      --text: #2c3345;
+      --muted: #8c8c8c;
+      --border: #e5e7eb;
+      --shadow-sm: 0 1px 2px rgba(31,68,95,.06);
+      --shadow-md: 0 6px 18px rgba(31,68,95,.08);
+      --shadow-lg: 0 14px 36px rgba(31,68,95,.14);
+      --radius: 10px;
+      --max: 1140px;
+      --ease: cubic-bezier(.2,.7,.2,1);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      font-size: 17px; line-height: 1.55; color: var(--text);
+      background: var(--bg); -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--navy); text-decoration: none; }
+    a:hover { color: var(--blue); }
+    h1, h2, h3 {
+      font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+      color: var(--navy); font-weight: 700; line-height: 1.15;
+      margin: 0 0 .5em; letter-spacing: -.015em;
+    }
+    h1 { font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -.03em; }
+    h2 { font-size: clamp(1.5rem, 2.8vw, 2rem); }
+    h3 { font-size: 1.15rem; font-weight: 600; }
+    p { margin: 0 0 1em; }
+    ul { margin: 0 0 1em; padding-left: 1.3em; }
+    li { margin-bottom: .5em; }
+
+    .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    section { padding: 88px 0; scroll-margin-top: 80px; }
+    .eyebrow {
+      display: inline-block; color: var(--blue); font-weight: 600;
+      font-size: .8rem; letter-spacing: .1em; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ---------- NAV ---------- */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      background: rgba(255,255,255,.96);
+      backdrop-filter: saturate(140%) blur(8px);
+      box-shadow: var(--shadow-sm);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; padding: 16px 24px; max-width: var(--max); margin: 0 auto;
+    }
+    .logo img { height: 40px; width: auto; display: block; }
+    .nav-links {
+      display: flex; gap: 30px; align-items: center;
+      list-style: none; margin: 0; padding: 0;
+    }
+    .nav-links a {
+      color: var(--text); font-weight: 500; font-size: .95rem;
+      transition: color 250ms var(--ease);
+    }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-links a.active { color: var(--navy); font-weight: 600; }
+
+    .btn {
+      display: inline-block; background: var(--navy); color: #fff;
+      padding: 11px 20px; border-radius: 2px; font-weight: 700;
+      font-size: .74rem; letter-spacing: .14em; text-transform: uppercase;
+      border: 1px solid var(--navy); cursor: pointer; text-align: center; line-height: 1;
+      transition: background 200ms var(--ease);
+    }
+    .btn:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
+
+    .btn-cta {
+      display: inline-block; background: var(--navy); color: #fff;
+      padding: 16px 28px; border-radius: 2px;
+      font-weight: 700; font-size: .82rem;
+      letter-spacing: .14em; text-transform: uppercase;
+      border: 0; cursor: pointer; text-align: center; line-height: 1;
+      transition: background 200ms var(--ease), transform 200ms var(--ease), box-shadow 200ms var(--ease);
+    }
+    .btn-cta:hover {
+      background: var(--blue); color: #fff;
+      transform: translateY(-1px); box-shadow: var(--shadow-md);
+    }
+
+    /* ---------- HAMBURGER ---------- */
+    .hamburger {
+      display: none;
+      width: 44px; height: 44px; padding: 8px;
+      background: transparent; border: 0; cursor: pointer;
+    }
+    .hamburger span {
+      display: block; width: 100%; height: 2px;
+      background: var(--navy); margin: 5px 0;
+      transition: background 200ms var(--ease), transform 200ms var(--ease), opacity 200ms var(--ease);
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ---------- FOOTER ---------- */
+    footer { background: var(--navy-deep); color: rgba(255,255,255,.6); }
+    .foot-inner {
+      display: grid; grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 40px; align-items: start;
+      padding: 64px 0 40px;
+    }
+    .foot-brand { max-width: 320px; }
+    .foot-logo { display: inline-block; background: #fff; border-radius: 6px; padding: 4px 8px; margin-bottom: 14px; }
+    .foot-logo img { height: 32px; }
+    .foot-tagline { color: rgba(255,255,255,.55); font-size: .9rem; margin: 0 0 4px; }
+    .foot-loc { color: rgba(255,255,255,.35); font-size: .82rem; margin: 0; }
+    .foot-col h4 {
+      color: #fff; font-size: .82rem;
+      text-transform: uppercase; letter-spacing: .1em;
+      font-weight: 700; margin-bottom: 16px;
+    }
+    .foot-nav {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .foot-nav a {
+      color: rgba(255,255,255,.6); font-size: .9rem;
+      transition: color 200ms var(--ease);
+    }
+    .foot-nav a:hover { color: #fff; }
+    .foot-socials { display: flex; gap: 12px; }
+    .foot-socials a {
+      color: rgba(255,255,255,.5); display: flex; align-items: center;
+      transition: color 200ms var(--ease);
+    }
+    .foot-socials a:hover { color: #fff; }
+    .foot-socials svg { width: 16px; height: 16px; }
+    .foot-bottom {
+      margin-top: 0; padding: 24px 0;
+      border-top: 1px solid rgba(255,255,255,.1);
+      color: rgba(255,255,255,.3); font-size: .82rem;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 960px) {
+      .foot-inner { grid-template-columns: 1fr 1fr; }
+      .foot-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 768px) {
+      body { font-size: 16px; }
+      section { padding: 60px 0; }
+      .nav-links {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        flex-direction: column; gap: 0;
+        background: rgba(255,255,255,.98);
+        backdrop-filter: blur(10px);
+        padding: 16px 24px; border-top: 1px solid var(--border);
+        box-shadow: var(--shadow-md);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { color: var(--text); padding: 12px 0; width: 100%; border-bottom: 1px solid var(--border); }
+      .nav-links li:last-child a { border-bottom: none; }
+      .nav .btn { display: none; }
+      .hamburger { display: block; }
+      .foot-inner { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo" aria-label="Kleen Up Solar, home">
+        <img src="website%20assets/Kleen%20Up%20Solar%20Logo.webp" alt="Kleen Up Solar" />
+      </a>
+      <nav aria-label="Primary navigation">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html#inspection">Inspection</a></li>
+          <li><a href="services.html" class="active">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <a href="index.html#calculator" class="btn">Get a quote</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- page content coming soon -->
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="container">
+      <div class="foot-inner">
+        <div class="foot-brand">
+          <a href="index.html" class="foot-logo" aria-label="Kleen Up Solar home">
+            <img src="website%20assets/Kleen%20Up%20Solar%20Logo.webp" alt="Kleen Up Solar" />
+          </a>
+          <p class="foot-tagline">South Africa&rsquo;s commercial solar O&amp;M partner.</p>
+          <p class="foot-loc">Cape Town, South Africa</p>
+        </div>
+        <div class="foot-col">
+          <h4>Navigate</h4>
+          <ul class="foot-nav">
+            <li><a href="index.html#inspection">Inspection</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h4>Follow</h4>
+          <div class="foot-socials">
+            <a href="https://instagram.com/kleenup.solar" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="https://www.linkedin.com/company/kleen-up-solar/" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"></path></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <p class="foot-bottom">&copy; <script>document.write(new Date().getFullYear())</script> Kleen Up Solar. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var btn = document.getElementById('hamburger');
+      var links = document.getElementById('navLinks');
+      if (!btn || !links) return;
+      btn.addEventListener('click', function () {
+        var isOpen = links.classList.toggle('open');
+        btn.classList.toggle('open', isOpen);
+        btn.setAttribute('aria-expanded', String(isOpen));
+      });
+      links.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+          links.classList.remove('open');
+          btn.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('visible'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+
+</body>
+</html>
