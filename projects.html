@@ -208,7 +208,7 @@
     }
     .proj-card {
       background: var(--surface);
-      border-radius: var(--radius);
+      border-radius: 12px;
       overflow: hidden;
       box-shadow: var(--shadow-sm);
       border: 1px solid var(--border);
@@ -239,20 +239,22 @@
       display: flex; flex-direction: column; flex: 1;
     }
     .proj-card-meta {
-      display: flex; align-items: center; gap: 10px;
+      display: flex; flex-direction: column; gap: 6px;
       margin-bottom: 12px;
     }
     .proj-card-location {
-      font-size: .74rem; font-weight: 600;
+      font-size: .74rem; font-weight: 700;
       color: var(--blue); letter-spacing: .08em; text-transform: uppercase;
     }
     .proj-card-service {
       font-size: .72rem; color: var(--muted);
       background: var(--bg-cool);
       border-radius: 999px; padding: 3px 10px;
+      align-self: flex-start;
     }
     .proj-card-body h3 {
-      font-size: 1.08rem; margin-bottom: 10px; color: var(--navy);
+      font-size: 1.08rem; font-weight: 700; letter-spacing: .01em;
+      margin-bottom: 10px; color: var(--blue);
     }
     .proj-card-body p {
       font-size: .95rem; color: var(--text);
@@ -260,7 +262,7 @@
     }
     .proj-card-stats {
       display: flex; gap: 18px;
-      padding-top: 14px;
+      padding-top: 14px; margin-bottom: 18px;
       border-top: 1px solid var(--border);
     }
     .proj-stat-item { display: flex; flex-direction: column; }
@@ -273,6 +275,15 @@
       font-size: .72rem; color: var(--muted);
       text-transform: uppercase; letter-spacing: .06em; margin-top: 2px;
     }
+    .proj-card-link {
+      align-self: flex-start;
+      background: rgba(78,153,212,.12); color: var(--blue);
+      font-size: .8rem; font-weight: 600;
+      padding: 7px 16px; border-radius: 999px;
+      text-decoration: none;
+      transition: background 200ms var(--ease);
+    }
+    .proj-card-link:hover { background: rgba(78,153,212,.22); color: var(--blue); }
 
     /* ---------- MAP SECTION ---------- */
     .map-section { background: var(--surface); padding-bottom: 96px; }
@@ -496,6 +507,7 @@
                   <span class="proj-stat-label">Panels</span>
                 </div>
               </div>
+              <a href="#" class="proj-card-link">View more &rarr;</a>
             </div>
           </article>
 
@@ -521,6 +533,7 @@
                   <span class="proj-stat-label">Panels</span>
                 </div>
               </div>
+              <a href="#" class="proj-card-link">View more &rarr;</a>
             </div>
           </article>
 
@@ -546,6 +559,7 @@
                   <span class="proj-stat-label">Panels</span>
                 </div>
               </div>
+              <a href="#" class="proj-card-link">View more &rarr;</a>
             </div>
           </article>
 
@@ -593,7 +607,7 @@
           <form class="foot-form" action="" method="POST">
             <label for="foot-email" class="foot-sr-only">Email address</label>
             <input type="email" id="foot-email" name="email" placeholder="your@email.com" autocomplete="email" required />
-            <input type="hidden" name="source" value="footer-newsletter" />
+            <input type="hidden" name="source" value="projects-footer" />
             <button type="submit" class="foot-sub-btn">Subscribe <span aria-hidden="true">&rarr;</span></button>
           </form>
         </div>
