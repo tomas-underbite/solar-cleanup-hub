@@ -637,8 +637,7 @@
 
     /* ---------- CONTACT ---------- */
     .contact-grid {
-      display: grid; grid-template-columns: 1.2fr 1fr;
-      gap: 56px; align-items: stretch;
+      max-width: 620px; margin: 0 auto;
     }
     .contact-form { display: flex; flex-direction: column; gap: 16px; }
     .contact-field { display: flex; flex-direction: column; }
@@ -656,7 +655,7 @@
     }
     .contact-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .contact-form button {
-      align-self: flex-start; background: var(--navy); color: #fff;
+      align-self: stretch; background: var(--navy); color: #fff;
       padding: 16px 30px; border: 0; border-radius: 2px;
       font: inherit; font-weight: 700; font-size: .82rem;
       letter-spacing: .14em; text-transform: uppercase;
@@ -1004,7 +1003,7 @@
     <!-- ============ CONTACT ============ -->
     <section id="contact" style="background:var(--surface);padding-top:48px;">
       <div class="container">
-        <div class="section-head reveal">
+        <div class="section-head center reveal">
           <h2>Book an inspection.</h2>
           <p>Fill in the form and we&rsquo;ll get back to you within 24 hours. Report delivered within 10&ndash;14 days of the flight.</p>
         </div>
@@ -1045,40 +1044,6 @@
             </div>
             <button type="button" onclick="submitContactForm(this)">Send enquiry</button>
           </form>
-          <div class="contact-right-col">
-            <aside class="contact-details reveal">
-              <h3>Get in touch</h3>
-              <div class="contact-detail-row">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                <div>
-                  <span class="label">Email</span>
-                  <a href="mailto:info@kleenup.solar" class="value">info@kleenup.solar</a>
-                </div>
-              </div>
-              <div class="contact-detail-row">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                <div>
-                  <span class="label">Phone</span>
-                  <a href="tel:+27674095945" class="value">067 409 5945</a>
-                </div>
-              </div>
-              <div class="contact-detail-row">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                <div>
-                  <span class="label">Instagram</span>
-                  <a href="https://instagram.com/kleenup.solar" target="_blank" rel="noopener" class="value">@kleenup.solar</a>
-                </div>
-              </div>
-              <div class="contact-detail-row">
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"></path></svg>
-                <div>
-                  <span class="label">LinkedIn</span>
-                  <a href="https://www.linkedin.com/company/kleen-up-solar/" target="_blank" rel="noopener" class="value">Kleen Up Solar</a>
-                </div>
-              </div>
-            </aside>
-            <img src="website%20assets/Kleen%20Up%20Solar%20Email%20Banner.png" class="contact-email-banner reveal" alt="Kleen Up Solar" />
-          </div>
         </div>
       </div>
     </section>
