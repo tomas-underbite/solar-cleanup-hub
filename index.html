@@ -978,16 +978,16 @@
     .git-textarea:focus { border-color: rgba(255,255,255,.9); }
     .git-submit-wrap { display: flex; justify-content: flex-end; margin-top: 12px; }
     .git-submit {
-      background: #C9F564; color: var(--navy);
-      border: none; border-radius: 999px;
-      font: inherit; font-weight: 700; font-size: .9rem;
-      letter-spacing: .03em;
-      padding: 14px 32px;
+      background: #fff; color: var(--navy);
+      border: none; border-radius: 2px;
+      font: inherit; font-weight: 700; font-size: .82rem;
+      letter-spacing: .14em; text-transform: uppercase;
+      padding: 16px 28px;
       cursor: pointer;
       display: inline-flex; align-items: center; gap: 10px;
-      transition: background 200ms var(--ease), transform 200ms var(--ease);
+      transition: background 200ms var(--ease), color 200ms var(--ease), transform 200ms var(--ease), box-shadow 200ms var(--ease);
     }
-    .git-submit:hover { background: #d9ff7a; transform: translateY(-1px); }
+    .git-submit:hover { background: var(--blue); color: #fff; transform: translateY(-1px); box-shadow: var(--shadow-md); }
     @media (max-width: 768px) {
       .git-form-grid { grid-template-columns: 1fr; gap: 28px; }
       .git-submit-wrap { justify-content: flex-start; }
