@@ -779,6 +779,55 @@
       color: rgba(255,255,255,.55); font-size: .9rem;
     }
 
+    /* ---------- FOOTPRINT SNAPSHOT ---------- */
+    .footprint {
+      padding: 88px 0; background: var(--surface);
+      text-align: center; border-bottom: 1px solid var(--border);
+    }
+    .footprint h2 { margin: 0 0 10px; font-size: clamp(1.6rem, 3vw, 2.2rem); }
+    .fp-stat { color: var(--muted); font-size: .95rem; margin: 0 0 40px; }
+    .fp-map-wrap {
+      max-width: 500px; margin: 0 auto 32px;
+      position: relative; display: inline-block;
+    }
+    .fp-svg { display: block; width: 100%; filter: drop-shadow(0 4px 16px rgba(31,68,95,.1)); }
+    .fp-pin {
+      position: absolute; transform: translate(-50%, -50%);
+      z-index: 1;
+    }
+    .fp-pin:hover { z-index: 10; }
+    .fp-dot {
+      display: block; width: 13px; height: 13px;
+      background: var(--blue); border-radius: 50%;
+      border: 2.5px solid #fff; box-shadow: 0 0 0 2px var(--blue);
+      cursor: pointer;
+      transition: transform 200ms ease, box-shadow 200ms ease;
+    }
+    .fp-pin:hover .fp-dot {
+      transform: scale(1.5);
+      box-shadow: 0 0 0 2px var(--blue), 0 4px 12px rgba(78,153,212,.4);
+    }
+    .fp-card {
+      position: absolute; width: 210px;
+      background: #fff; border-radius: 10px; overflow: hidden;
+      box-shadow: 0 8px 28px rgba(31,68,95,.2);
+      opacity: 0; pointer-events: none;
+      transition: opacity 180ms ease;
+    }
+    .fp-pin:hover .fp-card { opacity: 1; pointer-events: auto; }
+    .fp-card img { width: 100%; height: 130px; object-fit: cover; display: block; }
+    .fp-card-label {
+      display: block; padding: 8px 12px;
+      font-size: .78rem; font-weight: 600; color: var(--navy);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .fp-link {
+      font-weight: 600; color: var(--navy); font-size: 1rem;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: color 200ms var(--ease);
+    }
+    .fp-link:hover { color: var(--blue); }
+
     /* ---------- TESTIMONIALS ---------- */
     .testi-grid {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
@@ -1327,6 +1376,7 @@
       .cert-marquee__item[aria-hidden="true"] { display: none; }
       /* Hide drone operator image on mobile */
       .insp-right { display: none; }
+      .fp-card { display: none; }
 
     }
     @media (prefers-reduced-motion: reduce) {
@@ -1613,8 +1663,61 @@
       </div>
     </section>
 
+    <!-- ============ FOOTPRINT SNAPSHOT ============ -->
+    <section id="footprint" class="footprint reveal">
+      <div class="container">
+        <h2 class="reveal">Nationwide footprint</h2>
+        <p class="fp-stat reveal">500+ sites across South Africa</p>
+        <div class="fp-map-wrap reveal">
+          <svg class="fp-svg" viewBox="0 0 500 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Outline map of South Africa showing project locations">
+            <title>South Africa project locations</title>
+            <!-- Coord mapping: x = (lon-16)*27.78, y = (lat-22)*33.08 -->
+            <!-- SA outline, clockwise from Orange River mouth on Atlantic -->
+            <path d="M 12.5,220.1 L 27.8,198.5 L 110.4,213.4 L 111.1,160.5 L 134.7,132.3 L 166.7,122.4 L 222.2,132.3 L 277.8,86.0 L 305.6,66.2 L 333.3,13.2 L 388.6,7.3 L 425.6,11.9 L 443.6,52.9 L 444.4,82.7 L 444.4,115.8 L 444.4,130.9 L 410.6,123.0 L 410.6,175.9 L 447.6,175.9 L 460.7,215.1 L 400.3,290.2 L 350.3,353.1 L 305.6,366.0 L 267.2,396.5 L 194.4,399.5 L 125.0,411.7 L 79.2,408.4 L 73.6,404.4 L 68.0,409.6 L 63.9,399.5 L 68.0,396.2 L 54.2,364.7 L 39.0,314.8 L 29.2,281.7 Z"
+              fill="var(--bg-cool)" stroke="var(--navy)" stroke-width="2" stroke-linejoin="round" />
+            <!-- Lesotho enclave -->
+            <path d="M 305.6,248.1 L 322.2,218.4 L 361.1,221.6 L 372.2,241.4 L 375.0,286.9 L 313.9,270.3 Z"
+              fill="var(--bg-cool)" stroke="var(--navy)" stroke-width="2" stroke-linejoin="round" />
+          </svg>
+          <!-- Pin: Cape Town 115 kW — 18.47°E 33.91°S -->
+          <div class="fp-pin" style="left:13.7%;top:91.6%;">
+            <span class="fp-dot"></span>
+            <div class="fp-card" style="bottom:20px;left:0;">
+              <img src="website%20assets/tmp4phvlu4h.webp" alt="Cape Town, 115 kW" loading="lazy" />
+              <span class="fp-card-label">Cape Town, 115 kW</span>
+            </div>
+          </div>
+          <!-- Pin: Fisantekraal 360 kW — 18.75°E 33.77°S -->
+          <div class="fp-pin" style="left:15.3%;top:90.5%;">
+            <span class="fp-dot"></span>
+            <div class="fp-card" style="bottom:20px;left:0;">
+              <img src="website%20assets/tmpfnao8y5_.webp" alt="Fisantekraal, Cape Town, 360 kW" loading="lazy" />
+              <span class="fp-card-label">Fisantekraal, 360 kW</span>
+            </div>
+          </div>
+          <!-- Pin: Sasolburg Free State 392 kW — 27.82°E 26.81°S -->
+          <div class="fp-pin" style="left:65.7%;top:37%;">
+            <span class="fp-dot"></span>
+            <div class="fp-card" style="bottom:20px;left:-99px;">
+              <img src="website%20assets/tmp9wftsuv6.webp" alt="Sasolburg, Free State, 392 kW" loading="lazy" />
+              <span class="fp-card-label">Sasolburg, Free State, 392 kW</span>
+            </div>
+          </div>
+          <!-- Pin: Nelspruit Mpumalanga 361 kW — 30.97°E 25.47°S -->
+          <div class="fp-pin" style="left:83.1%;top:26.7%;">
+            <span class="fp-dot"></span>
+            <div class="fp-card" style="top:20px;right:0;bottom:auto;">
+              <img src="website%20assets/tmphynl_c2s.webp" alt="Nelspruit, Mpumalanga, 361 kW" loading="lazy" />
+              <span class="fp-card-label">Nelspruit, Mpumalanga, 361 kW</span>
+            </div>
+          </div>
+        </div>
+        <a href="projects.html#projects-map" class="fp-link">Explore our project map &rarr;</a>
+      </div>
+    </section>
+
     <!-- ============ FEATURED TESTIMONIAL (Pattern C) ============ -->
-    <section class="featured-testi" aria-label="Featured client testimonial">
+    <section class="featured-testi reveal" aria-label="Featured client testimonial">
       <div class="container">
         <div class="ft-inner reveal">
           <div class="ft-avatar">
@@ -1751,7 +1854,7 @@
             </div>
           </div>
         </div>
-        <img src="website%20assets/Kleen%20Up%20Solar%20Email%20Banner.png" alt="Kleen Up Solar" class="git-email-banner" />
+        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1280 267'><rect width='1280' height='267' fill='rgb(78,153,212)'/><text x='640' y='148' fill='white' font-family='Inter, sans-serif' font-size='30' font-weight='600' text-anchor='middle'>[REPLACE: real Kleen Up Solar field photo banner]</text></svg>" alt="Kleen Up Solar" class="git-email-banner" />
         </div>
 
       </div>
