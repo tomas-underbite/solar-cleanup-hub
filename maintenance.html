@@ -231,6 +231,48 @@
       }
       .reveal { opacity: 1; transform: none; }
     }
+
+    /* ---------- SECTION HEAD ---------- */
+    .section-head { margin-bottom: 48px; max-width: 760px; }
+    .section-head p { color: var(--text); margin: 8px 0 0; font-size: 1.02rem; }
+
+    /* ---------- PAGE HERO ---------- */
+    .page-hero { background: var(--surface); padding-top: 128px; padding-bottom: 64px; }
+    .page-hero .intro { max-width: 680px; font-size: 1.08rem; color: var(--text); line-height: 1.65; margin: 0; }
+
+    /* ---------- INCLUDED LIST ---------- */
+    .included-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; max-width: 640px; }
+    .included-list li { position: relative; padding-left: 30px; color: var(--text); font-size: .98rem; }
+    .included-list li::before {
+      content: ''; position: absolute; left: 0; top: 8px;
+      width: 14px; height: 14px; background: var(--blue);
+      mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='5 12 10 17 19 7'/></svg>") no-repeat center / contain;
+      -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='5 12 10 17 19 7'/></svg>") no-repeat center / contain;
+    }
+
+    /* ---------- CONTACT ---------- */
+    .contact-form-wrap { max-width: 640px; }
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .contact-field { display: flex; flex-direction: column; }
+    .contact-field label { font-size: .86rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .contact-field input, .contact-field select, .contact-field textarea {
+      padding: 13px 14px; font: inherit; color: var(--text);
+      background: #fff; border: 1.5px solid var(--border); border-radius: 8px;
+      transition: border-color 180ms var(--ease); width: 100%;
+    }
+    .contact-field textarea { min-height: 130px; resize: vertical; }
+    .contact-field input:focus, .contact-field select:focus, .contact-field textarea:focus { outline: none; border-color: var(--blue); }
+    .contact-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .contact-form button {
+      align-self: flex-start; background: var(--navy); color: #fff;
+      padding: 16px 30px; border: 0; border-radius: 2px;
+      font: inherit; font-weight: 700; font-size: .82rem;
+      letter-spacing: .14em; text-transform: uppercase;
+      cursor: pointer; margin-top: 8px;
+      transition: background 180ms var(--ease), transform 180ms var(--ease);
+    }
+    .contact-form button:hover { background: var(--blue); transform: translateY(-1px); }
+    @media (max-width: 768px) { .contact-form-row { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -258,7 +300,94 @@
   </header>
 
   <main>
-    <!-- page content coming soon -->
+
+    <!-- ============ PAGE HERO ============ -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Service</span>
+          <h1>Maintenance</h1>
+          <p class="intro">[COPY TBD] A solar asset that isn&rsquo;t actively maintained degrades faster and fails sooner than it should. [COPY TBD] We provide both planned preventive maintenance and reactive call-outs to keep your systems generating at full capacity year round. [COPY TBD] Every visit is documented with a detailed report, panel counts, and fault records you can share with asset owners and insurers.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WHAT'S INCLUDED ============ -->
+    <section style="background:var(--bg-cool);">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>What&rsquo;s included</h2>
+        </div>
+        <ul class="included-list reveal">
+          <li>[COPY TBD] Planned preventive maintenance visits scheduled to your O&amp;M calendar and manufacturer guidelines</li>
+          <li>[COPY TBD] Reactive call-outs for unplanned faults, inverter trips, and string failures</li>
+          <li>[COPY TBD] Component repair and replacement — including fuses, connectors, isolators, and DC cabling</li>
+          <li>[COPY TBD] Detailed maintenance log and post-visit report with panel counts, fault descriptions, and actions taken</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ WHERE WE OPERATE ============ -->
+    <section style="background:var(--surface);">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Where we operate</h2>
+          <p>KwaZulu-Natal and Port Elizabeth are our primary regions for full-service maintenance coverage. Cape Town and the Western Cape are also served. <a href="index.html#get-in-touch">Contact us</a> to confirm availability at your site.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section id="contact" style="background:var(--bg-cool);padding-top:48px;">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Get a quote for Maintenance.</h2>
+          <p>Tell us about your site and we&rsquo;ll get back to you within 24 hours.</p>
+        </div>
+        <div class="contact-form-wrap">
+          <form class="contact-form reveal" data-source="maintenance">
+            <input type="hidden" name="source" value="maintenance" />
+            <input type="hidden" name="service_interest" value="Maintenance" />
+            <div class="contact-form-row">
+              <div class="contact-field">
+                <label for="cf-first-name">First name *</label>
+                <input id="cf-first-name" name="first_name" type="text" autocomplete="given-name" required />
+              </div>
+              <div class="contact-field">
+                <label for="cf-last-name">Last name</label>
+                <input id="cf-last-name" name="last_name" type="text" autocomplete="family-name" />
+              </div>
+            </div>
+            <div class="contact-form-row">
+              <div class="contact-field">
+                <label for="cf-email">Work email *</label>
+                <input id="cf-email" name="email" type="email" autocomplete="email" required />
+              </div>
+              <div class="contact-field">
+                <label for="cf-phone">Phone</label>
+                <input id="cf-phone" name="phone" type="tel" autocomplete="tel" />
+              </div>
+            </div>
+            <div class="contact-form-row">
+              <div class="contact-field">
+                <label for="cf-company">Company</label>
+                <input id="cf-company" name="company" type="text" autocomplete="organization" />
+              </div>
+              <div class="contact-field">
+                <label for="cf-region">Site region</label>
+                <input id="cf-region" name="region" type="text" placeholder="e.g. Durban, KwaZulu-Natal&hellip;" />
+              </div>
+            </div>
+            <div class="contact-field">
+              <label for="cf-message">Message *</label>
+              <textarea id="cf-message" name="message" rows="4" required></textarea>
+            </div>
+            <button type="button" onclick="submitContactForm(this)">Send enquiry</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- ============ FOOTER ============ -->
@@ -334,6 +463,33 @@
       }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
       els.forEach(function (el) { io.observe(el); });
     })();
+
+    // -------- contact form → Supabase --------
+    async function submitContactForm(btn) {
+      var form = btn.closest('form');
+      var data = Object.fromEntries(new FormData(form));
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      var row = {
+        source:           data.source,
+        first_name:       data.first_name,
+        last_name:        data.last_name || null,
+        email:            data.email,
+        phone:            data.phone || null,
+        company:          data.company || null,
+        service_interest: data.service_interest,
+        region:           data.region || null,
+        message:          data.message || null
+      };
+      var result = await _sbClient.from('form_submissions').insert(row);
+      if (result.error) {
+        btn.disabled = false;
+        btn.textContent = 'Send enquiry';
+        alert('Something went wrong. Please email us directly at info@kleenup.solar');
+      } else {
+        form.innerHTML = '<p style="padding:24px 0;font-size:1.1rem;color:var(--navy);font-weight:600;">Thanks — we’ll be in touch within 24 hours.</p>';
+      }
+    }
   </script>
 
 </body>
