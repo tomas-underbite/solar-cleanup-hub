@@ -892,88 +892,6 @@
       </div>
     </section>
 
-    <!-- ============ CONTACT ============ -->
-    <section id="contact" style="background:var(--surface);padding-top:48px;">
-      <div class="container">
-        <div class="section-head reveal">
-          <h2>Book an inspection.</h2>
-          <p>Fill in the form and we&rsquo;ll get back to you within 24 hours with a detailed quote. Report delivered within 10&ndash;14 days of the flight.</p>
-        </div>
-        <div class="contact-grid">
-          <form class="contact-form reveal" data-source="drone-inspections">
-            <input type="hidden" name="service_interest" value="Drone Inspections" />
-            <div class="contact-form-row">
-              <div class="contact-field">
-                <label for="cf-first-name">First name</label>
-                <input id="cf-first-name" name="first_name" type="text" autocomplete="given-name" required />
-              </div>
-              <div class="contact-field">
-                <label for="cf-last-name">Last name</label>
-                <input id="cf-last-name" name="last_name" type="text" autocomplete="family-name" />
-              </div>
-            </div>
-            <div class="contact-field">
-              <label for="cf-company">Company</label>
-              <input id="cf-company" name="company" type="text" autocomplete="organization" />
-            </div>
-            <div class="contact-form-row">
-              <div class="contact-field">
-                <label for="cf-email">Work email</label>
-                <input id="cf-email" name="email" type="email" autocomplete="email" required />
-              </div>
-              <div class="contact-field">
-                <label for="cf-phone">Phone</label>
-                <input id="cf-phone" name="phone" type="tel" autocomplete="tel" />
-              </div>
-            </div>
-            <div class="contact-field">
-              <label for="cf-region">Site location / region</label>
-              <input id="cf-region" name="region" type="text" placeholder="e.g. Cape Town, KwaZulu-Natal&hellip;" />
-            </div>
-            <div class="contact-field">
-              <label for="cf-message">Additional details (optional)</label>
-              <textarea id="cf-message" name="message" placeholder="Number of panels, site access, preferred dates&hellip;"></textarea>
-            </div>
-            <button type="button" onclick="submitContactForm(this)">Send enquiry</button>
-          </form>
-          <div class="contact-right-col">
-            <aside class="contact-details reveal">
-              <h3>Get in touch</h3>
-              <div class="contact-detail-row">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                <div>
-                  <span class="label">Email</span>
-                  <a href="mailto:info@kleenup.solar" class="value">info@kleenup.solar</a>
-                </div>
-              </div>
-              <div class="contact-detail-row">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                <div>
-                  <span class="label">Phone</span>
-                  <a href="tel:+27674095945" class="value">067 409 5945</a>
-                </div>
-              </div>
-              <div class="contact-detail-row">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                <div>
-                  <span class="label">Instagram</span>
-                  <a href="https://instagram.com/kleenup.solar" target="_blank" rel="noopener" class="value">@kleenup.solar</a>
-                </div>
-              </div>
-              <div class="contact-detail-row">
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"></path></svg>
-                <div>
-                  <span class="label">LinkedIn</span>
-                  <a href="https://www.linkedin.com/company/kleen-up-solar/" target="_blank" rel="noopener" class="value">Kleen Up Solar</a>
-                </div>
-              </div>
-            </aside>
-            <img src="website%20assets/Kleen%20Up%20Solar%20Email%20Banner.png" class="contact-email-banner reveal" alt="Kleen Up Solar" />
-          </div>
-        </div>
-      </div>
-    </section>
-
   </main>
 
   <!-- ============ FOOTER ============ -->
@@ -1095,41 +1013,11 @@
         resultBox.classList.add('visible');
         resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-        var contactEmail = document.getElementById('cf-email');
-        if (contactEmail && !contactEmail.value) contactEmail.value = emailVal;
-
         if (typeof gtag === 'function') {
           gtag('event', 'calculator_quote', { event_category: 'lead', event_label: 'quote_calculator', value: Math.round(base) });
         }
       });
     })();
-
-    // -------- contact form → Supabase --------
-    async function submitContactForm(btn) {
-      var form = btn.closest('form');
-      var data = Object.fromEntries(new FormData(form));
-      btn.disabled = true;
-      btn.textContent = 'Sending…';
-      var row = {
-        source:           form.dataset.source,
-        first_name:       data.first_name,
-        last_name:        data.last_name || null,
-        email:            data.email,
-        phone:            data.phone || null,
-        company:          data.company || null,
-        service_interest: data.service_interest || 'Drone Inspections',
-        region:           data.region || null,
-        message:          data.message || null
-      };
-      var result = await _sbClient.from('form_submissions').insert(row);
-      if (result.error) {
-        btn.disabled = false;
-        btn.textContent = 'Send enquiry';
-        alert('Something went wrong. Please email us directly at info@kleenup.solar');
-      } else {
-        form.innerHTML = '<p style="padding:24px 0;font-size:1.1rem;color:var(--navy);font-weight:600;">Thanks — we’ll be in touch within 24 hours.</p>';
-      }
-    }
   </script>
 
 </body>
