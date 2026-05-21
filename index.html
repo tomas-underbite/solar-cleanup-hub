@@ -649,6 +649,26 @@
     .svc-teaser-item ul { margin: 0; padding-left: 18px; }
     .svc-teaser-item ul li { color: var(--text); font-size: .9rem; line-height: 1.55; margin-bottom: 4px; }
     .svc-teaser-item ul li:last-child { margin-bottom: 0; }
+    .svc-more {
+      display: inline-flex; align-items: center; gap: 5px;
+      margin-top: 16px;
+      font-size: .78rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--navy);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 5px 14px 5px 12px;
+      transition: color .2s, border-color .2s, background .2s;
+    }
+    .svc-more .arr {
+      display: inline-block;
+      transition: transform .2s var(--ease);
+    }
+    .svc-more:hover {
+      color: var(--surface);
+      background: var(--navy);
+      border-color: var(--navy);
+    }
+    .svc-more:hover .arr { transform: translateX(3px); }
 
     /* ---------- SCALE BAND ---------- */
     .scale-band {
@@ -1584,6 +1604,7 @@
               <li>Capable of cleaning 1,000+ panels per day</li>
               <li>Restores peak generation across utility, C&amp;I, residential</li>
             </ul>
+            <a href="pv-cleaning.html" class="svc-more">View more <span class="arr">→</span></a>
           </div>
           <div class="svc-teaser-item reveal">
             <h3><a href="services.html#consultancy">Technical Annual Inspections</a></h3>
@@ -1592,6 +1613,7 @@
               <li>Detailed system and roof condition reports</li>
               <li>Catches faults before they show up in your yield</li>
             </ul>
+            <a href="technical-inspections.html" class="svc-more">View more <span class="arr">→</span></a>
           </div>
           <div class="svc-teaser-item reveal">
             <h3><a href="services.html#drone">Drone Inspections</a></h3>
@@ -1600,6 +1622,7 @@
               <li>Detects heat anomalies and module faults</li>
               <li>Reduces fire risk and recovers lost yield</li>
             </ul>
+            <a href="drone-inspections.html" class="svc-more">View more <span class="arr">→</span></a>
           </div>
           <div class="svc-teaser-item reveal">
             <h3><a href="services.html#reporting">Maintenance</a></h3>
@@ -1608,6 +1631,7 @@
               <li>Detailed reports with panel counts</li>
               <li>Keeps assets generating year round</li>
             </ul>
+            <a href="maintenance.html" class="svc-more">View more <span class="arr">→</span></a>
           </div>
         </div>
         <div style="text-align:center;margin-top:32px;">
