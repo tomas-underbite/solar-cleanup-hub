@@ -931,6 +931,68 @@
     }
     .contact-detail-row a:hover { color: var(--blue); }
 
+    /* ---------- GET IN TOUCH ---------- */
+    .get-in-touch { background: var(--navy); padding: 88px 0; }
+    .git-headline {
+      color: #fff;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700; letter-spacing: -.02em; line-height: 1.2;
+      margin-bottom: 48px; max-width: 800px;
+    }
+    .git-form-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 32px 56px;
+    }
+    .git-field { display: flex; flex-direction: column; }
+    .git-label {
+      color: rgba(255,255,255,.85);
+      font-size: .8rem; font-weight: 600;
+      letter-spacing: .07em; text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .git-input, .git-select {
+      background: transparent; border: none;
+      border-bottom: 1.5px solid rgba(255,255,255,.3);
+      color: #fff; font: inherit; font-size: 1rem;
+      padding: 8px 0; outline: none;
+      transition: border-color 200ms var(--ease); width: 100%;
+    }
+    .git-input::placeholder { color: rgba(255,255,255,.35); }
+    .git-input:focus, .git-select:focus { border-bottom-color: rgba(255,255,255,.9); }
+    .git-select {
+      -webkit-appearance: none; appearance: none; cursor: pointer;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='rgba(255,255,255,.55)' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+      background-repeat: no-repeat; background-position: right 4px center;
+      padding-right: 24px;
+    }
+    .git-select option { background: var(--navy); color: #fff; }
+    .git-textarea {
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,.3);
+      border-radius: 6px; color: #fff;
+      font: inherit; font-size: 1rem;
+      padding: 12px 14px; outline: none; resize: vertical;
+      transition: border-color 200ms var(--ease); width: 100%;
+    }
+    .git-textarea::placeholder { color: rgba(255,255,255,.35); }
+    .git-textarea:focus { border-color: rgba(255,255,255,.9); }
+    .git-submit-wrap { display: flex; justify-content: flex-end; margin-top: 12px; }
+    .git-submit {
+      background: #C9F564; color: var(--navy);
+      border: none; border-radius: 999px;
+      font: inherit; font-weight: 700; font-size: .9rem;
+      letter-spacing: .03em;
+      padding: 14px 32px;
+      cursor: pointer;
+      display: inline-flex; align-items: center; gap: 10px;
+      transition: background 200ms var(--ease), transform 200ms var(--ease);
+    }
+    .git-submit:hover { background: #d9ff7a; transform: translateY(-1px); }
+    @media (max-width: 768px) {
+      .git-form-grid { grid-template-columns: 1fr; gap: 28px; }
+      .git-submit-wrap { justify-content: flex-start; }
+    }
+
     /* ---------- FOOTER ---------- */
     footer {
       background: var(--navy-deep); padding: 56px 0 36px;
@@ -1373,6 +1435,46 @@
     <!-- moved to drone-inspections.html -->
 
   </main>
+
+  <!-- ============ GET IN TOUCH ============ -->
+  <section id="get-in-touch" class="get-in-touch">
+    <div class="container">
+      <h2 class="git-headline">Let&rsquo;s discuss your sites and your service plan.</h2>
+      <form class="git-form" action="" method="post">
+        <input type="hidden" name="source" value="homepage" />
+        <div class="git-form-grid">
+          <div class="git-field">
+            <label class="git-label" for="git-name">Full Name *</label>
+            <input class="git-input" id="git-name" name="first_name" type="text" placeholder="Firstname Lastname" required />
+          </div>
+          <div class="git-field">
+            <label class="git-label" for="git-email">Email *</label>
+            <input class="git-input" id="git-email" name="email" type="email" placeholder="email@email.com" required />
+          </div>
+          <div class="git-field">
+            <label class="git-label" for="git-service">I&rsquo;m interested in&hellip;</label>
+            <select class="git-select" id="git-service" name="service_interest">
+              <option value="general" selected>I have a general question</option>
+              <option value="PV Cleaning">PV Cleaning</option>
+              <option value="Technical Annual Inspections">Technical Annual Inspections</option>
+              <option value="Drone Inspections">Drone Inspections</option>
+              <option value="Maintenance">Maintenance</option>
+            </select>
+          </div>
+          <div class="git-field">
+            <label class="git-label" for="git-message">Message *</label>
+            <textarea class="git-textarea" id="git-message" name="message" rows="4" required></textarea>
+          </div>
+        </div>
+        <div class="git-submit-wrap">
+          <button type="submit" class="git-submit">
+            Get in touch
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
 
   <!-- ============ FOOTER ============ -->
   <footer>
