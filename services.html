@@ -192,8 +192,47 @@
       color: rgba(255,255,255,.3); font-size: .82rem;
     }
 
+    /* ---------- PAGE TITLE BAND ---------- */
+    .page-title-band {
+      background: var(--navy-deep); color: #fff;
+      padding: 120px 0 72px; text-align: center;
+    }
+    .page-title-band h1 { color: #fff; }
+    .page-title-band p {
+      color: rgba(255,255,255,.72); font-size: 1.05rem;
+      max-width: 640px; margin: 16px auto 0;
+    }
+
+    /* ---------- SERVICE SPLIT SECTIONS ---------- */
+    .svc-section { background: var(--surface); }
+    .svc-section:nth-child(even) { background: var(--bg-cool); }
+    .svc-split {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 72px; align-items: center;
+    }
+    .svc-split-img {
+      width: 100%; aspect-ratio: 4/3; object-fit: cover;
+      border-radius: var(--radius); display: block;
+    }
+    .svc-split.flip .svc-split-img { order: 1; }
+    .svc-split.flip .svc-split-body { order: 0; }
+    .svc-split-body h2 { margin-bottom: 16px; }
+    .svc-split-body p { color: var(--text); font-size: 1rem; line-height: 1.65; margin-bottom: 28px; }
+    .svc-learn-more {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-weight: 700; font-size: .82rem;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--navy); border-bottom: 2px solid var(--navy);
+      padding-bottom: 2px;
+      transition: color 200ms var(--ease), border-color 200ms var(--ease);
+    }
+    .svc-learn-more:hover { color: var(--blue); border-bottom-color: var(--blue); }
+
     /* ---------- RESPONSIVE ---------- */
     @media (max-width: 960px) {
+      .svc-split { grid-template-columns: 1fr; gap: 36px; }
+      .svc-split.flip .svc-split-img { order: 0; }
+      .svc-split.flip .svc-split-body { order: 1; }
       .foot-inner { grid-template-columns: 1fr 1fr; }
       .foot-brand { grid-column: 1 / -1; }
     }
@@ -249,7 +288,83 @@
   </header>
 
   <main>
-    <!-- hub content goes here -->
+
+    <!-- ============ PAGE TITLE ============ -->
+    <div class="page-title-band">
+      <div class="container">
+        <h1>Our services.</h1>
+        <p>[COPY TBD]</p>
+      </div>
+    </div>
+
+    <!-- ============ 01 — PV CLEANING (image left) ============ -->
+    <section class="svc-section">
+      <div class="container">
+        <div class="svc-split reveal">
+          <img src="New%20HD%20photos/IMG_20251103_091147.jpg"
+               alt="Kleen Up Solar team cleaning commercial solar panels on site"
+               class="svc-split-img" />
+          <div class="svc-split-body">
+            <span class="eyebrow">PV Cleaning</span>
+            <h2>PV Cleaning</h2>
+            <p>[COPY TBD]</p>
+            <a href="pv-cleaning.html" class="svc-learn-more">Learn more &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 02 — TECHNICAL ANNUAL INSPECTIONS (image right) ============ -->
+    <section class="svc-section">
+      <div class="container">
+        <div class="svc-split flip reveal">
+          <img src="New%20HD%20photos/20260210_101319.jpg"
+               alt="Kleen Up Solar technician performing a technical annual inspection on site"
+               class="svc-split-img" />
+          <div class="svc-split-body">
+            <span class="eyebrow">Technical Annual Inspections</span>
+            <h2>Technical Annual Inspections</h2>
+            <p>[COPY TBD]</p>
+            <a href="technical-inspections.html" class="svc-learn-more">Learn more &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 03 — DRONE INSPECTIONS (image left) ============ -->
+    <section class="svc-section">
+      <div class="container">
+        <div class="svc-split reveal">
+          <img src="New%20HD%20photos/20260512_160013.jpg"
+               alt="Thermal drone inspection flight over a commercial solar array"
+               class="svc-split-img" />
+          <div class="svc-split-body">
+            <span class="eyebrow">Drone Inspections</span>
+            <h2>Drone Inspections</h2>
+            <p>[COPY TBD]</p>
+            <a href="drone-inspections.html" class="svc-learn-more">Learn more &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04 — MAINTENANCE (image right) ============ -->
+    <section class="svc-section">
+      <div class="container">
+        <div class="svc-split flip reveal">
+          <img src="New%20HD%20photos/20260316_145855.jpg"
+               alt="Kleen Up Solar maintenance crew on a commercial solar site"
+               class="svc-split-img" />
+          <div class="svc-split-body">
+            <span class="eyebrow">Maintenance</span>
+            <h2>Maintenance</h2>
+            <p>[COPY TBD]</p>
+            <a href="maintenance.html" class="svc-learn-more">Learn more &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- ============ FOOTER ============ -->
