@@ -1,0 +1,68 @@
+{
+  "company": {
+    "name": "Kleen Up Solar",
+    "domain": "kleenup.solar",
+    "email": "info@kleenup.solar",
+    "website": "https://kleenup.solar"
+  },
+  "contacts": {
+    "gareth_hayden": {
+      "name": "Gareth Hayden",
+      "title": "Director",
+      "cell": "083 415 1266",
+      "website": "https://kleenup.solar",
+      "instagram": "https://www.instagram.com/kleenup.solar/"
+    }
+  },
+  "social": {
+    "instagram": "https://www.instagram.com/kleenup.solar/",
+    "linkedin": "https://www.linkedin.com/company/kleen-up-solar/",
+    "facebook": "[CONFIRM]",
+    "youtube": "[CONFIRM]"
+  },
+  "calculator": {
+    "day_rate_zar": 7500,
+    "travel_per_km_zar": 6,
+    "panel_tiers": [
+      { "label": "Up to 500 panels",         "days": 0.5 },
+      { "label": "500 to 2,000 panels",       "days": 1   },
+      { "label": "2,000 to 5,000 panels",     "days": 1.5 },
+      { "label": "5,000 to 10,000 panels",    "days": 2   },
+      { "label": "10,000 to 20,000 panels",   "days": 3   },
+      { "label": "20,000+ panels",            "days": null, "note": "Contact for quote" }
+    ],
+    "cities": [
+      { "label": "Cape Town metro (within 50 km)",          "km": 50  },
+      { "label": "Paarl / Stellenbosch / Franschhoek area", "km": 250 },
+      { "label": "George / Mossel Bay / Garden Route",      "km": 400 },
+      { "label": "Port Elizabeth / Gqeberha",               "km": 760 },
+      { "label": "East London",                             "km": 980 },
+      { "label": "Durban / eThekwini",                      "km": 500 },
+      { "label": "Johannesburg / Ekurhuleni",               "km": 60  },
+      { "label": "Pretoria / Tshwane metro",                "km": 20  },
+      { "label": "Polokwane / Limpopo",                     "km": 300 },
+      { "label": "Nelspruit / Mbombela",                    "km": 350 },
+      { "label": "Bloemfontein / Free State",               "km": 500 },
+      { "label": "Kimberley / Northern Cape",               "km": 700 }
+    ]
+  },
+  "stats": {
+    "panels_under_management": 80000,
+    "mw_under_management": 120,
+    "sites_under_management": 70
+  },
+  "analytics": {
+    "ga4_property": "G-B3NDZYGWCV"
+  },
+  "pending": {
+    "phone_number_for_site": "[CONFIRM with Gareth — cell is 083 415 1266, confirm if this is the public number]",
+    "drone_pilot_licence_number": "[CONFIRM]",
+    "operating_company_cert": "[CONFIRM]",
+    "public_liability_cover_amount": "[CONFIRM]",
+    "bbbee_level": "[CONFIRM]",
+    "facebook_url": "[CONFIRM]",
+    "youtube_url": "[CONFIRM]",
+    "bradley_headshot": "website assets/Bradley Headshot.jpg",
+    "gareth_headshot": "website assets/Gareth Headshot.jpg"
+  }
+}

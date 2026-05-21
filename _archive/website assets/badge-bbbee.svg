@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 72" width="260" height="72">
+  <rect width="260" height="72" rx="10" fill="#fff" stroke="#1b3a5c" stroke-width="1.5"/>
+  <rect x="12" y="16" width="40" height="40" rx="8" fill="#1b3a5c"/>
+  <g stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <circle cx="32" cy="33" r="10"/>
+    <text x="32" y="38" font-family="-apple-system,sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">B</text>
+  </g>
+  <text x="64" y="33" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="11" font-weight="700" fill="#111827" letter-spacing="0.04em">B-BBEE CERTIFIED</text>
+  <text x="64" y="50" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="11" fill="#6b7280">Broad-based black economic empowerment</text>
+</svg>

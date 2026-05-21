@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kleen Up Solar — Thermal Drone Inspection</title>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="animations.jsx"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; background: #000; overflow: hidden; }
+  #root { width: 100%; height: 100%; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+
+const { useRef, useEffect, useState } = React;
+
+// ── Brand colours ─────────────────────────────────────────────────────────────
+const C = {
+  navy:    '#0d2d4a',
+  blue:    '#1a5d8f',
+  sky:     '#3591cc',
+  light:   '#e8f4fd',
+  white:   '#ffffff',
+  offwhite:'#f0f5fa',
+  amber:   '#ff8c00',
+  red:     '#e63000',
+  thermal0:'#2d006e',
+  thermal1:'#7b00b4',
+  thermal2:'#cc3300',
+  thermal3:'#ff7700',
+  thermal4:'#ffdd00',
+  dark:    '#060f18',
+};
+
+// ── Fonts ─────────────────────────────────────────────────────────────────────
+// DM Sans + DM Serif Display
+const FontLink = () => (
+  <style>{`
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap');
+    * { font-family: 'DM Sans', Helvetica, sans-serif; }
+  `}</style>
+);
+
+// ── Shared interpolate (available globally from animations.jsx) ───────────────
+// interpolate(t, [0,1], [fromVal, toVal], easing)
+
+// ── Scene 1 — Opening title (0–6s) ───────────────────────────────────────────
+function Scene1() {
+  const { progress, localTime } = useSprite();
+  const t = progress;
+
+  // Aerial site photo slow zoom
+  const imgScale = interpolate(t, [0, 1], [1.0, 1.08], Easing.easeInOutSine);
+  const bgOpacity = interpolate(t, [0, 0.15, 0.85, 1], [0, 1, 1, 0.85]);
+
+  // Title line 1 fades in at 0.15, out at 0.85
+  const titleOpacity = interpolate(t, [0.12, 0.28, 0.72, 0.88], [0, 1, 1, 0]);
+  const titleY = interpolate(t, [0.12, 0.28], [32, 0], Easing.easeOutCubic);
+
+  // Subtitle
+  const subOpacity = interpolate(t, [0.22, 0.36, 0.72, 0.88], [0, 1, 1, 0]);
+  const subY = interpolate(t, [0.22, 0.36], [24, 0], Easing.easeOutCubic);
+
+  return (
+    <div style={{ position:'absolute', inset:0, overflow:'hidden' }}>
+      {/* Background aerial photo */}
+      <div style={{
+        position:'absolute', inset:0,
+        backgroundImage:`url('assets/img1.webp')`,
+        backgroundSize:'cover', backgroundPosition:'center 40%',
+        transform:`scale(${imgScale})`,
+        transformOrigin:'center center',
+        opacity: bgOpacity,
+      }}/>
+      {/* Dark overlay */}
+      <div style={{
+        position:'absolute', inset:0,
+        background:'linear-gradient(to bottom, rgba(6,15,24,0.7) 0%, rgba(6,15,24,0.5) 50%, rgba(6,15,24,0.85) 100%)',
+      }}/>
+      {/* Text */}
+      <div style={{
+        position:'absolute', inset:0, display:'flex', flexDirection:'column',
+        alignItems:'center', justifyContent:'center', padding:'0 120px',
+        textAlign:'center',
+      }}>
+        <div style={{
+          color: C.sky, fontSize:18, letterSpacing:'0.22em', textTransform:'uppercase',
+          fontWeight:500, marginBottom:20,
+          opacity: subOpacity, transform:`translateY(${subY}px)`,
+        }}>Kleen Up Solar</div>
+        <div style={{
+          color: C.white, fontSize:76, lineHeight:1.05, fontWeight:700,
+          opacity: titleOpacity, transform:`translateY(${titleY}px)`,
+          textWrap:'balance',
+        }}>
+          Your solar asset is generating <em style={{ fontFamily:'DM Serif Display, serif', fontWeight:400, fontStyle:'italic', color: C.sky }}>less</em> than you think.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Scene 2 — Aerial overview (6–16s) ─────────────────────────────────────────
+function Scene2() {
+  const { progress } = useSprite();
+  const t = progress;
+
+  const opacity = interpolate(t, [0, 0.12, 0.85, 1], [0, 1, 1, 0]);
+  const imgScale = interpolate(t, [0, 1], [1.04, 1.12], Easing.easeInOutSine);
+
+  // Label card
+  const cardOpacity = interpolate(t, [0.2, 0.35, 0.75, 0.9], [0, 1, 1, 0]);
+  const cardX = interpolate(t, [0.2, 0.35], [-40, 0], Easing.easeOutCubic);
+
+  // "820 kW" counter
+  const counter = Math.round(interpolate(t, [0.3, 0.55], [0, 820], Easing.easeOutCubic));
+
+  return (
+    <div style={{ position:'absolute', inset:0, opacity, overflow:'hidden' }}>
+      <div style={{
+        position:'absolute', inset:0,
+        backgroundImage:`url('assets/img1.webp')`,
+        backgroundSize:'cover', backgroundPosition:'center 30%',
+        transform:`scale(${imgScale})`,
+        transformOrigin:'center 40%',
+      }}/>
+      <div style={{
+        position:'absolute', inset:0,
+        background:'linear-gradient(to bottom, rgba(6,15,24,0.2) 0%, rgba(6,15,24,0.6) 100%)',
+      }}/>
+      {/* Site label */}
+      <div style={{
+        position:'absolute', bottom:90, left:80,
+        opacity:cardOpacity, transform:`translateX(${cardX}px)`,
+      }}>
+        <div style={{
+          background: C.sky, color:'#fff', fontSize:13, letterSpacing:'0.15em',
+          textTransform:'uppercase', fontWeight:600, padding:'6px 14px',
+          display:'inline-block', marginBottom:10,
+        }}>Live site · Goodwood, Cape Town</div>
+        <div style={{ color:'#fff', fontSize:72, fontWeight:700, lineHeight:1 }}>
+          {counter} <span style={{ fontSize:32, fontWeight:400, opacity:0.7 }}>kW installed</span>
+        </div>
+      </div>
+      {/* Subtle scan line hint */}
+      <ScanLines opacity={interpolate(t, [0.6, 0.85], [0, 0.25])} />
+    </div>
+  );
+}
+
+// ── Scene 3 — Thermal reveal (16–28s) ─────────────────────────────────────────
+function Scene3() {
+  const { progress } = useSprite();
+  const t = progress;
+
+  const opacity = interpolate(t, [0, 0.08, 0.88, 1], [0, 1, 1, 0]);
+
+  // Wipe: the thermal image covers the RGB image left-to-right
+  const wipeProgress = interpolate(t, [0.15, 0.55], [0, 1], Easing.easeInOutCubic);
+  const wipeX = wipeProgress * 100; // percentage width of thermal overlay
+
+  // Label
+  const labelOpacity = interpolate(t, [0.45, 0.6, 0.82, 0.95], [0, 1, 1, 0]);
+
+  return (
+    <div style={{ position:'absolute', inset:0, opacity, overflow:'hidden' }}>
+      {/* RGB base */}
+      <div style={{
+        position:'absolute', inset:0,
+        backgroundImage:`url('assets/thermal1.webp')`,
+        backgroundSize:'cover', backgroundPosition:'center',
+        filter:'saturate(0.4) brightness(0.8)',
+      }}/>
+      {/* Thermal overlay — clipped wipe */}
+      <div style={{
+        position:'absolute', inset:0,
+        clipPath:`inset(0 ${100 - wipeX}% 0 0)`,
+        transition:'none',
+      }}>
+        <div style={{
+          position:'absolute', inset:0,
+          backgroundImage:`url('assets/DJI_0179_R.webp')`,
+          backgroundSize:'cover', backgroundPosition:'center',
+        }}/>
+        {/* thermal tint */}
+        <div style={{
+          position:'absolute', inset:0,
+          background:'linear-gradient(135deg, rgba(45,0,110,0.35) 0%, rgba(123,0,180,0.2) 40%, rgba(204,51,0,0.15) 100%)',
+          mixBlendMode:'color',
+        }}/>
+      </div>
+
+      {/* Wipe line */}
+      {wipeProgress > 0.01 && wipeProgress < 0.99 && (
+        <div style={{
+          position:'absolute', top:0, bottom:0,
+          left:`${wipeX}%`,
+          width:3,
+          background:'linear-gradient(to bottom, transparent, #fff, transparent)',
+          boxShadow:'0 0 18px 4px rgba(255,255,255,0.5)',
+        }}/>
+      )}
+
+      {/* Dark overlay bottom */}
+      <div style={{
+        position:'absolute', inset:0,
+        background:'linear-gradient(to bottom, rgba(6,15,24,0) 60%, rgba(6,15,24,0.75) 100%)',
+      }}/>
+
+      {/* Label */}
+      <div style={{
+        position:'absolute', bottom:80, left:0, right:0, textAlign:'center',
+        opacity:labelOpacity,
+      }}>
+        <div style={{
+          color: C.sky, fontSize:15, letterSpacing:'0.2em', textTransform:'uppercase',
+          fontWeight:600, marginBottom:8,
+        }}>Thermal imaging reveals what the eye cannot</div>
+        <div style={{ color:'#fff', fontSize:44, fontWeight:700 }}>
+          Every panel. Every anomaly. Detected.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Scene 4 — Hot spot callout (28–40s) ──────────────────────────────────────
+function Scene4() {
+  const { progress, localTime } = useSprite();
+  const t = progress;
+
+  const opacity = interpolate(t, [0, 0.08, 0.88, 1], [0, 1, 1, 0]);
+  const imgScale = interpolate(t, [0, 1], [1.0, 1.12], Easing.easeInOutSine);
+
+  // Crosshair appears at 0.3
+  const crossOpacity = interpolate(t, [0.28, 0.42], [0, 1], Easing.easeOutCubic);
+  const crossScale  = interpolate(t, [0.28, 0.42], [1.8, 1.0], Easing.easeOutBack);
+
+  // Callout card
+  const cardOpacity = interpolate(t, [0.42, 0.55, 0.82, 0.94], [0, 1, 1, 0]);
+  const cardY = interpolate(t, [0.42, 0.55], [20, 0], Easing.easeOutCubic);
+
+  // Pulse ring
+  const pulse = (Math.sin(localTime * 4) * 0.5 + 0.5); // 0..1 oscillating
+
+  // Temp badge
+  const temp = Math.round(interpolate(t, [0.42, 0.65], [20, 68], Easing.easeOutCubic));
+
+  return (
+    <div style={{ position:'absolute', inset:0, opacity, overflow:'hidden' }}>
+      {/* Thermal background */}
+      <div style={{
+        position:'absolute', inset:0,
+        backgroundImage:`url('assets/chatgpt_render.png')`,
+        backgroundSize:'cover', backgroundPosition:'center 55%',
+        transform:`scale(${imgScale})`, transformOrigin:'45% 55%',
+      }}/>
+      <div style={{
+        position:'absolute', inset:0,
+        background:'rgba(6,15,24,0.35)',
+      }}/>
+
+      {/* Hot spot crosshair — positioned at the bright spot */}
+      <div style={{
+        position:'absolute',
+        left:'43%', top:'52%',
+        transform:`translate(-50%,-50%) scale(${crossScale})`,
+        opacity: crossOpacity,
+      }}>
+        {/* Pulse ring */}
+        <div style={{
+          position:'absolute', inset:0,
+          width:90, height:90, marginLeft:-45, marginTop:-45,
+          borderRadius:'50%',
+          border:`2px solid rgba(255,100,0,${0.3 + pulse * 0.7})`,
+          transform:`scale(${1 + pulse * 0.4})`,
+        }}/>
+        {/* Corner brackets */}
+        {[
+          {top:0,left:0,borderTop:`2px solid #fff`,borderLeft:`2px solid #fff`},
+          {top:0,right:0,borderTop:`2px solid #fff`,borderRight:`2px solid #fff`},
+          {bottom:0,left:0,borderBottom:`2px solid #fff`,borderLeft:`2px solid #fff`},
+          {bottom:0,right:0,borderBottom:`2px solid #fff`,borderRight:`2px solid #fff`},
+        ].map((s,i) => (
+          <div key={i} style={{ position:'absolute', width:16, height:16, ...s }} />
+        ))}
+        {/* Centre dot */}
+        <div style={{
+          position:'absolute', width:6, height:6, background:'#ff6400',
+          borderRadius:'50%', top:'50%', left:'50%',
+          transform:'translate(-50%,-50%)',
+          boxShadow:'0 0 10px 4px rgba(255,100,0,0.6)',
+        }}/>
+        {/* Temp badge */}
+        <div style={{
+          position:'absolute', top:-38, left:'50%', transform:'translateX(-50%)',
+          background:'rgba(255,100,0,0.9)', color:'#fff',
+          fontSize:15, fontWeight:700, padding:'3px 10px', borderRadius:4,
+          whiteSpace:'nowrap',
+        }}>{temp} °C</div>
+      </div>
+
+      {/* Callout card */}
+      <div style={{
+        position:'absolute', left:72, bottom:90,
+        opacity:cardOpacity, transform:`translateY(${cardY}px)`,
+        background:'rgba(13,45,74,0.88)', backdropFilter:'blur(8px)',
+        border:'1px solid rgba(53,145,204,0.4)',
+        padding:'20px 28px', borderRadius:4, maxWidth:340,
+      }}>
+        <div style={{
+          display:'flex', alignItems:'center', gap:10, marginBottom:10,
+        }}>
+          <div style={{ width:10, height:10, borderRadius:'50%', background:'#e63000', flexShrink:0 }}/>
+          <div style={{ color:'#ff8060', fontSize:13, letterSpacing:'0.14em', fontWeight:700, textTransform:'uppercase' }}>
+            Critical Anomaly Detected
+          </div>
+        </div>
+        <div style={{ color:'#fff', fontSize:24, fontWeight:600, marginBottom:6 }}>
+          Hot spot · Panel cluster B-14
+        </div>
+        <div style={{ color:'rgba(255,255,255,0.6)', fontSize:13, lineHeight:1.6 }}>
+          Temperature delta: <strong style={{ color:'#ff8060' }}>+48°C above baseline</strong><br/>
+          Estimated output loss: <strong style={{ color:'#ff8060' }}>~12%</strong> on affected string
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Scene 5 — Stats: what it costs (40–52s) ───────────────────────────────────
+function Scene5() {
+  const { progress, localTime } = useSprite();
+  const t = progress;
+
+  const opacity = interpolate(t, [0, 0.08, 0.88, 1], [0, 1, 1, 0]);
+  const bgOpacity = interpolate(t, [0, 0.12], [0, 1]);
+
+  // Each stat staggered
+  const stat1p = interpolate(t, [0.15, 0.35], [0, 1], Easing.easeOutCubic);
+  const stat2p = interpolate(t, [0.28, 0.48], [0, 1], Easing.easeOutCubic);
+  const stat3p = interpolate(t, [0.41, 0.61], [0, 1], Easing.easeOutCubic);
+
+  const panels  = Math.round(interpolate(t, [0.15, 0.42], [0, 1248], Easing.easeOutExpo));
+  const anomalies = Math.round(interpolate(t, [0.28, 0.52], [0, 3], Easing.easeOutCubic));
+  const loss    = Math.round(interpolate(t, [0.41, 0.65], [0, 12], Easing.easeOutCubic));
+
+  // Bottom line
+  const lineOpacity = interpolate(t, [0.62, 0.74, 0.82, 0.94], [0, 1, 1, 0]);
+
+  const StatCard = ({ value, unit, label, accent, progress: p }) => (
+    <div style={{
+      flex:1, display:'flex', flexDirection:'column', alignItems:'center',
+      opacity:p, transform:`translateY(${interpolate(p, [0,1],[28,0], Easing.easeOutCubic)}px)`,
+      padding:'36px 24px',
+      background:'rgba(13,45,74,0.55)', backdropFilter:'blur(6px)',
+      border:'1px solid rgba(53,145,204,0.2)', borderRadius:4,
+    }}>
+      <div style={{ fontSize:80, fontWeight:700, color: accent || '#fff', lineHeight:1 }}>
+        {value}<span style={{ fontSize:36, fontWeight:400, opacity:0.6 }}>{unit}</span>
+      </div>
+      <div style={{ color:'rgba(255,255,255,0.55)', fontSize:15, marginTop:10, textTransform:'uppercase', letterSpacing:'0.12em', textAlign:'center' }}>
+        {label}
+      </div>
+    </div>
+  );
+
+  return (
+    <div style={{ position:'absolute', inset:0, opacity, overflow:'hidden' }}>
+      {/* BG — dark industrial site */}
+      <div style={{
+        position:'absolute', inset:0,
+        backgroundImage:`url('assets/img10.webp')`,
+        backgroundSize:'cover', backgroundPosition:'center',
+        filter:'brightness(0.25) saturate(0.2)',
+        opacity:bgOpacity,
+      }}/>
+      <div style={{
+        position:'absolute', inset:0,
+        background:'linear-gradient(135deg, rgba(6,15,24,0.9) 0%, rgba(13,45,74,0.7) 100%)',
+      }}/>
+
+      <div style={{
+        position:'absolute', inset:0, display:'flex', flexDirection:'column',
+        alignItems:'center', justifyContent:'center', padding:'0 80px', gap:40,
+      }}>
+        <div style={{
+          color:'rgba(255,255,255,0.5)', fontSize:15, letterSpacing:'0.2em', textTransform:'uppercase',
+        }}>Inspection snapshot · 500 kW portfolio</div>
+
+        <div style={{ display:'flex', gap:24, width:'100%' }}>
+          <StatCard value={panels.toLocaleString()} unit="" label="Panels scanned" progress={stat1p} />
+          <StatCard value={anomalies} unit=" found" label="Anomalies detected" accent="#ff8060" progress={stat2p} />
+          <StatCard value={loss} unit="%" label="Output reclaimed after repair" accent={C.sky} progress={stat3p} />
+        </div>
+
+        <div style={{
+          opacity:lineOpacity,
+          color:'#fff', fontSize:32, fontWeight:500, textAlign:'center',
+          textWrap:'balance', maxWidth:700,
+        }}>
+          Invisible degradation is costing your portfolio <span style={{ color: C.sky, fontWeight:700 }}>every day</span>.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Scene 6 — Report / deliverable (52–63s) ───────────────────────────────────
+function Scene6() {
+  const { progress } = useSprite();
+  const t = progress;
+
+  const opacity = interpolate(t, [0, 0.1, 0.88, 1], [0, 1, 1, 0]);
+
+  // Report card slides up
+  const cardY = interpolate(t, [0.1, 0.3], [60, 0], Easing.easeOutCubic);
+  const cardOpacity = interpolate(t, [0.1, 0.3], [0, 1]);
+
+  // Rows appear staggered
+  const row = (i) => interpolate(t, [0.28 + i*0.08, 0.40 + i*0.08], [0, 1], Easing.easeOutCubic);
+
+  const rows = [
+    { label:'Licensed pilot + thermal drone', status:'✓ Included', color: '#5ec85e' },
+    { label:'AI-powered hot spot detection', status:'✓ Included', color: '#5ec85e' },
+    { label:'SiteMark interactive report', status:'✓ Included', color: '#5ec85e' },
+    { label:'5-business-day delivery SLA', status:'✓ Guaranteed', color: C.sky },
+    { label:'Historical baseline for year-on-year tracking', status:'✓ Included', color: '#5ec85e' },
+  ];
+
+  const checkOpacity = interpolate(t, [0.6, 0.75, 0.82, 0.94], [0, 1, 1, 0]);
+
+  return (
+    <div style={{ position:'absolute', inset:0, opacity, overflow:'hidden', display:'flex', alignItems:'center', justifyContent:'center' }}>
+      {/* BG */}
+      <div style={{
+        position:'absolute', inset:0,
+        background:`linear-gradient(135deg, ${C.dark} 0%, ${C.navy} 100%)`,
+      }}/>
+      {/* Grid lines */}
+      <GridLines />
+
+      {/* Report card */}
+      <div style={{
+        position:'relative', zIndex:2,
+        opacity:cardOpacity, transform:`translateY(${cardY}px)`,
+        background:'rgba(13,45,74,0.7)', backdropFilter:'blur(12px)',
+        border:'1px solid rgba(53,145,204,0.35)', borderRadius:6,
+        width:680, padding:'40px 48px',
+      }}>
+        {/* Header */}
+        <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:28 }}>
+          <div>
+            <div style={{ color:C.sky, fontSize:13, letterSpacing:'0.15em', textTransform:'uppercase', marginBottom:6 }}>
+              What you receive
+            </div>
+            <div style={{ color:'#fff', fontSize:32, fontWeight:700 }}>
+              Thermal Inspection Report
+            </div>
+          </div>
+          {/* Kleen Up logo placeholder */}
+          <div style={{
+            background:'rgba(53,145,204,0.15)', border:'1px solid rgba(53,145,204,0.3)',
+            borderRadius:4, padding:'8px 16px',
+            color:C.sky, fontWeight:700, fontSize:18, letterSpacing:'0.05em',
+          }}>KU</div>
+        </div>
+
+        {/* Rows */}
+        <div style={{ display:'flex', flexDirection:'column', gap:0 }}>
+          {rows.map((r, i) => (
+            <div key={i} style={{
+              display:'flex', alignItems:'center', justifyContent:'space-between',
+              padding:'14px 0',
+              borderBottom: i < rows.length-1 ? '1px solid rgba(255,255,255,0.07)' : 'none',
+              opacity: row(i),
+              transform:`translateX(${interpolate(row(i), [0,1], [-20,0], Easing.easeOutCubic)}px)`,
+            }}>
+              <div style={{ color:'rgba(255,255,255,0.75)', fontSize:16 }}>{r.label}</div>
+              <div style={{ color: r.color, fontSize:14, fontWeight:600 }}>{r.status}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Bottom label */}
+      <div style={{
+        position:'absolute', bottom:72, left:0, right:0, textAlign:'center',
+        opacity:checkOpacity, color:'rgba(255,255,255,0.5)', fontSize:16,
+        letterSpacing:'0.12em', textTransform:'uppercase',
+      }}>
+        Powered by SiteMark · Delivered in 5 business days
+      </div>
+    </div>
+  );
+}
+
+// ── Scene 7 — Price reveal (63–72s) ──────────────────────────────────────────
+function Scene7() {
+  const { progress } = useSprite();
+  const t = progress;
+
+  const opacity = interpolate(t, [0, 0.1, 0.88, 1], [0, 1, 1, 0]);
+
+  // Price
+  const priceScale = interpolate(t, [0.15, 0.35], [0.6, 1.0], Easing.easeOutBack);
+  const priceOpacity = interpolate(t, [0.12, 0.28], [0, 1]);
+
+  // Market rate crossed out
+  const strikeOpacity = interpolate(t, [0.35, 0.5], [0, 1]);
+  const strikeWidth = interpolate(t, [0.35, 0.55], [0, 100]);
+
+  // Context line
+  const ctxOpacity = interpolate(t, [0.5, 0.65, 0.82, 0.94], [0, 1, 1, 0]);
+
+  return (
+    <div style={{ position:'absolute', inset:0, opacity, overflow:'hidden', display:'flex', alignItems:'center', justifyContent:'center' }}>
+      <div style={{
+        position:'absolute', inset:0,
+        background:`linear-gradient(160deg, ${C.dark} 0%, #091d30 100%)`,
+      }}/>
+      <GridLines />
+
+      <div style={{ position:'relative', zIndex:2, textAlign:'center', padding:'0 80px' }}>
+        <div style={{
+          color:'rgba(255,255,255,0.4)', fontSize:15, letterSpacing:'0.2em',
+          textTransform:'uppercase', marginBottom:20,
+        }}>Transparent, flat-rate pricing</div>
+
+        {/* Market rate struck through */}
+        <div style={{
+          display:'inline-flex', alignItems:'center', justifyContent:'center',
+          gap:12, marginBottom:16,
+          opacity:strikeOpacity,
+        }}>
+          <div style={{ color:'rgba(255,255,255,0.25)', fontSize:28, fontWeight:300 }}>Market rate</div>
+          <div style={{ position:'relative', display:'inline-block' }}>
+            <div style={{ color:'rgba(255,255,255,0.25)', fontSize:28 }}>R12k – R15k</div>
+            <div style={{
+              position:'absolute', top:'50%', left:0,
+              height:2, background:'rgba(230,48,0,0.7)',
+              width:`${strikeWidth}%`, marginTop:-1,
+            }}/>
+          </div>
+        </div>
+
+        {/* Our price */}
+        <div style={{
+          opacity:priceOpacity,
+          transform:`scale(${priceScale})`,
+          transformOrigin:'center',
+        }}>
+          <div style={{ color:'rgba(255,255,255,0.45)', fontSize:22, marginBottom:4 }}>from</div>
+          <div style={{ color:'#fff', fontSize:120, fontWeight:700, lineHeight:1, letterSpacing:'-0.02em' }}>
+            R7,500
+          </div>
+        </div>
+
+        {/* Context */}
+        <div style={{
+          opacity:ctxOpacity, marginTop:24,
+          color:'rgba(255,255,255,0.45)', fontSize:16, lineHeight:1.7,
+        }}>
+          Per site · includes licensed pilot, drone flight, AI analysis &amp; SiteMark report<br/>
+          <span style={{ color:C.sky }}>No hidden costs. No surprises.</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Scene 8 — CTA (72–75s) ────────────────────────────────────────────────────
+function Scene8() {
+  const { progress } = useSprite();
+  const t = progress;
+
+  const opacity = interpolate(t, [0, 0.18], [0, 1]);
+
+  const logoOpacity  = interpolate(t, [0.15, 0.4], [0, 1], Easing.easeOutCubic);
+  const ctaOpacity   = interpolate(t, [0.35, 0.6], [0, 1], Easing.easeOutCubic);
+  const ctaScale     = interpolate(t, [0.35, 0.6], [0.88, 1], Easing.easeOutBack);
+  const urlOpacity   = interpolate(t, [0.55, 0.75], [0, 1]);
+
+  return (
+    <div style={{ position:'absolute', inset:0, opacity, overflow:'hidden', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center' }}>
+      <div style={{
+        position:'absolute', inset:0,
+        background:`linear-gradient(160deg, ${C.navy} 0%, ${C.dark} 60%)`,
+      }}/>
+      {/* Accent glow */}
+      <div style={{
+        position:'absolute', top:'50%', left:'50%',
+        transform:'translate(-50%,-50%)',
+        width:600, height:600, borderRadius:'50%',
+        background:`radial-gradient(circle, rgba(53,145,204,0.12) 0%, transparent 70%)`,
+      }}/>
+      <GridLines />
+
+      <div style={{ position:'relative', zIndex:2, textAlign:'center', display:'flex', flexDirection:'column', alignItems:'center', gap:32 }}>
+        {/* Logo lockup */}
+        <div style={{ opacity:logoOpacity, display:'flex', alignItems:'center', gap:16 }}>
+          <img src="assets/img5.webp" alt="Kleen Up Solar" style={{ height:64 }} />
+        </div>
+
+        {/* CTA button */}
+        <div style={{
+          opacity:ctaOpacity, transform:`scale(${ctaScale})`,
+        }}>
+          <div style={{
+            background:C.sky, color:'#fff',
+            fontSize:26, fontWeight:700,
+            padding:'22px 56px', borderRadius:4,
+            letterSpacing:'0.04em',
+            boxShadow:`0 0 40px rgba(53,145,204,0.4)`,
+          }}>
+            Get your inspection report
+          </div>
+        </div>
+
+        {/* URL */}
+        <div style={{
+          opacity:urlOpacity,
+          color:'rgba(255,255,255,0.4)', fontSize:18, letterSpacing:'0.1em',
+        }}>
+          kleenup.solar
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Utility: Scan lines ───────────────────────────────────────────────────────
+function ScanLines({ opacity = 0.15 }) {
+  return (
+    <div style={{
+      position:'absolute', inset:0, pointerEvents:'none', opacity,
+      backgroundImage:'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(53,145,204,0.06) 2px, rgba(53,145,204,0.06) 4px)',
+    }}/>
+  );
+}
+
+// ── Utility: Grid lines (subtle) ─────────────────────────────────────────────
+function GridLines() {
+  return (
+    <div style={{
+      position:'absolute', inset:0, pointerEvents:'none',
+      backgroundImage:`
+        linear-gradient(rgba(53,145,204,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(53,145,204,0.06) 1px, transparent 1px)
+      `,
+      backgroundSize:'80px 80px',
+    }}/>
+  );
+}
+
+// ── Timestamp updater ─────────────────────────────────────────────────────────
+function TimestampUpdater() {
+  const t = useTime();
+  useEffect(() => {
+    const el = document.getElementById('video-root');
+    if (el) el.setAttribute('data-screen-label', `${Math.floor(t)}s`);
+  });
+  return null;
+}
+
+// ── Root app ──────────────────────────────────────────────────────────────────
+function App() {
+  return (
+    <>
+      <FontLink />
+      <Stage
+        width={1920}
+        height={1080}
+        duration={75}
+        background={C.dark}
+        id="video-root"
+        data-screen-label="0s"
+      >
+        <TimestampUpdater />
+
+        {/* Scene 1: Opening hook */}
+        <Sprite start={0} end={6}>
+          <Scene1 />
+        </Sprite>
+
+        {/* Scene 2: Aerial overview */}
+        <Sprite start={5.5} end={16}>
+          <Scene2 />
+        </Sprite>
+
+        {/* Scene 3: Thermal reveal */}
+        <Sprite start={15.5} end={28}>
+          <Scene3 />
+        </Sprite>
+
+        {/* Scene 4: Hot spot callout */}
+        <Sprite start={27.5} end={40}>
+          <Scene4 />
+        </Sprite>
+
+        {/* Scene 5: Stats */}
+        <Sprite start={39.5} end={52}>
+          <Scene5 />
+        </Sprite>
+
+        {/* Scene 6: Report deliverable */}
+        <Sprite start={51.5} end={63}>
+          <Scene6 />
+        </Sprite>
+
+        {/* Scene 7: Price reveal */}
+        <Sprite start={62.5} end={72}>
+          <Scene7 />
+        </Sprite>
+
+        {/* Scene 8: CTA */}
+        <Sprite start={71.5} end={75}>
+          <Scene8 />
+        </Sprite>
+      </Stage>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
