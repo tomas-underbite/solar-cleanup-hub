@@ -232,6 +232,162 @@
       .reveal { opacity: 1; transform: none; }
     }
 
+    /* ---------- SECTION HEAD ---------- */
+    .section-head { margin-bottom: 48px; max-width: 760px; }
+    .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+    .section-head p { color: var(--text); margin: 8px 0 0; font-size: 1.02rem; }
+
+    /* ---------- VALUE PROPS ---------- */
+    .value-props { background: var(--bg-cool); }
+    .vp-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 56px; text-align: center;
+    }
+    .vp-item { padding: 0 8px; }
+    .vp-icon {
+      width: 56px; height: 56px;
+      margin: 0 auto 22px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue);
+    }
+    .vp-icon svg { width: 100%; height: 100%; }
+    .vp-label {
+      display: block; font-weight: 700;
+      color: var(--blue); font-size: .76rem;
+      letter-spacing: .14em; text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .vp-copy {
+      color: var(--text); font-size: 1rem;
+      line-height: 1.65; margin: 0;
+      max-width: 280px; margin-left: auto; margin-right: auto;
+    }
+
+    /* ---------- REPORT SECTION ---------- */
+    .report-band { background: var(--navy-deep); color: #fff; }
+    .report-band .eyebrow { color: var(--blue); }
+    .report-band h2 { color: #fff; }
+    .report-rows { display: grid; gap: 22px; margin-bottom: 40px; }
+    .report-row {
+      display: flex; gap: 18px; align-items: flex-start;
+      padding: 22px 24px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius);
+    }
+    .report-row .check {
+      flex-shrink: 0; width: 32px; height: 32px;
+      background: var(--blue); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .report-row .check svg { width: 16px; height: 16px; color: #fff; }
+    .report-row h3 { color: #fff; font-size: 1.08rem; margin-bottom: 6px; }
+    .report-row p { color: rgba(255,255,255,.74); font-size: .96rem; margin: 0; line-height: 1.55; }
+    .report-gallery {
+      display: flex; overflow-x: auto; gap: 16px;
+      padding-bottom: 12px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .report-gallery img {
+      scroll-snap-align: start;
+      flex: 0 0 auto;
+      width: 320px; height: auto;
+      border-radius: 8px;
+      box-shadow: 0 14px 36px rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.1);
+    }
+    .report-gallery::-webkit-scrollbar { height: 8px; }
+    .report-gallery::-webkit-scrollbar-track { background: rgba(255,255,255,.05); border-radius: 4px; }
+    .report-gallery::-webkit-scrollbar-thumb { background: rgba(255,255,255,.2); border-radius: 4px; }
+    .report-caption { margin-top: 18px; color: rgba(255,255,255,.6); font-size: .9rem; font-style: italic; }
+
+    /* ---------- QUOTE CALCULATOR ---------- */
+    .calc-section { background: var(--navy-deep); padding-top: 0; }
+    .calc-section .eyebrow { color: var(--blue); }
+    .calc-section h2 { color: #fff; }
+    .calc-section .section-head p { color: rgba(255,255,255,.7); }
+    .calc-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 44px 40px;
+      box-shadow: var(--shadow-lg);
+      max-width: 720px; margin: 0 auto;
+    }
+    .calc-fields {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+      margin-bottom: 22px;
+    }
+    .calc-field { display: flex; flex-direction: column; }
+    .calc-field label, .calc-gate label {
+      font-size: .86rem; font-weight: 600;
+      color: var(--text); margin-bottom: 8px;
+    }
+    .calc-field select, .calc-gate input {
+      padding: 13px 14px;
+      font: inherit; color: var(--text);
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      transition: border-color 180ms var(--ease);
+      width: 100%;
+    }
+    .calc-field select:focus, .calc-gate input:focus {
+      outline: none; border-color: var(--blue);
+    }
+    .calc-gate {
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 12px; align-items: end;
+      margin-bottom: 24px;
+    }
+    .calc-gate > div { display: flex; flex-direction: column; }
+    .calc-gate button {
+      background: var(--navy); color: #fff;
+      padding: 13px 22px;
+      border: 0; border-radius: 2px;
+      font: inherit; font-weight: 700; font-size: .82rem;
+      letter-spacing: .14em; text-transform: uppercase;
+      cursor: pointer;
+      transition: background 180ms var(--ease), transform 180ms var(--ease);
+      height: 48px;
+    }
+    .calc-gate button:hover { background: var(--blue); transform: translateY(-1px); }
+    .calc-result {
+      display: none;
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+      animation: fadeUp 400ms var(--ease);
+    }
+    .calc-result.visible { display: block; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .result-range {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 700; color: var(--navy);
+      letter-spacing: -.015em; line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .result-label { color: var(--muted); font-size: .88rem; margin-bottom: 18px; }
+    .result-breakdown { margin-bottom: 18px; }
+    .rb-row {
+      display: flex; justify-content: space-between;
+      padding: 6px 0; font-size: .94rem; color: var(--text);
+    }
+    .calc-disclaimer { color: var(--muted); font-size: .82rem; line-height: 1.55; margin: 0; }
+
+    @media (max-width: 768px) {
+      .vp-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+    @media (max-width: 480px) {
+      .calc-fields { grid-template-columns: 1fr; }
+      .calc-gate { grid-template-columns: 1fr; }
+      .calc-gate button { width: 100%; }
+      .calc-card { padding: 32px 24px; }
+    }
+
     /* ---------- INSPECTION SECTION ---------- */
     figure { margin: 0; }
     .insp-grid {
@@ -405,6 +561,51 @@
 
   <main>
 
+    <!-- ============ VALUE PROPS ============ -->
+    <section class="value-props">
+      <div class="container">
+        <div class="vp-grid">
+          <div class="vp-item reveal">
+            <div class="vp-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="22" cy="22" r="13"/>
+                <line x1="22" y1="16" x2="22" y2="28"/>
+                <line x1="16" y1="22" x2="28" y2="22"/>
+                <line x1="40" y1="40" x2="32" y2="32"/>
+              </svg>
+            </div>
+            <span class="vp-label">Fault detection</span>
+            <p class="vp-copy">Up to 97% faster than manual inspection. No plant downtime.</p>
+          </div>
+          <div class="vp-item reveal">
+            <div class="vp-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="24" cy="24" r="18"/>
+                <polyline points="24 13 24 24 31 28"/>
+              </svg>
+            </div>
+            <span class="vp-label">Report in 10-14 days</span>
+            <p class="vp-copy">SiteMark fault report delivered to your inbox within 10-14 days of the inspection flight.</p>
+          </div>
+          <div class="vp-item reveal">
+            <div class="vp-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="6" y="18" width="14" height="24" rx="1"/>
+                <rect x="28" y="8" width="14" height="34" rx="1"/>
+                <line x1="10" y1="26" x2="14" y2="26"/>
+                <line x1="10" y1="34" x2="14" y2="34"/>
+                <line x1="32" y1="18" x2="38" y2="18"/>
+                <line x1="32" y1="26" x2="38" y2="26"/>
+                <line x1="32" y1="34" x2="38" y2="34"/>
+              </svg>
+            </div>
+            <span class="vp-label">Built for commercial assets</span>
+            <p class="vp-copy">Designed for EPCs, PPA funds, and C&amp;I asset owners.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ THERMAL INSPECTION ============ -->
     <section id="inspection" style="background:var(--surface);padding-top:96px;">
       <div class="container">
@@ -517,6 +718,127 @@
 
     </section>
 
+    <!-- ============ INSPECTION REPORT ============ -->
+    <section id="report" class="report-band">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>A report built for asset owners, lenders, and insurers.</h2>
+        </div>
+        <div class="report-rows">
+          <div class="report-row reveal">
+            <div class="check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"></polyline></svg>
+            </div>
+            <div>
+              <h3>Pinpoint the exact panels losing you money</h3>
+              <p>AI-driven anomaly detection at cell, module, string, and system level.</p>
+            </div>
+          </div>
+          <div class="report-row reveal">
+            <div class="check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"></polyline></svg>
+            </div>
+            <div>
+              <h3>Insurance and refinancing-grade documentation</h3>
+              <p>IEC TS 62446-3:2017 compliant hardware. Reports accepted by insurers and lenders.</p>
+            </div>
+          </div>
+          <div class="report-row reveal">
+            <div class="check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"></polyline></svg>
+            </div>
+            <div>
+              <h3>Interactive fault maps you can act on</h3>
+              <p>Annotated thermal imagery with repair prioritisation, not a PDF you&rsquo;ll never open.</p>
+            </div>
+          </div>
+          <div class="report-row reveal">
+            <div class="check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"></polyline></svg>
+            </div>
+            <div>
+              <h3>A baseline you can track year over year</h3>
+              <p>See degradation early. Hot spots progress into cracks. Catch them before they become claims.</p>
+            </div>
+          </div>
+        </div>
+        <div class="report-gallery reveal" aria-label="Sample inspection report screenshots">
+          <img src="website%20assets/SiteMark%20Report/Map%20Overview.png" alt="SiteMark report screenshot, site map overview" />
+          <img src="website%20assets/SiteMark%20Report/Screenshot%202026-05-12%20132106.png" alt="SiteMark report screenshot, site overview" />
+          <img src="website%20assets/SiteMark%20Report/Screenshot%202026-05-12%20132114.png" alt="SiteMark report screenshot, thermal aerial map" />
+          <img src="website%20assets/SiteMark%20Report/Screenshot%202026-05-12%20132123.png" alt="SiteMark report screenshot, fault classification" />
+          <img src="website%20assets/SiteMark%20Report/Screenshot%202026-05-12%20132130.png" alt="SiteMark report screenshot, panel-level detail" />
+          <img src="website%20assets/SiteMark%20Report/Screenshot%202026-05-12%20132150.png" alt="SiteMark report screenshot, fault detail with severity classification" />
+          <img src="website%20assets/SiteMark%20Report/Screenshot%202026-05-12%20132156.png" alt="SiteMark report screenshot, RGB and thermal comparison" />
+          <img src="website%20assets/SiteMark%20Report/Screenshot%202026-05-12%20132204.png" alt="SiteMark report screenshot, temperature delta readings" />
+          <img src="website%20assets/SiteMark%20Report/Screenshot%202026-05-12%20132211.png" alt="SiteMark report screenshot, repair prioritisation list" />
+          <img src="website%20assets/SiteMark%20Report/Screenshot%202026-05-12%20132218.png" alt="SiteMark report screenshot, performance impact summary" />
+          <img src="website%20assets/SiteMark%20Report/Screenshot%202026-05-12%20132228.png" alt="SiteMark report screenshot, annotated thermal map" />
+        </div>
+        <p class="report-caption">Commercial building report, Cape Town, April 2026.</p>
+      </div>
+    </section>
+
+    <!-- ============ QUOTE CALCULATOR ============ -->
+    <section id="calculator" class="calc-section">
+      <div class="container">
+        <div class="section-head center reveal">
+          <h2>Get a price.</h2>
+          <p>Get a ballpark figure in seconds. We&rsquo;ll send the full quote to your inbox within 24 hours.</p>
+        </div>
+        <div class="calc-card reveal">
+          <div class="calc-fields">
+            <div class="calc-field">
+              <label for="calcPanels">Number of panels</label>
+              <select id="calcPanels">
+                <option value="">Select a range...</option>
+                <option value="0.5">Up to 500 panels</option>
+                <option value="1">500 to 2,000 panels</option>
+                <option value="1.5">2,000 to 5,000 panels</option>
+                <option value="2">5,000 to 10,000 panels</option>
+                <option value="3">10,000 to 20,000 panels</option>
+              </select>
+            </div>
+            <div class="calc-field">
+              <label for="calcCity">Nearest major city to site</label>
+              <select id="calcCity">
+                <option value="">Select a city...</option>
+                <option value="50">Cape Town metro (within 50 km)</option>
+                <option value="250">Paarl / Stellenbosch / Franschhoek area</option>
+                <option value="400">George / Mossel Bay / Garden Route</option>
+                <option value="760">Port Elizabeth / Gqeberha</option>
+                <option value="980">East London</option>
+                <option value="500">Durban / eThekwini</option>
+                <option value="60">Johannesburg / Ekurhuleni</option>
+                <option value="20">Pretoria / Tshwane metro</option>
+                <option value="300">Polokwane / Limpopo</option>
+                <option value="350">Nelspruit / Mbombela</option>
+                <option value="500">Bloemfontein / Free State</option>
+                <option value="700">Kimberley / Northern Cape</option>
+              </select>
+            </div>
+          </div>
+          <div class="calc-gate">
+            <div>
+              <label for="calcEmail">Your work email, we&rsquo;ll send the full quote here</label>
+              <input id="calcEmail" type="email" placeholder="you@company.com" autocomplete="email" />
+            </div>
+            <button type="button" id="calcSubmit">See estimate &rarr;</button>
+          </div>
+          <div class="calc-result" id="calcResult" aria-live="polite">
+            <div class="result-range" id="calcRange"></div>
+            <div class="result-label">Estimated inspection cost, incl. travel and report. Excl. VAT.</div>
+            <div class="result-breakdown" id="calcBreakdown"></div>
+            <p class="calc-disclaimer">
+              This is an indicative estimate based on a current flat-rate day rate. The formal quote we send to your inbox will be binding.
+              Prices exclude VAT. Travel billed at R6/km from the nearest Kleen Up Solar base.
+              Large sites (&gt;20,000 panels) are quoted separately, <a href="#contact">contact us</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- ============ FOOTER ============ -->
@@ -591,6 +913,57 @@
         });
       }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
       els.forEach(function (el) { io.observe(el); });
+    })();
+
+    // -------- quote calculator --------
+    (function () {
+      var btnCalc = document.getElementById('calcSubmit');
+      var resultBox = document.getElementById('calcResult');
+      var rangeEl = document.getElementById('calcRange');
+      var breakdownEl = document.getElementById('calcBreakdown');
+      if (!btnCalc) return;
+
+      var DAY_RATE = 7500;
+      var TRAVEL_PER_KM = 6;
+
+      function fmt(n) { return 'R ' + Math.round(n).toLocaleString('en-ZA'); }
+
+      btnCalc.addEventListener('click', function () {
+        var panelVal = document.getElementById('calcPanels').value;
+        var cityVal = document.getElementById('calcCity').value;
+        var emailVal = document.getElementById('calcEmail').value.trim();
+
+        if (!panelVal) { document.getElementById('calcPanels').focus(); return; }
+        if (!cityVal) { document.getElementById('calcCity').focus(); return; }
+        if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+          var emailInput = document.getElementById('calcEmail');
+          emailInput.style.borderColor = '#e98a8a';
+          emailInput.focus();
+          setTimeout(function () { emailInput.style.borderColor = ''; }, 2000);
+          return;
+        }
+
+        var days = parseFloat(panelVal);
+        var distKm = parseFloat(cityVal);
+        var inspectionCost = days * DAY_RATE;
+        var travelCost = distKm * TRAVEL_PER_KM;
+        var base = inspectionCost + travelCost;
+        var low = Math.round(base * 0.9 / 100) * 100;
+        var high = Math.round(base * 1.1 / 100) * 100;
+
+        rangeEl.textContent = fmt(low) + ' – ' + fmt(high);
+        breakdownEl.innerHTML =
+          '<div class="rb-row"><span>Inspection (' + (days < 1 ? 'half-day' : days + (days === 1 ? ' day' : ' days')) + ')</span><span>' + fmt(inspectionCost) + '</span></div>' +
+          '<div class="rb-row"><span>Travel (' + distKm + ' km \xd7 R' + TRAVEL_PER_KM + ')</span><span>' + fmt(travelCost) + '</span></div>' +
+          '<div class="rb-row" style="border-top:1px solid var(--border);padding-top:10px;margin-top:6px;font-weight:700;color:var(--navy)"><span>Estimated total</span><span>' + fmt(base) + ' excl. VAT</span></div>';
+
+        resultBox.classList.add('visible');
+        resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+        if (typeof gtag === 'function') {
+          gtag('event', 'calculator_quote', { event_category: 'lead', event_label: 'quote_calculator', value: Math.round(base) });
+        }
+      });
     })();
   </script>
 
