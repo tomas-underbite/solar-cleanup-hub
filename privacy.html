@@ -60,6 +60,10 @@
     }
     .priv-navlinks > a:hover::after,
     .priv-navlinks > .nav-has-dropdown > a:hover::after { transform: scaleX(1); }
+    .priv-navlinks > a:focus::after,
+    .priv-navlinks > .nav-has-dropdown > a:focus::after,
+    .priv-navlinks > a:focus-visible::after,
+    .priv-navlinks > .nav-has-dropdown > a:focus-visible::after { transform: scaleX(1); }
     /* ---------- NAV DROPDOWN ---------- */
     .nav-has-dropdown { position: relative; display: inline-flex; align-items: center; }
     .nav-dd-arrow { width: 10px; height: 10px; display: inline-block; vertical-align: middle; margin-left: 4px; }

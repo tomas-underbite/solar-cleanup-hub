@@ -123,6 +123,8 @@
         transition: transform 200ms ease;
       }
       .nav-links > li > a:hover::after { transform: scaleX(1); }
+      .nav-links > li > a:focus::after,
+      .nav-links > li > a:focus-visible::after { transform: scaleX(1); }
     }
     .nav-links a.active { color: var(--navy); font-weight: 600; }
 
