@@ -591,9 +591,56 @@
     }
 
     /* ---------- SERVICES TEASER STRIP ---------- */
+    @property --svc-ang {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
     .svc-teaser { padding: 56px 0; }
     .svc-teaser-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    }
+    .svc-teaser-item {
+      position: relative; isolation: isolate;
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 28px 22px;
+      box-shadow: var(--shadow-sm);
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+      overflow: hidden;
+    }
+    .svc-teaser-item::before {
+      content: '';
+      position: absolute; inset: -60%;
+      background: conic-gradient(from var(--svc-ang),
+        transparent 0%, transparent 62%,
+        rgba(78,153,212,.18) 72%,
+        #4e99d4 84%,
+        transparent 92%
+      );
+      animation: svc-border-spin 2.4s linear infinite paused;
+      opacity: 0;
+      transition: opacity .35s;
+      z-index: 0;
+    }
+    .svc-teaser-item::after {
+      content: '';
+      position: absolute; inset: 2px;
+      background: var(--surface);
+      border-radius: calc(var(--radius) - 1px);
+      z-index: 1;
+    }
+    .svc-teaser-item > * { position: relative; z-index: 2; }
+    .svc-teaser-item:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+    .svc-teaser-item:hover::before {
+      animation-play-state: running;
+      opacity: 1;
+    }
+    @keyframes svc-border-spin {
+      to { --svc-ang: 360deg; }
     }
     .svc-teaser-item h3 { font-size: 1.05rem; margin-bottom: 8px; }
     .svc-teaser-item h3 a { color: var(--navy); border-bottom: 1px solid var(--border); padding-bottom: 1px; }
@@ -1523,8 +1570,12 @@
             <p>Performance reviews, maintenance programme design, and technical advisory for EPCs and asset owners.</p>
           </div>
           <div class="svc-teaser-item reveal">
+            <h3><a href="services.html#drone">Drone Inspections</a></h3>
+            <p>IEC 62446-3 thermal drone surveys. Faults mapped to GPS coordinates, classified by severity, report in 10–14 days.</p>
+          </div>
+          <div class="svc-teaser-item reveal">
             <h3><a href="services.html#reporting">Maintenance</a></h3>
-            <p>IEC-compliant reporting formatted for lenders, insurers, and board-level review.</p>
+            <p>Scheduled and reactive maintenance programmes. Fault remediation, corrective work, and compliance documentation.</p>
           </div>
         </div>
         <div style="text-align:center;margin-top:32px;">
