@@ -942,7 +942,7 @@
       color: #fff;
       font-size: clamp(1.8rem, 3.5vw, 2.8rem);
       font-weight: 700; letter-spacing: -.02em; line-height: 1.2;
-      margin-bottom: 48px; max-width: 800px;
+      margin-bottom: 48px;
     }
     .git-layout {
       display: grid;
@@ -981,6 +981,9 @@
     }
     .ci-value a { color: #fff; }
     .ci-value a:hover { color: var(--blue); }
+    .git-right-col {
+      display: flex; flex-direction: column;
+    }
     .git-contact-col {
       position: relative; isolation: isolate;
       border-radius: var(--radius);
@@ -1009,6 +1012,12 @@
     .git-contact-col > * { position: relative; z-index: 2; }
     @keyframes git-contact-spin {
       to { --git-contact-ang: 360deg; }
+    }
+    .git-email-banner {
+      width: 100%; display: block;
+      border-radius: var(--radius);
+      margin-top: auto;
+      padding-top: 24px;
     }
     .git-field { display: flex; flex-direction: column; }
     .git-label {
@@ -1043,7 +1052,7 @@
     }
     .git-textarea::placeholder { color: rgba(255,255,255,.35); }
     .git-textarea:focus { border-color: rgba(255,255,255,.9); }
-    .git-submit-wrap { display: flex; margin-top: 12px; }
+    .git-submit-wrap { display: flex; margin-top: -12px; }
     .git-submit {
       background: #fff; color: var(--navy);
       border: none; border-radius: 2px;
@@ -1564,7 +1573,8 @@
           </div>
         </form>
 
-        <!-- CONTACT DETAILS -->
+        <!-- CONTACT DETAILS + BANNER -->
+        <div class="git-right-col">
         <div class="git-contact-col">
           <p class="git-contact-label">or reach out to us directly</p>
           <div class="git-contact-items">
@@ -1597,6 +1607,8 @@
               </div>
             </div>
           </div>
+        </div>
+        <img src="website%20assets/Kleen%20Up%20Solar%20Email%20Banner.png" alt="Kleen Up Solar" class="git-email-banner" />
         </div>
 
       </div>
