@@ -292,12 +292,57 @@
       color: var(--text); font-size: 1rem; margin: 0 0 36px;
     }
     #projects-map {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background: var(--bg-cool);
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
+      position: relative;
+      width: 100%; max-width: 720px; margin: 0 auto;
     }
+    .sa-map { display: block; width: 100%; height: auto; overflow: visible; }
+    .sa-outline {
+      fill: var(--bg-cool); stroke: var(--border); stroke-width: 1;
+      vector-effect: non-scaling-stroke;
+    }
+    .sa-dot { vector-effect: non-scaling-stroke; transform-box: fill-box; transform-origin: center; }
+    .sa-dot--all { fill: var(--blue); fill-opacity: .55; pointer-events: none; }
+    .sa-dot--photo { fill: #22C55E; stroke: #fff; stroke-width: 1; cursor: pointer; }
+    @media (prefers-reduced-motion: no-preference) {
+      .sa-dot--photo { transition: transform 150ms var(--ease); }
+    }
+    .sa-dot--photo:hover, .sa-dot--photo:focus-visible { transform: scale(1.4); }
+    .sa-dot--photo:focus { outline: none; }
+
+    .map-tooltip {
+      position: absolute; z-index: 5; pointer-events: none;
+      transform: translate(-50%, calc(-100% - 12px));
+      background: var(--navy-deep); color: #fff;
+      padding: 10px 12px; border-radius: 8px;
+      box-shadow: var(--shadow-lg);
+      max-width: 200px; font-size: .8rem; line-height: 1.4;
+    }
+    .map-tooltip[hidden] { display: none; }
+    .map-tooltip-name { font-weight: 700; display: block; }
+    .map-tooltip-region { display: block; color: var(--blue); font-size: .72rem; }
+    .map-tooltip-photo {
+      display: block; max-width: 160px; width: 100%; height: auto;
+      border-radius: 6px; margin-top: 8px;
+    }
+
+    .map-lightbox {
+      position: fixed; inset: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(11,28,42,.88); padding: 24px;
+    }
+    .map-lightbox[hidden] { display: none; }
+    .map-lightbox img {
+      max-width: min(90vw, 1100px); max-height: 86vh;
+      border-radius: 8px; box-shadow: var(--shadow-lg);
+    }
+    .map-lightbox-close {
+      position: absolute; top: 20px; right: 24px;
+      width: 44px; height: 44px; border: 0;
+      background: rgba(255,255,255,.14); color: #fff;
+      font-size: 1.5rem; line-height: 1; border-radius: 999px; cursor: pointer;
+      transition: background 200ms var(--ease);
+    }
+    .map-lightbox-close:hover { background: rgba(255,255,255,.28); }
 
     /* ---------- FOOTER (compact, SOLV-inspired, KUS palette) ---------- */
     footer {
@@ -426,7 +471,7 @@
       .nav .btn { display: none; }
       .hamburger { display: block; }
       .proj-grid { grid-template-columns: 1fr; }
-      #projects-map { aspect-ratio: 4 / 3; }
+      #projects-map { max-width: 100%; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -446,7 +491,6 @@
       </a>
       <nav aria-label="Primary navigation">
         <ul class="nav-links" id="navLinks">
-          <li><a href="index.html#inspection">Inspection</a></li>
           <li class="nav-has-dropdown">
             <a href="services.html">Services <svg class="nav-dd-arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></a>
             <ul class="nav-dropdown">
@@ -456,10 +500,10 @@
               <li><a href="maintenance.html">Maintenance</a></li>
             </ul>
           </li>
+          <li><a href="projects.html" class="active">Projects</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="faq.html">FAQ</a></li>
-          <li><a href="projects.html" class="active">Projects</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="index.html#get-in-touch">Contact</a></li>
         </ul>
       </nav>
       <a href="index.html#get-in-touch" class="btn">Talk to us</a>
@@ -488,15 +532,15 @@
           <!-- Card 1 -->
           <article class="proj-card reveal">
             <div class="proj-card-img">
-              <span class="proj-card-img-placeholder">[Project image TBD]</span>
+              <span class="proj-card-img-placeholder">[Project 1 image TBD]</span>
             </div>
             <div class="proj-card-body">
               <div class="proj-card-meta">
-                <span class="proj-card-location">[Location, Province]</span>
-                <span class="proj-card-service">[Service TBD]</span>
+                <span class="proj-card-location">[City, Province TBD]</span>
+                <span class="proj-card-service">[PV Cleaning / Drone Inspection / Maintenance — TBD]</span>
               </div>
-              <h3>[Project Name TBD]</h3>
-              <p>[COPY TBD] Brief description of the project, client type, scope of work, and outcome.</p>
+              <h3>[Project 1 Name TBD]</h3>
+              <p>[COPY TBD]</p>
               <div class="proj-card-stats">
                 <div class="proj-stat-item">
                   <span class="proj-stat-num">[0] kW</span>
@@ -507,22 +551,22 @@
                   <span class="proj-stat-label">Panels</span>
                 </div>
               </div>
-              <a href="#" class="proj-card-link">View more &rarr;</a>
+              <a href="" class="proj-card-link">View more &rarr;</a>
             </div>
           </article>
 
           <!-- Card 2 -->
           <article class="proj-card reveal">
             <div class="proj-card-img">
-              <span class="proj-card-img-placeholder">[Project image TBD]</span>
+              <span class="proj-card-img-placeholder">[Project 2 image TBD]</span>
             </div>
             <div class="proj-card-body">
               <div class="proj-card-meta">
-                <span class="proj-card-location">[Location, Province]</span>
-                <span class="proj-card-service">[Service TBD]</span>
+                <span class="proj-card-location">[City, Province TBD]</span>
+                <span class="proj-card-service">[PV Cleaning / Drone Inspection / Maintenance — TBD]</span>
               </div>
-              <h3>[Project Name TBD]</h3>
-              <p>[COPY TBD] Brief description of the project, client type, scope of work, and outcome.</p>
+              <h3>[Project 2 Name TBD]</h3>
+              <p>[COPY TBD]</p>
               <div class="proj-card-stats">
                 <div class="proj-stat-item">
                   <span class="proj-stat-num">[0] kW</span>
@@ -533,22 +577,22 @@
                   <span class="proj-stat-label">Panels</span>
                 </div>
               </div>
-              <a href="#" class="proj-card-link">View more &rarr;</a>
+              <a href="" class="proj-card-link">View more &rarr;</a>
             </div>
           </article>
 
           <!-- Card 3 -->
           <article class="proj-card reveal">
             <div class="proj-card-img">
-              <span class="proj-card-img-placeholder">[Project image TBD]</span>
+              <span class="proj-card-img-placeholder">[Project 3 image TBD]</span>
             </div>
             <div class="proj-card-body">
               <div class="proj-card-meta">
-                <span class="proj-card-location">[Location, Province]</span>
-                <span class="proj-card-service">[Service TBD]</span>
+                <span class="proj-card-location">[City, Province TBD]</span>
+                <span class="proj-card-service">[PV Cleaning / Drone Inspection / Maintenance — TBD]</span>
               </div>
-              <h3>[Project Name TBD]</h3>
-              <p>[COPY TBD] Brief description of the project, client type, scope of work, and outcome.</p>
+              <h3>[Project 3 Name TBD]</h3>
+              <p>[COPY TBD]</p>
               <div class="proj-card-stats">
                 <div class="proj-stat-item">
                   <span class="proj-stat-num">[0] kW</span>
@@ -559,7 +603,7 @@
                   <span class="proj-stat-label">Panels</span>
                 </div>
               </div>
-              <a href="#" class="proj-card-link">View more &rarr;</a>
+              <a href="" class="proj-card-link">View more &rarr;</a>
             </div>
           </article>
 
@@ -572,7 +616,7 @@
       <div class="container">
         <h2>Where we operate</h2>
         <p class="map-sub">[COPY TBD] Every dot is a site we service. KwaZulu-Natal and Port Elizabeth are our primary regions; Cape Town and the Western Cape are also fully covered.</p>
-        <div id="projects-map" role="img" aria-label="Interactive map of Kleen Up Solar project sites across South Africa"></div>
+        <div id="projects-map"></div>
       </div>
     </section>
 
@@ -586,12 +630,11 @@
           <img src="website%20assets/Kleen%20Up%20Solar%20Logo.webp" alt="Kleen Up Solar" />
         </a>
         <ul class="foot-hnav" aria-label="Footer navigation">
-          <li><a href="index.html#inspection">Inspection</a></li>
           <li><a href="services.html">Services</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="faq.html">FAQ</a></li>
           <li><a href="projects.html">Projects</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="index.html#get-in-touch">Contact</a></li>
         </ul>
       </div>
       <div class="foot-grid">
@@ -669,6 +712,207 @@
         });
       }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
       els.forEach(function (el) { io.observe(el); });
+    })();
+
+    /* ---------- PROJECTS MAP (SOLV-style, two-tone dots) ---------- */
+    (function () {
+      var mapEl = document.getElementById('projects-map');
+      if (!mapEl) return;
+
+      // Sites we have photos of — green, interactive (tooltip + lightbox).
+      // Photos are real files in /website assets, named by location.
+      var PHOTO_SITES = [
+        { name: "Cape Town",    lat: -33.92, lng: 18.42, region: "Western Cape", photo: "website assets/Cape Town.webp" },
+        { name: "Goodwood",     lat: -33.90, lng: 18.55, region: "Western Cape", photo: "website assets/Goodwood, Cape Town.webp" },
+        { name: "Fisantekraal", lat: -33.71, lng: 18.74, region: "Western Cape", photo: "website assets/Fisantekraal, Cape Town.webp" },
+        { name: "Nelspruit",    lat: -25.47, lng: 30.97, region: "Mpumalanga",   photo: "website assets/Nelspruit. Mpumelanga.webp" },
+        { name: "Sasolburg",    lat: -26.81, lng: 27.82, region: "Free State",   photo: "website assets/Sasolburg, Free State.webp" }
+      ];
+      // Decorative density of all the sites we service (blue, non-interactive).
+      var BLUE_COUNT = 520;
+
+      // Simple linear lat/lng -> SVG x/y, calibrated to the SA bounding box.
+      var BBOX = { lngMin: 16.5, lngMax: 33.0, latTop: -22.0, latBottom: -35.0 };
+      var VBW = 1000, VBH = 897;
+      function project(lng, lat) {
+        return [
+          (lng - BBOX.lngMin) / (BBOX.lngMax - BBOX.lngMin) * VBW,
+          (BBOX.latTop - lat) / (BBOX.latTop - BBOX.latBottom) * VBH
+        ];
+      }
+
+      // Approximate South Africa outline as [lng, lat] vertices (clean outline, no provincial borders).
+      var SA_OUTLINE = [
+        [16.45,-28.58],[17.10,-29.90],[17.90,-31.40],[18.25,-32.60],[18.05,-33.40],
+        [18.45,-34.00],[18.45,-34.35],[19.30,-34.65],[20.00,-34.83],[21.00,-34.40],
+        [22.20,-34.05],[23.60,-34.05],[24.80,-34.20],[25.60,-33.96],[26.50,-33.75],
+        [27.90,-33.02],[28.80,-32.30],[29.90,-31.10],[30.90,-30.35],[31.05,-29.86],
+        [31.80,-28.80],[32.40,-28.50],[32.90,-27.50],[32.90,-26.85],[32.00,-26.40],
+        [31.70,-25.95],[31.30,-25.20],[31.20,-24.40],[31.30,-22.40],[29.40,-22.20],
+        [28.20,-22.65],[27.50,-23.20],[26.80,-23.70],[26.00,-24.40],[25.30,-25.40],
+        [25.00,-26.00],[24.20,-26.50],[23.00,-25.90],[22.00,-26.30],[20.80,-26.10],
+        [20.00,-25.50],[19.98,-27.20],[19.90,-28.45],[18.20,-28.65],[17.20,-28.50]
+      ];
+
+      // Ray-casting point-in-polygon test (lng/lat space).
+      function inSA(lng, lat) {
+        var inside = false, n = SA_OUTLINE.length;
+        for (var i = 0, j = n - 1; i < n; j = i++) {
+          var xi = SA_OUTLINE[i][0], yi = SA_OUTLINE[i][1];
+          var xj = SA_OUTLINE[j][0], yj = SA_OUTLINE[j][1];
+          if (((yi > lat) !== (yj > lat)) &&
+              (lng < (xj - xi) * (lat - yi) / (yj - yi) + xi)) inside = !inside;
+        }
+        return inside;
+      }
+      // Deterministic PRNG so the blue field is stable across reloads.
+      function mulberry32(a) {
+        return function () {
+          a |= 0; a = (a + 0x6D2B79F5) | 0;
+          var t = Math.imul(a ^ (a >>> 15), 1 | a);
+          t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+          return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        };
+      }
+
+      var NS = 'http://www.w3.org/2000/svg';
+      function esc(s) {
+        return String(s).replace(/[&<>"]/g, function (c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+        });
+      }
+      function encPhoto(p) { return encodeURI(p); }
+
+      // Build SVG + outline.
+      var svg = document.createElementNS(NS, 'svg');
+      svg.setAttribute('viewBox', '0 0 ' + VBW + ' ' + VBH);
+      svg.setAttribute('class', 'sa-map');
+      svg.setAttribute('role', 'group');
+      svg.setAttribute('aria-label', 'Map of Kleen Up Solar project sites across South Africa');
+
+      var d = SA_OUTLINE.map(function (pt, i) {
+        var p = project(pt[0], pt[1]);
+        return (i === 0 ? 'M' : 'L') + p[0].toFixed(1) + ' ' + p[1].toFixed(1);
+      }).join(' ') + ' Z';
+      var path = document.createElementNS(NS, 'path');
+      path.setAttribute('d', d);
+      path.setAttribute('class', 'sa-outline');
+      svg.appendChild(path);
+
+      var dotsG = document.createElementNS(NS, 'g');
+      dotsG.setAttribute('class', 'sa-dots');
+      svg.appendChild(dotsG);
+      mapEl.insertBefore(svg, mapEl.firstChild);
+
+      // Tooltip + lightbox.
+      var tooltip = document.createElement('div');
+      tooltip.className = 'map-tooltip';
+      tooltip.setAttribute('role', 'status');
+      tooltip.hidden = true;
+      mapEl.appendChild(tooltip);
+
+      var lightbox = document.createElement('div');
+      lightbox.className = 'map-lightbox';
+      lightbox.hidden = true;
+      lightbox.innerHTML = '<button type="button" class="map-lightbox-close" aria-label="Close photo">&times;</button><img alt="" />';
+      document.body.appendChild(lightbox);
+      var lbImg = lightbox.querySelector('img');
+      var lbClose = lightbox.querySelector('.map-lightbox-close');
+      var lastFocused = null;
+
+      function openLightbox(site) {
+        if (!site.photo) return;
+        lastFocused = document.activeElement;
+        lbImg.src = encPhoto(site.photo);
+        lbImg.alt = site.name + ' — ' + site.region;
+        lightbox.hidden = false;
+        lbClose.focus();
+      }
+      function closeLightbox() {
+        lightbox.hidden = true;
+        lbImg.removeAttribute('src');
+        if (lastFocused && lastFocused.focus) lastFocused.focus();
+      }
+      lbClose.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
+      document.addEventListener('keydown', function (e) {
+        if (!lightbox.hidden && e.key === 'Escape') closeLightbox();
+      });
+
+      function showTooltip(site, p) {
+        var rect = svg.getBoundingClientRect();
+        if (!rect.width) return;
+        var html = '<span class="map-tooltip-name">' + esc(site.name) + '</span>' +
+                   '<span class="map-tooltip-region">' + esc(site.region) + '</span>';
+        if (site.photo) {
+          html += '<img class="map-tooltip-photo" src="' + encPhoto(site.photo) + '" alt="" loading="lazy" />';
+        }
+        tooltip.innerHTML = html;
+        tooltip.style.left = (p[0] / VBW * rect.width) + 'px';
+        tooltip.style.top = (p[1] / VBH * rect.height) + 'px';
+        tooltip.hidden = false;
+      }
+      function hideTooltip() { tooltip.hidden = true; }
+
+      // Blue decorative dots: random points inside the SA polygon, painted first.
+      var rand = mulberry32(20260521);
+      var blueCircles = [];
+      var guard = 0;
+      while (blueCircles.length < BLUE_COUNT && guard < BLUE_COUNT * 80) {
+        guard++;
+        var rlng = BBOX.lngMin + rand() * (BBOX.lngMax - BBOX.lngMin);
+        var rlat = BBOX.latBottom + rand() * (BBOX.latTop - BBOX.latBottom);
+        if (!inSA(rlng, rlat)) continue;
+        var bp = project(rlng, rlat);
+        var b = document.createElementNS(NS, 'circle');
+        b.setAttribute('cx', bp[0].toFixed(1));
+        b.setAttribute('cy', bp[1].toFixed(1));
+        b.setAttribute('class', 'sa-dot sa-dot--all');
+        dotsG.appendChild(b);
+        blueCircles.push(b);
+      }
+
+      // Green photo dots: interactive, painted on top of the blue field.
+      var greenCircles = [];
+      PHOTO_SITES.forEach(function (site) {
+        var p = project(site.lng, site.lat);
+        var c = document.createElementNS(NS, 'circle');
+        c.setAttribute('cx', p[0].toFixed(1));
+        c.setAttribute('cy', p[1].toFixed(1));
+        c.setAttribute('class', 'sa-dot sa-dot--photo');
+        c.setAttribute('role', 'button');
+        c.setAttribute('tabindex', '0');
+        c.setAttribute('aria-label', site.name + ', ' + site.region + '. Has photos — activate to enlarge.');
+        dotsG.appendChild(c);
+        greenCircles.push(c);
+
+        c.addEventListener('mouseenter', function () { showTooltip(site, p); });
+        c.addEventListener('mouseleave', hideTooltip);
+        c.addEventListener('focus', function () { showTooltip(site, p); });
+        c.addEventListener('blur', hideTooltip);
+        c.addEventListener('click', function () { openLightbox(site); });
+        c.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+            e.preventDefault();
+            openLightbox(site);
+          }
+        });
+      });
+
+      // Radii in viewBox units so rendered px stays constant as the SVG scales.
+      // Blue is a fine speckle; green pops larger so the photo sites stand out.
+      function updateRadii() {
+        var rect = svg.getBoundingClientRect();
+        if (!rect.width) return;
+        var k = VBW / rect.width;
+        var bluePx = window.innerWidth >= 1024 ? 3 : (window.innerWidth >= 768 ? 2.5 : 2);
+        var greenPx = window.innerWidth >= 1024 ? 7 : (window.innerWidth >= 768 ? 6 : 5);
+        var br = (bluePx * k).toFixed(2), gr = (greenPx * k).toFixed(2);
+        blueCircles.forEach(function (c) { c.setAttribute('r', br); });
+        greenCircles.forEach(function (c) { c.setAttribute('r', gr); });
+      }
+      updateRadii();
+      window.addEventListener('resize', function () { updateRadii(); hideTooltip(); });
     })();
   </script>
 

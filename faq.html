@@ -301,11 +301,11 @@
       overflow: hidden;
     }
     .faq-intro-inner {
-      display: grid; grid-template-columns: 1fr 420px;
+      display: grid; grid-template-columns: 1fr;
       gap: 0; align-items: flex-end;
     }
     .faq-intro-text {
-      padding-right: 48px; padding-bottom: 16px;
+      padding-bottom: 16px;
     }
     .faq-intro-text h1 { margin-bottom: 20px; }
     .faq-intro-text p { color: var(--text); font-size: 1.02rem; margin-bottom: 16px; }
@@ -315,14 +315,6 @@
     }
     .faq-intro-text .contact-hint a { color: var(--navy); font-weight: 600; border-bottom: 1px solid var(--border); }
     .faq-intro-text .contact-hint a:hover { color: var(--blue); border-bottom-color: var(--blue); }
-    .faq-man {
-      display: flex; align-items: flex-end; justify-content: center;
-      /* white bg on image blends with white section bg */
-    }
-    .faq-man img {
-      max-height: 460px; width: auto; display: block;
-    }
-
     /* ---------- FAQ ACCORDION ---------- */
     .faq-section { background: var(--bg-cool); }
     .faq-section + .faq-section { background: var(--surface); }
@@ -476,9 +468,6 @@
 
     /* ---------- RESPONSIVE ---------- */
     @media (max-width: 960px) {
-      .faq-intro-inner { grid-template-columns: 1fr; }
-      .faq-intro-text { padding-right: 0; }
-      .faq-man { display: none; }
       .foot-inner { grid-template-columns: 1fr 1fr; }
       .foot-brand { grid-column: 1 / -1; }
     }
@@ -515,7 +504,6 @@
       </a>
       <nav aria-label="Primary navigation">
         <ul class="nav-links" id="navLinks">
-          <li><a href="index.html#inspection">Inspection</a></li>
           <li class="nav-has-dropdown">
             <a href="services.html">Services <svg class="nav-dd-arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></a>
             <ul class="nav-dropdown">
@@ -525,9 +513,10 @@
               <li><a href="maintenance.html">Maintenance</a></li>
             </ul>
           </li>
+          <li><a href="projects.html">Projects</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="faq.html" class="active">FAQ</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="index.html#get-in-touch">Contact</a></li>
         </ul>
       </nav>
       <a href="index.html#get-in-touch" class="btn">Talk to us</a>
@@ -547,10 +536,7 @@
             <span class="eyebrow">Before you call</span>
             <h1>Common questions.</h1>
             <p>These are the questions we field most often. If yours isn&rsquo;t here, email us and we&rsquo;ll answer within 24 hours.</p>
-            <a href="index.html#contact" class="btn-cta">Contact us &rarr;</a>
-          </div>
-          <div class="faq-man" aria-hidden="true">
-            <img src="website%20assets/faq%20desk%20man.png" alt="" />
+            <a href="index.html#get-in-touch" class="btn-cta">Contact us &rarr;</a>
           </div>
         </div>
       </div>
@@ -699,7 +685,7 @@
       <div class="container">
         <h2>Still have questions?</h2>
         <p>Our team is always available. Reach out and we will come back to you within 24 hours.</p>
-        <a href="index.html#contact" class="btn-cta">Contact us &rarr;</a>
+        <a href="index.html#get-in-touch" class="btn-cta">Contact us &rarr;</a>
       </div>
     </section>
 
@@ -713,12 +699,11 @@
           <img src="website%20assets/Kleen%20Up%20Solar%20Logo.webp" alt="Kleen Up Solar" />
         </a>
         <ul class="foot-hnav" aria-label="Footer navigation">
-          <li><a href="index.html#inspection">Inspection</a></li>
           <li><a href="services.html">Services</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="faq.html">FAQ</a></li>
           <li><a href="projects.html">Projects</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="index.html#get-in-touch">Contact</a></li>
         </ul>
       </div>
       <div class="foot-grid">
