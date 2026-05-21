@@ -608,6 +608,7 @@
       box-shadow: var(--shadow-sm);
       transition: transform .25s var(--ease), box-shadow .25s var(--ease);
       overflow: hidden;
+      display: flex; flex-direction: column;
     }
     .svc-teaser-item::before {
       content: '';
@@ -651,7 +652,7 @@
     .svc-teaser-item ul li:last-child { margin-bottom: 0; }
     .svc-more {
       display: inline-flex; align-items: center; gap: 5px;
-      margin-top: 16px;
+      margin-top: auto; padding-top: 16px;
       font-size: .78rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
       color: var(--navy);
       border: 1px solid var(--border);
