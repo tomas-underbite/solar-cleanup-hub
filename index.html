@@ -596,6 +596,11 @@
       initial-value: 0deg;
       inherits: false;
     }
+    @property --git-contact-ang {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
     .svc-teaser { padding: 24px 0; }
     .svc-teaser-subtitle {
       color: var(--text); font-size: 1rem; margin: 0 0 20px;
@@ -939,9 +944,71 @@
       font-weight: 700; letter-spacing: -.02em; line-height: 1.2;
       margin-bottom: 48px; max-width: 800px;
     }
+    .git-layout {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
     .git-form-grid {
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 32px 56px;
+    }
+    .git-contact-label {
+      color: rgba(255,255,255,.45);
+      font-size: .72rem; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      margin: 0 0 24px;
+    }
+    .git-contact-items { display: flex; flex-direction: column; }
+    .git-contact-item {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .git-contact-item:last-child { border-bottom: none; }
+    .git-contact-icon {
+      flex-shrink: 0; width: 18px; height: 18px;
+      color: var(--blue); margin-top: 2px;
+    }
+    .ci-label {
+      display: block; color: rgba(255,255,255,.45);
+      font-size: .72rem; text-transform: uppercase;
+      letter-spacing: .08em; font-weight: 600; margin-bottom: 3px;
+    }
+    .ci-value {
+      display: block; color: #fff; font-size: .98rem; font-weight: 500;
+    }
+    .ci-value a { color: #fff; }
+    .ci-value a:hover { color: var(--blue); }
+    .git-contact-col {
+      position: relative; isolation: isolate;
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      overflow: hidden;
+    }
+    .git-contact-col::before {
+      content: '';
+      position: absolute; inset: -60%;
+      background: conic-gradient(from var(--git-contact-ang),
+        transparent 0%, transparent 60%,
+        rgba(78,153,212,.15) 70%,
+        #4e99d4 83%,
+        transparent 91%
+      );
+      animation: git-contact-spin 3s linear infinite;
+      z-index: 0;
+    }
+    .git-contact-col::after {
+      content: '';
+      position: absolute; inset: 2px;
+      background: var(--navy);
+      border-radius: calc(var(--radius) - 1px);
+      z-index: 1;
+    }
+    .git-contact-col > * { position: relative; z-index: 2; }
+    @keyframes git-contact-spin {
+      to { --git-contact-ang: 360deg; }
     }
     .git-field { display: flex; flex-direction: column; }
     .git-label {
@@ -976,7 +1043,7 @@
     }
     .git-textarea::placeholder { color: rgba(255,255,255,.35); }
     .git-textarea:focus { border-color: rgba(255,255,255,.9); }
-    .git-submit-wrap { display: flex; justify-content: flex-end; margin-top: 12px; }
+    .git-submit-wrap { display: flex; margin-top: 12px; }
     .git-submit {
       background: #fff; color: var(--navy);
       border: none; border-radius: 2px;
@@ -984,13 +1051,14 @@
       letter-spacing: .14em; text-transform: uppercase;
       padding: 16px 28px;
       cursor: pointer;
-      display: inline-flex; align-items: center; gap: 10px;
+      width: 100%;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
       transition: background 200ms var(--ease), color 200ms var(--ease), transform 200ms var(--ease), box-shadow 200ms var(--ease);
     }
     .git-submit:hover { background: var(--blue); color: #fff; transform: translateY(-1px); box-shadow: var(--shadow-md); }
     @media (max-width: 768px) {
+      .git-layout { grid-template-columns: 1fr; gap: 44px; }
       .git-form-grid { grid-template-columns: 1fr; gap: 28px; }
-      .git-submit-wrap { justify-content: flex-start; }
     }
 
     /* ---------- FOOTER ---------- */
@@ -1323,12 +1391,9 @@
       </div>
     </section>
 
-    <!-- moved to drone-inspections.html -->
-
-        <!-- ============ SERVICES TEASER ============ -->
+    <!-- ============ SERVICES TEASER ============ -->
     <section class="svc-teaser" style="background:var(--bg-cool);">
       <div class="container">
-        <p class="svc-teaser-subtitle">Four services, one operator. Nationwide solar asset management across South Africa.</p>
         <div class="svc-teaser-grid">
           <div class="svc-teaser-item reveal">
             <h3><a href="services.html#cleaning">PV Cleaning</a></h3>
@@ -1432,47 +1497,109 @@
     </section>
 
 
-    <!-- moved to drone-inspections.html -->
-
   </main>
 
   <!-- ============ GET IN TOUCH ============ -->
   <section id="get-in-touch" class="get-in-touch">
     <div class="container">
       <h2 class="git-headline">Let&rsquo;s discuss your sites and your service plan.</h2>
-      <form class="git-form" action="" method="post">
-        <input type="hidden" name="source" value="homepage" />
-        <div class="git-form-grid">
-          <div class="git-field">
-            <label class="git-label" for="git-name">Full Name *</label>
-            <input class="git-input" id="git-name" name="first_name" type="text" placeholder="Firstname Lastname" required />
+      <div class="git-layout">
+
+        <!-- FORM -->
+        <form class="git-form" action="" method="post">
+          <input type="hidden" name="source" value="homepage" />
+          <div class="git-form-grid">
+            <div class="git-field">
+              <label class="git-label" for="git-name">Full Name *</label>
+              <input class="git-input" id="git-name" name="first_name" type="text" placeholder="Firstname Lastname" required />
+            </div>
+            <div class="git-field">
+              <label class="git-label" for="git-phone">Phone</label>
+              <input class="git-input" id="git-phone" name="phone" type="tel" placeholder="+27 …" />
+            </div>
+            <div class="git-field">
+              <label class="git-label" for="git-email">Email *</label>
+              <input class="git-input" id="git-email" name="email" type="email" placeholder="you@company.com" required />
+            </div>
+            <div class="git-field">
+              <label class="git-label" for="git-company">Company</label>
+              <input class="git-input" id="git-company" name="company" type="text" placeholder="Company name" />
+            </div>
+            <div class="git-field">
+              <label class="git-label" for="git-service">I&rsquo;m interested in&hellip;</label>
+              <select class="git-select" id="git-service" name="service_interest">
+                <option value="general" selected>I have a general question</option>
+                <option value="PV Cleaning">PV Cleaning</option>
+                <option value="Technical Annual Inspections">Technical Annual Inspections</option>
+                <option value="Drone Inspections">Drone Inspections</option>
+                <option value="Maintenance">Maintenance</option>
+              </select>
+            </div>
+            <div class="git-field">
+              <label class="git-label" for="git-region">Site region</label>
+              <select class="git-select" id="git-region" name="region">
+                <option value="" selected>Select a region&hellip;</option>
+                <option value="Cape Town">Cape Town / Western Cape</option>
+                <option value="Port Elizabeth">Port Elizabeth / Eastern Cape</option>
+                <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+                <option value="Gauteng">Gauteng</option>
+                <option value="Garden Route">Garden Route</option>
+                <option value="Free State">Free State</option>
+                <option value="Northern Cape">Northern Cape</option>
+                <option value="Limpopo">Limpopo</option>
+                <option value="Mpumalanga">Mpumalanga</option>
+                <option value="North West">North West</option>
+              </select>
+            </div>
+            <div class="git-field" style="grid-column: 1 / -1;">
+              <label class="git-label" for="git-message">Message *</label>
+              <textarea class="git-textarea" id="git-message" name="message" rows="4" required></textarea>
+            </div>
+            <div class="git-submit-wrap" style="grid-column: 1 / -1;">
+              <button type="submit" class="git-submit">
+                Get in touch
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
           </div>
-          <div class="git-field">
-            <label class="git-label" for="git-email">Email *</label>
-            <input class="git-input" id="git-email" name="email" type="email" placeholder="email@email.com" required />
-          </div>
-          <div class="git-field">
-            <label class="git-label" for="git-service">I&rsquo;m interested in&hellip;</label>
-            <select class="git-select" id="git-service" name="service_interest">
-              <option value="general" selected>I have a general question</option>
-              <option value="PV Cleaning">PV Cleaning</option>
-              <option value="Technical Annual Inspections">Technical Annual Inspections</option>
-              <option value="Drone Inspections">Drone Inspections</option>
-              <option value="Maintenance">Maintenance</option>
-            </select>
-          </div>
-          <div class="git-field">
-            <label class="git-label" for="git-message">Message *</label>
-            <textarea class="git-textarea" id="git-message" name="message" rows="4" required></textarea>
+        </form>
+
+        <!-- CONTACT DETAILS -->
+        <div class="git-contact-col">
+          <p class="git-contact-label">or reach out to us directly</p>
+          <div class="git-contact-items">
+            <div class="git-contact-item">
+              <svg class="git-contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <div>
+                <span class="ci-label">Email</span>
+                <span class="ci-value"><a href="mailto:info@kleenup.solar">info@kleenup.solar</a></span>
+              </div>
+            </div>
+            <div class="git-contact-item">
+              <svg class="git-contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.59 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.06 6.06l.92-.93a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+              <div>
+                <span class="ci-label">Phone</span>
+                <span class="ci-value"><a href="tel:+27674095945">+27 67 409 5945</a></span>
+              </div>
+            </div>
+            <div class="git-contact-item">
+              <svg class="git-contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <div>
+                <span class="ci-label">Location</span>
+                <span class="ci-value">Cape Town, South Africa</span>
+              </div>
+            </div>
+            <div class="git-contact-item">
+              <svg class="git-contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <div>
+                <span class="ci-label">Response time</span>
+                <span class="ci-value">Within 24 hours</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="git-submit-wrap">
-          <button type="submit" class="git-submit">
-            Get in touch
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </div>
-      </form>
+
+      </div>
     </div>
   </section>
 
