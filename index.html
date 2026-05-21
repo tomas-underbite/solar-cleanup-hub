@@ -1102,31 +1102,29 @@
       to   { transform: translateX(-50%); }
     }
 
-    /* Hero tagline animation */
-    .hero-tagline {
-      display: flex; align-items: center; gap: 10px;
-      margin-bottom: 32px;
-      font-weight: 300; font-size: 1rem; letter-spacing: 0.04em;
-      color: rgba(255,255,255,0.72);
+    /* Hero circular badge */
+    .hero-badge {
+      position: absolute;
+      right: clamp(24px, 7vw, 110px);
+      top: 50%;
+      transform: translateY(-50%);
+      width: 164px; height: 164px;
+      z-index: 3;
       opacity: 0;
-      animation: tagline-rise 0.9s cubic-bezier(.22,.68,0,1.2) 0.5s forwards;
+      animation: badge-fade-in 1s ease 1s forwards;
+      pointer-events: none;
     }
-    .tagline-sun {
-      flex-shrink: 0;
-      filter: drop-shadow(0 0 6px rgba(245,166,35,0.5));
+    .badge-spin-group {
+      transform-origin: 82px 82px;
+      animation: badge-spin 24s linear infinite;
     }
-    .tagline-sun .sun-rays {
-      transform-box: fill-box;
-      transform-origin: center;
-      animation: sun-spin 14s linear infinite;
-    }
-    @keyframes sun-spin {
+    @keyframes badge-spin {
       to { transform: rotate(360deg); }
     }
-    @keyframes tagline-rise {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
+    @keyframes badge-fade-in {
+      to { opacity: 1; }
     }
+    @media (max-width: 900px) { .hero-badge { display: none; } }
   </style>
 
   <!-- LocalBusiness JSON-LD -->
@@ -1214,22 +1212,6 @@
           <span class="hero-eyebrow">Commercial Solar O&amp;M, South Africa</span>
           <h1>Nationwide solar asset management</h1>
           <p class="sub">PV cleaning, periodic technical inspections, maintenance, and drone inspection across 500+ South African sites.</p>
-          <p class="hero-tagline">
-            <svg class="tagline-sun" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <circle cx="11" cy="11" r="4" fill="#F5A623"/>
-              <g class="sun-rays" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round">
-                <line x1="11" y1="1"    x2="11" y2="4"/>
-                <line x1="11" y1="18"   x2="11" y2="21"/>
-                <line x1="1"  y1="11"   x2="4"  y2="11"/>
-                <line x1="18" y1="11"   x2="21" y2="11"/>
-                <line x1="3.64" y1="3.64" x2="5.76" y2="5.76"/>
-                <line x1="16.24" y1="16.24" x2="18.36" y2="18.36"/>
-                <line x1="18.36" y1="3.64"  x2="16.24" y2="5.76"/>
-                <line x1="5.76"  y1="16.24" x2="3.64"  y2="18.36"/>
-              </g>
-            </svg>
-            Cleaning today. Powering tomorrow™
-          </p>
           <div class="hero-ctas">
             <a href="#calculator" class="btn-cta">Request a thermal inspection</a>
             <a href="#report" class="btn-cta btn-cta--ghost">See a sample report</a>
@@ -1250,6 +1232,37 @@
           </div>
         </div>
       </div>
+
+      <!-- Circular rotating badge -->
+      <svg class="hero-badge" viewBox="0 0 164 164" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <path id="badge-path" d="M 82,82 m -70,0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0"/>
+        </defs>
+        <g class="badge-spin-group">
+          <circle cx="82" cy="82" r="70" stroke="rgba(255,255,255,0.18)" stroke-width="0.75" fill="none"/>
+          <circle cx="82" cy="82" r="52" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" fill="none"/>
+          <text font-family="'Inter', sans-serif" font-size="10.5" font-weight="400"
+                fill="rgba(255,255,255,0.78)" letter-spacing="1">
+            <textPath href="#badge-path" textLength="440" lengthAdjust="spacing">
+              Cleaning today · Powering tomorrow™ · Kleen Up Solar ·
+            </textPath>
+          </text>
+        </g>
+        <!-- Centre sun — counter-rotates to stay upright -->
+        <g style="transform-origin:82px 82px;animation:badge-spin 24s linear infinite reverse">
+          <circle cx="82" cy="82" r="6" fill="#F5A623" opacity="0.9"/>
+          <g stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" opacity="0.8">
+            <line x1="82" y1="70" x2="82" y2="74"/>
+            <line x1="82" y1="90" x2="82" y2="94"/>
+            <line x1="70" y1="82" x2="74" y2="82"/>
+            <line x1="90" y1="82" x2="94" y2="82"/>
+            <line x1="73.5" y1="73.5" x2="76.3" y2="76.3"/>
+            <line x1="87.7" y1="87.7" x2="90.5" y2="90.5"/>
+            <line x1="90.5" y1="73.5" x2="87.7" y2="76.3"/>
+            <line x1="76.3" y1="87.7" x2="73.5" y2="90.5"/>
+          </g>
+        </g>
+      </svg>
     </section>
 
     <!-- ============ TRUSTED BY (animated marquee) ============ -->
