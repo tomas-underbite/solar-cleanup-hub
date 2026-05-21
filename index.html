@@ -781,9 +781,17 @@
 
     /* ---------- FOOTPRINT SNAPSHOT ---------- */
     .footprint {
+      position: relative;
       padding: 88px 0; background: var(--surface);
       text-align: center; border-bottom: 1px solid var(--border);
     }
+    .fp-flag {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: .1; z-index: 0; pointer-events: none;
+    }
+    .footprint > .container { position: relative; z-index: 1; }
     .footprint h2 { margin: 0 0 10px; font-size: clamp(1.6rem, 3vw, 2.2rem); }
     .fp-stat { color: var(--muted); font-size: .95rem; margin: 0 0 40px; }
     .fp-coverage {
@@ -1110,6 +1118,7 @@
     .ci-value a:hover { color: var(--blue); }
     .git-right-col {
       display: flex; flex-direction: column;
+      justify-content: center; align-self: stretch;
     }
     .git-contact-col {
       position: relative; isolation: isolate;
@@ -1143,8 +1152,6 @@
     .git-email-banner {
       width: 100%; display: block;
       border-radius: var(--radius);
-      margin-top: auto;
-      padding-top: 24px;
     }
     .git-field { display: flex; flex-direction: column; }
     .git-label {
@@ -1508,7 +1515,7 @@
       </div>
       <nav aria-label="Primary navigation">
         <ul class="nav-links" id="navLinks">
-          <li><a href="#inspection">Inspection</a></li>
+          <li><a href="projects.html">Projects</a></li>
           <li class="nav-has-dropdown">
             <a href="services.html">Services <svg class="nav-dd-arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></a>
             <ul class="nav-dropdown">
@@ -1670,6 +1677,8 @@
 
     <!-- ============ FOOTPRINT SNAPSHOT ============ -->
     <section id="footprint" class="footprint reveal">
+      <!-- South African flag watermark -->
+      <img class="fp-flag" src="website%20assets/south%20african%20flag.avif" alt="" aria-hidden="true" loading="lazy" />
       <div class="container">
         <h2 class="reveal">Nationwide footprint</h2>
         <p class="fp-stat reveal">500+ sites across South Africa</p>
@@ -1825,42 +1834,9 @@
           </div>
         </form>
 
-        <!-- CONTACT DETAILS + BANNER -->
+        <!-- CONTACT IMAGE -->
         <div class="git-right-col">
-        <div class="git-contact-col">
-          <p class="git-contact-label">or reach out to us directly</p>
-          <div class="git-contact-items">
-            <div class="git-contact-item">
-              <svg class="git-contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              <div>
-                <span class="ci-label">Email</span>
-                <span class="ci-value"><a href="mailto:info@kleenup.solar">info@kleenup.solar</a></span>
-              </div>
-            </div>
-            <div class="git-contact-item">
-              <svg class="git-contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.59 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.06 6.06l.92-.93a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
-              <div>
-                <span class="ci-label">Phone</span>
-                <span class="ci-value"><a href="tel:+27674095945">+27 67 409 5945</a></span>
-              </div>
-            </div>
-            <div class="git-contact-item">
-              <svg class="git-contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              <div>
-                <span class="ci-label">Location</span>
-                <span class="ci-value">Cape Town, South Africa</span>
-              </div>
-            </div>
-            <div class="git-contact-item">
-              <svg class="git-contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              <div>
-                <span class="ci-label">Response time</span>
-                <span class="ci-value">Within 24 hours</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1280 267'><rect width='1280' height='267' fill='rgb(78,153,212)'/><text x='640' y='148' fill='white' font-family='Inter, sans-serif' font-size='30' font-weight='600' text-anchor='middle'>[REPLACE: real Kleen Up Solar field photo banner]</text></svg>" alt="Kleen Up Solar" class="git-email-banner" />
+        <img src="website%20assets/contact-banner-pv-cleaning.jpg" alt="Kleen Up Solar technician cleaning commercial solar panels" class="git-email-banner" />
         </div>
 
       </div>
@@ -1875,7 +1851,6 @@
           <img src="website%20assets/Kleen%20Up%20Solar%20Logo.webp" alt="Kleen Up Solar" />
         </a>
         <ul class="foot-hnav" aria-label="Footer navigation">
-          <li><a href="index.html#inspection">Inspection</a></li>
           <li><a href="services.html">Services</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="faq.html">FAQ</a></li>
