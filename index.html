@@ -12,12 +12,12 @@
   <meta property="og:url" content="https://kleenup.solar/" />
   <meta property="og:title" content="Kleen Up Solar: Commercial Solar O&M, South Africa" />
   <meta property="og:description" content="Commercial solar asset management across South Africa. PV cleaning, technical annual inspections, drone inspections, and maintenance. 500+ sites, 120 MW under management." />
-  <meta property="og:image" content="https://kleenup.solar/website%20assets/Good%20Wood%20og.webp" />
+  <meta property="og:image" content="https://kleenup.solar/website%20assets/Goodwood,%20Cape%20Town.webp" />
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Kleen Up Solar: Commercial Solar O&M, South Africa" />
   <meta name="twitter:description" content="Commercial solar asset management across South Africa. PV cleaning, technical annual inspections, drone inspections, and maintenance." />
-  <meta name="twitter:image" content="https://kleenup.solar/website%20assets/Good%20Wood%20og.webp" />
+  <meta name="twitter:image" content="https://kleenup.solar/website%20assets/Goodwood,%20Cape%20Town.webp" />
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3NDZYGWCV"></script>
@@ -840,6 +840,62 @@
       transition: color 200ms var(--ease);
     }
     .fp-link:hover { color: var(--blue); }
+    /* ---------- SITE MAP (moved from projects.html "Where we operate") ---------- */
+    #projects-map {
+      position: relative;
+      width: 100%; max-width: 560px; margin: 0 auto 32px;
+    }
+    .sa-map { display: block; width: 100%; height: auto; overflow: visible; }
+    .sa-outline {
+      fill: var(--bg-cool); stroke: var(--border); stroke-width: 1;
+      vector-effect: non-scaling-stroke;
+    }
+    .sa-dot { vector-effect: non-scaling-stroke; transform-box: fill-box; transform-origin: center; }
+    .sa-dot--all { fill: var(--blue); fill-opacity: .55; pointer-events: none; }
+    .sa-dot--photo { fill: #22C55E; stroke: #fff; stroke-width: 1; cursor: pointer; }
+    @media (prefers-reduced-motion: no-preference) {
+      .sa-dot--photo { transition: transform 150ms var(--ease); }
+    }
+    .sa-dot--photo:hover, .sa-dot--photo:focus-visible { transform: scale(1.4); }
+    .sa-dot--photo:focus { outline: none; }
+
+    .map-tooltip {
+      position: absolute; z-index: 5; pointer-events: none; text-align: left;
+      transform: translate(-50%, calc(-100% - 12px));
+      background: var(--navy-deep); color: #fff;
+      padding: 10px 12px; border-radius: 8px;
+      box-shadow: var(--shadow-lg);
+      max-width: 200px; font-size: .8rem; line-height: 1.4;
+    }
+    .map-tooltip[hidden] { display: none; }
+    .map-tooltip-name { font-weight: 700; display: block; }
+    .map-tooltip-region { display: block; color: var(--blue); font-size: .72rem; }
+    .map-tooltip-photo {
+      display: block; width: 160px; height: auto;
+      border-radius: 6px; margin-top: 8px;
+    }
+
+    .map-lightbox {
+      position: fixed; inset: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(11,28,42,.88); padding: 24px;
+    }
+    .map-lightbox[hidden] { display: none; }
+    .map-lightbox img {
+      max-width: min(90vw, 1100px); max-height: 86vh;
+      border-radius: 8px; box-shadow: var(--shadow-lg);
+    }
+    .map-lightbox-close {
+      position: absolute; top: 20px; right: 24px;
+      width: 44px; height: 44px; border: 0;
+      background: rgba(255,255,255,.14); color: #fff;
+      font-size: 1.5rem; line-height: 1; border-radius: 999px; cursor: pointer;
+      transition: background 200ms var(--ease);
+    }
+    .map-lightbox-close:hover { background: rgba(255,255,255,.28); }
+    @media (max-width: 768px) {
+      #projects-map { max-width: 100%; }
+    }
 
     /* ---------- TESTIMONIALS ---------- */
     .testi-grid {
@@ -1642,52 +1698,8 @@
       <div class="container">
         <h2 class="reveal">Nationwide footprint</h2>
         <p class="fp-stat reveal">500+ sites across South Africa</p>
-        <div class="fp-map-wrap reveal">
-          <svg class="fp-svg" viewBox="0 0 500 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Outline map of South Africa showing project locations">
-            <title>South Africa project locations</title>
-            <!-- Coord mapping: x = (lon-16)*27.78, y = (lat-22)*33.08 -->
-            <!-- SA outline, clockwise from Orange River mouth on Atlantic -->
-            <path d="M 12.5,220.1 L 27.8,198.5 L 110.4,213.4 L 111.1,160.5 L 134.7,132.3 L 166.7,122.4 L 222.2,132.3 L 277.8,86.0 L 305.6,66.2 L 333.3,13.2 L 388.6,7.3 L 425.6,11.9 L 443.6,52.9 L 444.4,82.7 L 444.4,115.8 L 444.4,130.9 L 410.6,123.0 L 410.6,175.9 L 447.6,175.9 L 460.7,215.1 L 400.3,290.2 L 350.3,353.1 L 305.6,366.0 L 267.2,396.5 L 194.4,399.5 L 125.0,411.7 L 79.2,408.4 L 73.6,404.4 L 68.0,409.6 L 63.9,399.5 L 68.0,396.2 L 54.2,364.7 L 39.0,314.8 L 29.2,281.7 Z"
-              fill="var(--bg-cool)" stroke="var(--navy)" stroke-width="2" stroke-linejoin="round" />
-            <!-- Lesotho enclave -->
-            <path d="M 305.6,248.1 L 322.2,218.4 L 361.1,221.6 L 372.2,241.4 L 375.0,286.9 L 313.9,270.3 Z"
-              fill="var(--bg-cool)" stroke="var(--navy)" stroke-width="2" stroke-linejoin="round" />
-          </svg>
-          <!-- Pin: Cape Town 115 kW,18.47°E 33.91°S -->
-          <div class="fp-pin" style="left:13.7%;top:91.6%;">
-            <span class="fp-dot"></span>
-            <div class="fp-card" style="bottom:20px;left:0;">
-              <img src="website%20assets/Cape%20Town.webp" alt="Cape Town, 115 kW" loading="lazy" />
-              <span class="fp-card-label">Cape Town, 115 kW</span>
-            </div>
-          </div>
-          <!-- Pin: Fisantekraal 360 kW,18.75°E 33.77°S -->
-          <div class="fp-pin" style="left:15.3%;top:90.5%;">
-            <span class="fp-dot"></span>
-            <div class="fp-card" style="bottom:20px;left:0;">
-              <img src="website%20assets/Fisantekraal,%20Cape%20Town.webp" alt="Fisantekraal, Cape Town, 360 kW" loading="lazy" />
-              <span class="fp-card-label">Fisantekraal, 360 kW</span>
-            </div>
-          </div>
-          <!-- Pin: Sasolburg Free State 392 kW,27.82°E 26.81°S -->
-          <div class="fp-pin" style="left:65.7%;top:37%;">
-            <span class="fp-dot"></span>
-            <div class="fp-card" style="bottom:20px;left:-99px;">
-              <img src="website%20assets/Sasolburg,%20Free%20State.webp" alt="Sasolburg, Free State, 392 kW" loading="lazy" />
-              <span class="fp-card-label">Sasolburg, Free State, 392 kW</span>
-            </div>
-          </div>
-          <!-- Pin: Nelspruit Mpumalanga 361 kW,30.97°E 25.47°S -->
-          <div class="fp-pin" style="left:83.1%;top:26.7%;">
-            <span class="fp-dot"></span>
-            <div class="fp-card" style="top:20px;right:0;bottom:auto;">
-              <img src="website%20assets/Nelspruit.%20Mpumelanga.webp" alt="Nelspruit, Mpumalanga, 361 kW" loading="lazy" />
-              <span class="fp-card-label">Nelspruit, Mpumalanga, 361 kW</span>
-            </div>
-          </div>
-        </div>
+        <div id="projects-map" class="reveal"></div>
         <p class="fp-coverage reveal">Full-service coverage across <strong>KwaZulu-Natal</strong>, <strong>Port Elizabeth</strong>, and <strong>Cape Town</strong>. Nationwide drone inspections.</p>
-        <a href="projects.html#projects-map" class="fp-link">Explore our project map &rarr;</a>
       </div>
     </section>
 
@@ -2037,5 +2049,205 @@
     })();
   </script>
 
+  <script>
+    /* ---------- HOMEPAGE SITE MAP (SOLV-style, two-tone dots) ---------- */
+    (function () {
+      var mapEl = document.getElementById('projects-map');
+      if (!mapEl) return;
+
+      // Sites we have photos of: green, interactive (tooltip + lightbox).
+      var PHOTO_SITES = [
+        { name: "Cape Town",    lat: -33.92, lng: 18.42, region: "Western Cape", photo: "website assets/Cape Town.webp" },
+        { name: "Goodwood",     lat: -33.90, lng: 18.55, region: "Western Cape", photo: "website assets/Goodwood, Cape Town.webp" },
+        { name: "Fisantekraal", lat: -33.71, lng: 18.74, region: "Western Cape", photo: "website assets/Fisantekraal, Cape Town.webp" },
+        { name: "Nelspruit",    lat: -25.47, lng: 30.97, region: "Mpumalanga",   photo: "website assets/Nelspruit. Mpumelanga.webp" },
+        { name: "Sasolburg",    lat: -26.81, lng: 27.82, region: "Free State",   photo: "website assets/Sasolburg, Free State.webp" }
+      ];
+      // Decorative density of all the sites we service (blue, non-interactive).
+      var BLUE_COUNT = 520;
+
+      // Simple linear lat/lng -> SVG x/y, calibrated to the SA bounding box.
+      var BBOX = { lngMin: 16.5, lngMax: 33.0, latTop: -22.0, latBottom: -35.0 };
+      var VBW = 1000, VBH = 897;
+      function project(lng, lat) {
+        return [
+          (lng - BBOX.lngMin) / (BBOX.lngMax - BBOX.lngMin) * VBW,
+          (BBOX.latTop - lat) / (BBOX.latTop - BBOX.latBottom) * VBH
+        ];
+      }
+
+      // Approximate South Africa outline as [lng, lat] vertices.
+      var SA_OUTLINE = [
+        [16.45,-28.58],[17.10,-29.90],[17.90,-31.40],[18.25,-32.60],[18.05,-33.40],
+        [18.45,-34.00],[18.45,-34.35],[19.30,-34.65],[20.00,-34.83],[21.00,-34.40],
+        [22.20,-34.05],[23.60,-34.05],[24.80,-34.20],[25.60,-33.96],[26.50,-33.75],
+        [27.90,-33.02],[28.80,-32.30],[29.90,-31.10],[30.90,-30.35],[31.05,-29.86],
+        [31.80,-28.80],[32.40,-28.50],[32.90,-27.50],[32.90,-26.85],[32.00,-26.40],
+        [31.70,-25.95],[31.30,-25.20],[31.20,-24.40],[31.30,-22.40],[29.40,-22.20],
+        [28.20,-22.65],[27.50,-23.20],[26.80,-23.70],[26.00,-24.40],[25.30,-25.40],
+        [25.00,-26.00],[24.20,-26.50],[23.00,-25.90],[22.00,-26.30],[20.80,-26.10],
+        [20.00,-25.50],[19.98,-27.20],[19.90,-28.45],[18.20,-28.65],[17.20,-28.50]
+      ];
+
+      // Ray-casting point-in-polygon test (lng/lat space).
+      function inSA(lng, lat) {
+        var inside = false, n = SA_OUTLINE.length;
+        for (var i = 0, j = n - 1; i < n; j = i++) {
+          var xi = SA_OUTLINE[i][0], yi = SA_OUTLINE[i][1];
+          var xj = SA_OUTLINE[j][0], yj = SA_OUTLINE[j][1];
+          if (((yi > lat) !== (yj > lat)) &&
+              (lng < (xj - xi) * (lat - yi) / (yj - yi) + xi)) inside = !inside;
+        }
+        return inside;
+      }
+      // Deterministic PRNG so the blue field is stable across reloads.
+      function mulberry32(a) {
+        return function () {
+          a |= 0; a = (a + 0x6D2B79F5) | 0;
+          var t = Math.imul(a ^ (a >>> 15), 1 | a);
+          t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+          return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        };
+      }
+
+      var NS = 'http://www.w3.org/2000/svg';
+      function esc(s) {
+        return String(s).replace(/[&<>"]/g, function (c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+        });
+      }
+      function encPhoto(p) { return encodeURI(p); }
+
+      // Build SVG + outline.
+      var svg = document.createElementNS(NS, 'svg');
+      svg.setAttribute('viewBox', '0 0 ' + VBW + ' ' + VBH);
+      svg.setAttribute('class', 'sa-map');
+      svg.setAttribute('role', 'group');
+      svg.setAttribute('aria-label', 'Map of Kleen Up Solar project sites across South Africa');
+
+      var d = SA_OUTLINE.map(function (pt, i) {
+        var p = project(pt[0], pt[1]);
+        return (i === 0 ? 'M' : 'L') + p[0].toFixed(1) + ' ' + p[1].toFixed(1);
+      }).join(' ') + ' Z';
+      var path = document.createElementNS(NS, 'path');
+      path.setAttribute('d', d);
+      path.setAttribute('class', 'sa-outline');
+      svg.appendChild(path);
+
+      var dotsG = document.createElementNS(NS, 'g');
+      dotsG.setAttribute('class', 'sa-dots');
+      svg.appendChild(dotsG);
+      mapEl.insertBefore(svg, mapEl.firstChild);
+
+      // Tooltip + lightbox.
+      var tooltip = document.createElement('div');
+      tooltip.className = 'map-tooltip';
+      tooltip.setAttribute('role', 'status');
+      tooltip.hidden = true;
+      mapEl.appendChild(tooltip);
+
+      var lightbox = document.createElement('div');
+      lightbox.className = 'map-lightbox';
+      lightbox.hidden = true;
+      lightbox.innerHTML = '<button type="button" class="map-lightbox-close" aria-label="Close photo">&times;</button><img alt="" />';
+      document.body.appendChild(lightbox);
+      var lbImg = lightbox.querySelector('img');
+      var lbClose = lightbox.querySelector('.map-lightbox-close');
+      var lastFocused = null;
+
+      function openLightbox(site) {
+        if (!site.photo) return;
+        lastFocused = document.activeElement;
+        lbImg.src = encPhoto(site.photo);
+        lbImg.alt = site.name + ', ' + site.region;
+        lightbox.hidden = false;
+        lbClose.focus();
+      }
+      function closeLightbox() {
+        lightbox.hidden = true;
+        lbImg.removeAttribute('src');
+        if (lastFocused && lastFocused.focus) lastFocused.focus();
+      }
+      lbClose.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
+      document.addEventListener('keydown', function (e) {
+        if (!lightbox.hidden && e.key === 'Escape') closeLightbox();
+      });
+
+      function showTooltip(site, p) {
+        var rect = svg.getBoundingClientRect();
+        if (!rect.width) return;
+        var html = '<span class="map-tooltip-name">' + esc(site.name) + '</span>' +
+                   '<span class="map-tooltip-region">' + esc(site.region) + '</span>';
+        if (site.photo) {
+          html += '<img class="map-tooltip-photo" src="' + encPhoto(site.photo) + '" alt="" loading="lazy" />';
+        }
+        tooltip.innerHTML = html;
+        tooltip.style.left = (p[0] / VBW * rect.width) + 'px';
+        tooltip.style.top = (p[1] / VBH * rect.height) + 'px';
+        tooltip.hidden = false;
+      }
+      function hideTooltip() { tooltip.hidden = true; }
+
+      // Blue decorative dots: random points inside the SA polygon, painted first.
+      var rand = mulberry32(20260521);
+      var blueCircles = [];
+      var guard = 0;
+      while (blueCircles.length < BLUE_COUNT && guard < BLUE_COUNT * 80) {
+        guard++;
+        var rlng = BBOX.lngMin + rand() * (BBOX.lngMax - BBOX.lngMin);
+        var rlat = BBOX.latBottom + rand() * (BBOX.latTop - BBOX.latBottom);
+        if (!inSA(rlng, rlat)) continue;
+        var bp = project(rlng, rlat);
+        var b = document.createElementNS(NS, 'circle');
+        b.setAttribute('cx', bp[0].toFixed(1));
+        b.setAttribute('cy', bp[1].toFixed(1));
+        b.setAttribute('class', 'sa-dot sa-dot--all');
+        dotsG.appendChild(b);
+        blueCircles.push(b);
+      }
+
+      // Green photo dots: interactive, painted on top of the blue field.
+      var greenCircles = [];
+      PHOTO_SITES.forEach(function (site) {
+        var p = project(site.lng, site.lat);
+        var c = document.createElementNS(NS, 'circle');
+        c.setAttribute('cx', p[0].toFixed(1));
+        c.setAttribute('cy', p[1].toFixed(1));
+        c.setAttribute('class', 'sa-dot sa-dot--photo');
+        c.setAttribute('role', 'button');
+        c.setAttribute('tabindex', '0');
+        c.setAttribute('aria-label', site.name + ', ' + site.region + '. Has photos. Activate to enlarge.');
+        dotsG.appendChild(c);
+        greenCircles.push(c);
+
+        c.addEventListener('mouseenter', function () { showTooltip(site, p); });
+        c.addEventListener('mouseleave', hideTooltip);
+        c.addEventListener('focus', function () { showTooltip(site, p); });
+        c.addEventListener('blur', hideTooltip);
+        c.addEventListener('click', function () { openLightbox(site); });
+        c.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+            e.preventDefault();
+            openLightbox(site);
+          }
+        });
+      });
+
+      // Radii in viewBox units so rendered px stays constant as the SVG scales.
+      function updateRadii() {
+        var rect = svg.getBoundingClientRect();
+        if (!rect.width) return;
+        var k = VBW / rect.width;
+        var bluePx = window.innerWidth >= 1024 ? 3 : (window.innerWidth >= 768 ? 2.5 : 2);
+        var greenPx = window.innerWidth >= 1024 ? 7 : (window.innerWidth >= 768 ? 6 : 5);
+        var br = (bluePx * k).toFixed(2), gr = (greenPx * k).toFixed(2);
+        blueCircles.forEach(function (c) { c.setAttribute('r', br); });
+        greenCircles.forEach(function (c) { c.setAttribute('r', gr); });
+      }
+      updateRadii();
+      window.addEventListener('resize', function () { updateRadii(); hideTooltip(); });
+    })();
+  </script>
 </body>
 </html>
