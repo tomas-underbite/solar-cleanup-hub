@@ -321,7 +321,7 @@
     .map-tooltip-name { font-weight: 700; display: block; }
     .map-tooltip-region { display: block; color: var(--blue); font-size: .72rem; }
     .map-tooltip-photo {
-      display: block; max-width: 160px; width: 100%; height: auto;
+      display: block; width: 160px; height: auto;
       border-radius: 6px; margin-top: 8px;
     }
 
@@ -520,7 +520,7 @@
       <div class="container">
         <span class="eyebrow">Our Work</span>
         <h1>Featured Projects</h1>
-        <p class="intro">[COPY TBD] A selection of commercial and utility-scale solar assets we service across South Africa — from routine PV cleaning to full technical inspections and thermal drone surveys.</p>
+        <p class="intro">[COPY TBD] A selection of commercial and utility-scale solar assets we service across South Africa, from routine PV cleaning to full technical inspections and thermal drone surveys.</p>
       </div>
     </section>
 
@@ -537,7 +537,7 @@
             <div class="proj-card-body">
               <div class="proj-card-meta">
                 <span class="proj-card-location">[City, Province TBD]</span>
-                <span class="proj-card-service">[PV Cleaning / Drone Inspection / Maintenance — TBD]</span>
+                <span class="proj-card-service">[PV Cleaning / Drone Inspection / Maintenance - TBD]</span>
               </div>
               <h3>[Project 1 Name TBD]</h3>
               <p>[COPY TBD]</p>
@@ -563,7 +563,7 @@
             <div class="proj-card-body">
               <div class="proj-card-meta">
                 <span class="proj-card-location">[City, Province TBD]</span>
-                <span class="proj-card-service">[PV Cleaning / Drone Inspection / Maintenance — TBD]</span>
+                <span class="proj-card-service">[PV Cleaning / Drone Inspection / Maintenance - TBD]</span>
               </div>
               <h3>[Project 2 Name TBD]</h3>
               <p>[COPY TBD]</p>
@@ -589,7 +589,7 @@
             <div class="proj-card-body">
               <div class="proj-card-meta">
                 <span class="proj-card-location">[City, Province TBD]</span>
-                <span class="proj-card-service">[PV Cleaning / Drone Inspection / Maintenance — TBD]</span>
+                <span class="proj-card-service">[PV Cleaning / Drone Inspection / Maintenance - TBD]</span>
               </div>
               <h3>[Project 3 Name TBD]</h3>
               <p>[COPY TBD]</p>
@@ -719,7 +719,7 @@
       var mapEl = document.getElementById('projects-map');
       if (!mapEl) return;
 
-      // Sites we have photos of — green, interactive (tooltip + lightbox).
+      // Sites we have photos of: green, interactive (tooltip + lightbox).
       // Photos are real files in /website assets, named by location.
       var PHOTO_SITES = [
         { name: "Cape Town",    lat: -33.92, lng: 18.42, region: "Western Cape", photo: "website assets/Cape Town.webp" },
@@ -824,7 +824,7 @@
         if (!site.photo) return;
         lastFocused = document.activeElement;
         lbImg.src = encPhoto(site.photo);
-        lbImg.alt = site.name + ' — ' + site.region;
+        lbImg.alt = site.name + ', ' + site.region;
         lightbox.hidden = false;
         lbClose.focus();
       }
@@ -882,7 +882,7 @@
         c.setAttribute('class', 'sa-dot sa-dot--photo');
         c.setAttribute('role', 'button');
         c.setAttribute('tabindex', '0');
-        c.setAttribute('aria-label', site.name + ', ' + site.region + '. Has photos — activate to enlarge.');
+        c.setAttribute('aria-label', site.name + ', ' + site.region + '. Has photos. Activate to enlarge.');
         dotsG.appendChild(c);
         greenCircles.push(c);
 

@@ -10,12 +10,12 @@
   <!-- OpenGraph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://kleenup.solar/" />
-  <meta property="og:title" content="Kleen Up Solar — Commercial Solar O&M, South Africa" />
+  <meta property="og:title" content="Kleen Up Solar: Commercial Solar O&M, South Africa" />
   <meta property="og:description" content="Commercial solar asset management across South Africa. PV cleaning, technical annual inspections, drone inspections, and maintenance. 500+ sites, 120 MW under management." />
   <meta property="og:image" content="https://kleenup.solar/website%20assets/Good%20Wood%20og.webp" />
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Kleen Up Solar — Commercial Solar O&M, South Africa" />
+  <meta name="twitter:title" content="Kleen Up Solar: Commercial Solar O&M, South Africa" />
   <meta name="twitter:description" content="Commercial solar asset management across South Africa. PV cleaning, technical annual inspections, drone inspections, and maintenance." />
   <meta name="twitter:image" content="https://kleenup.solar/website%20assets/Good%20Wood%20og.webp" />
 
@@ -576,7 +576,7 @@
       display: block; width: 100%; height: auto;
       max-height: 520px; object-fit: contain; object-position: top center;
     }
-    /* Stats bar — horizontal, spans full section width */
+    /* Stats bar - horizontal, spans full section width */
     .insp-blue-strip {
       grid-column: 1 / -1; grid-row: 2;
       background: var(--navy); border-radius: var(--radius);
@@ -1072,22 +1072,19 @@
     .contact-detail-row a:hover { color: var(--blue); }
 
     /* ---------- GET IN TOUCH ---------- */
-    .get-in-touch { background: var(--navy); padding: 88px 0; }
+    .get-in-touch { background: var(--navy); padding: 60px 0; }
     .git-headline {
       color: #fff;
       font-size: clamp(1.8rem, 3.5vw, 2.8rem);
       font-weight: 700; letter-spacing: -.02em; line-height: 1.2;
-      margin-bottom: 48px;
+      margin-bottom: 28px; text-align: center;
     }
     .git-layout {
-      display: grid;
-      grid-template-columns: 1.3fr 1fr;
-      gap: 64px;
-      align-items: start;
+      max-width: 720px; margin: 0 auto;
     }
     .git-form-grid {
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: 32px 56px;
+      gap: 18px 56px;
     }
     .git-contact-label {
       color: rgba(255,255,255,.45);
@@ -1116,49 +1113,12 @@
     }
     .ci-value a { color: #fff; }
     .ci-value a:hover { color: var(--blue); }
-    .git-right-col {
-      display: flex; flex-direction: column;
-      justify-content: center; align-self: stretch;
-    }
-    .git-contact-col {
-      position: relative; isolation: isolate;
-      border-radius: var(--radius);
-      padding: 32px 28px;
-      overflow: hidden;
-    }
-    .git-contact-col::before {
-      content: '';
-      position: absolute; inset: -60%;
-      background: conic-gradient(from var(--git-contact-ang),
-        transparent 0%, transparent 60%,
-        rgba(78,153,212,.15) 70%,
-        #4e99d4 83%,
-        transparent 91%
-      );
-      animation: git-contact-spin 3s linear infinite;
-      z-index: 0;
-    }
-    .git-contact-col::after {
-      content: '';
-      position: absolute; inset: 2px;
-      background: var(--navy);
-      border-radius: calc(var(--radius) - 1px);
-      z-index: 1;
-    }
-    .git-contact-col > * { position: relative; z-index: 2; }
-    @keyframes git-contact-spin {
-      to { --git-contact-ang: 360deg; }
-    }
-    .git-email-banner {
-      width: 100%; display: block;
-      border-radius: var(--radius);
-    }
     .git-field { display: flex; flex-direction: column; }
     .git-label {
       color: rgba(255,255,255,.85);
       font-size: .8rem; font-weight: 600;
       letter-spacing: .07em; text-transform: uppercase;
-      margin-bottom: 10px;
+      margin-bottom: 6px;
     }
     .git-input, .git-select {
       background: transparent; border: none;
@@ -1186,19 +1146,19 @@
     }
     .git-textarea::placeholder { color: rgba(255,255,255,.35); }
     .git-textarea:focus { border-color: rgba(255,255,255,.9); }
-    .git-submit-wrap { display: flex; margin-top: -12px; }
+    .git-submit-wrap { display: flex; justify-content: center; margin-top: 6px; }
     .git-submit {
       background: #fff; color: var(--navy);
-      border: none; border-radius: 2px;
-      font: inherit; font-weight: 700; font-size: .82rem;
-      letter-spacing: .14em; text-transform: uppercase;
-      padding: 16px 28px;
+      border: none;
+      font: inherit; font-weight: 700; font-size: .76rem;
+      letter-spacing: .12em; text-transform: uppercase;
+      padding: 11px 26px;
       cursor: pointer;
-      width: 100%;
-      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-      transition: background 200ms var(--ease), color 200ms var(--ease), transform 200ms var(--ease), box-shadow 200ms var(--ease);
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+      transition: background 200ms var(--ease), color 200ms var(--ease), transform 200ms var(--ease);
     }
-    .git-submit:hover { background: var(--blue); color: #fff; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .git-submit:hover { background: var(--blue); color: #fff; transform: translateY(-1px); }
     @media (max-width: 768px) {
       .git-layout { grid-template-columns: 1fr; gap: 44px; }
       .git-form-grid { grid-template-columns: 1fr; gap: 28px; }
@@ -1693,35 +1653,35 @@
             <path d="M 305.6,248.1 L 322.2,218.4 L 361.1,221.6 L 372.2,241.4 L 375.0,286.9 L 313.9,270.3 Z"
               fill="var(--bg-cool)" stroke="var(--navy)" stroke-width="2" stroke-linejoin="round" />
           </svg>
-          <!-- Pin: Cape Town 115 kW — 18.47°E 33.91°S -->
+          <!-- Pin: Cape Town 115 kW,18.47°E 33.91°S -->
           <div class="fp-pin" style="left:13.7%;top:91.6%;">
             <span class="fp-dot"></span>
             <div class="fp-card" style="bottom:20px;left:0;">
-              <img src="website%20assets/tmp4phvlu4h.webp" alt="Cape Town, 115 kW" loading="lazy" />
+              <img src="website%20assets/Cape%20Town.webp" alt="Cape Town, 115 kW" loading="lazy" />
               <span class="fp-card-label">Cape Town, 115 kW</span>
             </div>
           </div>
-          <!-- Pin: Fisantekraal 360 kW — 18.75°E 33.77°S -->
+          <!-- Pin: Fisantekraal 360 kW,18.75°E 33.77°S -->
           <div class="fp-pin" style="left:15.3%;top:90.5%;">
             <span class="fp-dot"></span>
             <div class="fp-card" style="bottom:20px;left:0;">
-              <img src="website%20assets/tmpfnao8y5_.webp" alt="Fisantekraal, Cape Town, 360 kW" loading="lazy" />
+              <img src="website%20assets/Fisantekraal,%20Cape%20Town.webp" alt="Fisantekraal, Cape Town, 360 kW" loading="lazy" />
               <span class="fp-card-label">Fisantekraal, 360 kW</span>
             </div>
           </div>
-          <!-- Pin: Sasolburg Free State 392 kW — 27.82°E 26.81°S -->
+          <!-- Pin: Sasolburg Free State 392 kW,27.82°E 26.81°S -->
           <div class="fp-pin" style="left:65.7%;top:37%;">
             <span class="fp-dot"></span>
             <div class="fp-card" style="bottom:20px;left:-99px;">
-              <img src="website%20assets/tmp9wftsuv6.webp" alt="Sasolburg, Free State, 392 kW" loading="lazy" />
+              <img src="website%20assets/Sasolburg,%20Free%20State.webp" alt="Sasolburg, Free State, 392 kW" loading="lazy" />
               <span class="fp-card-label">Sasolburg, Free State, 392 kW</span>
             </div>
           </div>
-          <!-- Pin: Nelspruit Mpumalanga 361 kW — 30.97°E 25.47°S -->
+          <!-- Pin: Nelspruit Mpumalanga 361 kW,30.97°E 25.47°S -->
           <div class="fp-pin" style="left:83.1%;top:26.7%;">
             <span class="fp-dot"></span>
             <div class="fp-card" style="top:20px;right:0;bottom:auto;">
-              <img src="website%20assets/tmphynl_c2s.webp" alt="Nelspruit, Mpumalanga, 361 kW" loading="lazy" />
+              <img src="website%20assets/Nelspruit.%20Mpumelanga.webp" alt="Nelspruit, Mpumalanga, 361 kW" loading="lazy" />
               <span class="fp-card-label">Nelspruit, Mpumalanga, 361 kW</span>
             </div>
           </div>
@@ -1823,7 +1783,7 @@
             </div>
             <div class="git-field" style="grid-column: 1 / -1;">
               <label class="git-label" for="git-message">Message *</label>
-              <textarea class="git-textarea" id="git-message" name="message" rows="4" required></textarea>
+              <textarea class="git-textarea" id="git-message" name="message" rows="3" required></textarea>
             </div>
             <div class="git-submit-wrap" style="grid-column: 1 / -1;">
               <button type="submit" class="git-submit">
@@ -1833,11 +1793,6 @@
             </div>
           </div>
         </form>
-
-        <!-- CONTACT IMAGE -->
-        <div class="git-right-col">
-        <img src="website%20assets/contact-banner-pv-cleaning.jpg" alt="Kleen Up Solar technician cleaning commercial solar panels" class="git-email-banner" />
-        </div>
 
       </div>
     </div>
@@ -2049,7 +2004,7 @@
         btn.textContent = 'Send enquiry';
         alert('Something went wrong. Please email us directly at info@kleenup.solar');
       } else {
-        form.innerHTML = '<p style="padding:24px 0;font-size:1.1rem;color:var(--navy);font-weight:600;">Thanks — we’ll be in touch within 24 hours.</p>';
+        form.innerHTML = '<p style="padding:24px 0;font-size:1.1rem;color:var(--navy);font-weight:600;">Thanks, we’ll be in touch within 24 hours.</p>';
       }
     }
   </script>
