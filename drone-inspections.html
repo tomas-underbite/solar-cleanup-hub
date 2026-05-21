@@ -231,6 +231,152 @@
       }
       .reveal { opacity: 1; transform: none; }
     }
+
+    /* ---------- INSPECTION SECTION ---------- */
+    figure { margin: 0; }
+    .insp-grid {
+      display: grid;
+      grid-template-columns: 58% 1fr;
+      grid-template-rows: auto auto;
+      column-gap: 48px;
+      row-gap: 32px;
+      align-items: start;
+    }
+    .insp-left  { grid-column: 1; grid-row: 1; }
+    .insp-right { grid-column: 2; grid-row: 1; align-self: stretch; padding-top: 210px; }
+    .insp-header-area {
+      position: relative;
+      padding-right: 170px;
+      margin-bottom: 18px;
+    }
+    .insp-drone-zone {
+      position: absolute;
+      right: -150px; top: -20px;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .insp-drone-flying-img {
+      height: 140px; width: auto;
+      transform: rotate(42deg);
+      transform-origin: center center;
+    }
+    .insp-drone-label {
+      font-size: .68rem; font-weight: 400;
+      color: rgba(44,51,69,.38); letter-spacing: .08em;
+      text-transform: uppercase; margin-top: 52px; text-align: center;
+    }
+    .insp-left p { color: var(--text); font-size: 1.02rem; }
+    .insp-left ul {
+      margin: 18px 0 0; padding-left: 0; list-style: none;
+    }
+    .insp-left ul li {
+      position: relative; padding-left: 28px; margin-bottom: 10px;
+      color: var(--text); font-size: .98rem;
+    }
+    .insp-left ul li::before {
+      content: ''; position: absolute; left: 0; top: 9px;
+      width: 14px; height: 14px;
+      background: var(--blue);
+      mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='5 12 10 17 19 7'/></svg>") no-repeat center / contain;
+      -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='5 12 10 17 19 7'/></svg>") no-repeat center / contain;
+    }
+    .insp-cta-wrap { text-align: left; margin-top: 24px; }
+    .insp-operator-img {
+      display: block; width: 100%; height: auto;
+      max-height: 520px; object-fit: contain; object-position: top center;
+    }
+    .insp-blue-strip {
+      grid-column: 1 / -1; grid-row: 2;
+      background: var(--navy); border-radius: var(--radius);
+      padding: 28px 40px;
+      display: flex; flex-direction: row;
+      justify-content: space-evenly; align-items: center;
+    }
+    .strip-item { flex: 1; text-align: center; }
+    .strip-value {
+      display: block; font-size: 1.4rem; font-weight: 700;
+      font-family: 'DM Sans', 'Inter', sans-serif;
+      color: #fff; letter-spacing: -.02em; margin-bottom: 4px;
+    }
+    .strip-label {
+      font-size: .82rem; color: rgba(255,255,255,.52); letter-spacing: .02em;
+      display: block;
+    }
+    .strip-divider {
+      display: block;
+      width: 1px; height: 44px;
+      background: rgba(255,255,255,.18);
+      flex-shrink: 0;
+    }
+
+    /* ---------- CERTIFICATION MARQUEE ---------- */
+    .cert-marquee-wrap {
+      background: var(--surface);
+      padding: 64px 0 44px;
+      border-top: 1px solid var(--border);
+    }
+    .cert-marquee-heading {
+      color: var(--muted);
+      font-size: 12px; font-weight: 600;
+      font-family: 'DM Sans', 'Inter', sans-serif;
+      letter-spacing: .1em; text-transform: uppercase;
+      text-align: center;
+      margin: 0 0 28px;
+    }
+    .cert-marquee {
+      overflow: hidden;
+      width: 100%;
+    }
+    .cert-marquee__track {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      width: max-content;
+      animation: certScroll 24s linear infinite;
+      will-change: transform;
+      backface-visibility: hidden;
+    }
+    .cert-marquee__item {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 16px;
+      flex-shrink: 0;
+      min-width: 300px;
+    }
+    .cert-marquee__item img {
+      width: 96px; height: auto; display: block;
+    }
+    .cert-marquee__item span {
+      color: var(--navy);
+      font-family: 'DM Sans', 'Inter', sans-serif;
+      font-weight: 600; font-size: 14px;
+      letter-spacing: .06em; text-transform: uppercase;
+      text-align: center; white-space: nowrap;
+    }
+    @keyframes certScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    @media (max-width: 960px) {
+      .insp-grid { grid-template-columns: 1fr; grid-template-rows: auto auto auto; }
+      .insp-left  { grid-column: 1; grid-row: 1; padding-bottom: 0; }
+      .insp-right { grid-column: 1; grid-row: 2; align-self: start; padding-top: 0; }
+      .insp-blue-strip { grid-column: 1; grid-row: 3; flex-direction: column; gap: 20px; padding: 28px 24px; }
+      .insp-header-area { padding-right: 0; }
+      .insp-drone-zone { display: none; }
+      .insp-operator-img { max-height: 360px; }
+    }
+    @media (max-width: 480px) {
+      .insp-drone-flying-img { height: 110px; }
+      .insp-operator-img { max-height: 280px; }
+      .cert-marquee { overflow: visible; }
+      .cert-marquee__track { animation: none; width: auto; flex-wrap: wrap; justify-content: center; gap: 28px 32px; padding: 0 16px; }
+      .cert-marquee__item { min-width: 100px; }
+      .cert-marquee__item[aria-hidden="true"] { display: none; }
+      .insp-right { display: none; }
+    }
+    @media (max-width: 768px) {
+      .cert-marquee__track { animation: none; flex-wrap: wrap; justify-content: center; gap: 48px; padding: 0 24px; }
+    }
   </style>
 </head>
 <body>
@@ -258,7 +404,119 @@
   </header>
 
   <main>
-    <!-- page content coming soon -->
+
+    <!-- ============ THERMAL INSPECTION ============ -->
+    <section id="inspection" style="background:var(--surface);padding-top:96px;">
+      <div class="container">
+
+        <div class="insp-grid">
+
+          <!-- COL 1 ROW 1: text content -->
+          <div class="insp-left reveal">
+            <div class="insp-header-area">
+              <h1>Thermal drone inspection.</h1>
+              <div class="insp-drone-zone">
+                <img src="website%20assets/Drone.png"
+                     alt="DJI Mavic 3 Thermal in flight"
+                     class="insp-drone-flying-img" />
+                <span class="insp-drone-label">DJI Mavic 3 Thermal</span>
+              </div>
+            </div>
+            <p>We find every fault your monitoring system cannot see: string open circuits, hotspots, soiling shadows, bypass diode failures. Each fault mapped to GPS coordinates and classified by severity, all from a single flight.</p>
+            <ul>
+              <li>IEC&nbsp;TS&nbsp;62446-3:2017 compliant on every site</li>
+              <li>SACAA certified pilot, licensed Remote Operating Certificate</li>
+              <li>Georeferenced thermal map and panel-level fault list</li>
+              <li>Prioritised repair recommendations with temperature delta</li>
+              <li>Delivered via SiteMark interactive report within 10-14 days</li>
+              <li>Accepted for insurance submissions and lender due diligence</li>
+            </ul>
+            <div class="insp-cta-wrap">
+              <a href="#contact" class="btn-cta">Request an inspection</a>
+            </div>
+          </div>
+
+          <!-- COL 2 ROW 1: operator image -->
+          <div class="insp-right reveal">
+            <img src="website%20assets/KleenUp_Drone_Operator_no_bg.png"
+                 alt="SACAA-certified drone operator on site"
+                 class="insp-operator-img" />
+          </div>
+
+          <!-- FULL WIDTH ROW 2: stats bar -->
+          <div class="insp-blue-strip reveal">
+            <div class="strip-item">
+              <span class="strip-value">R 7,500 / day</span>
+              <span class="strip-label">Flat-rate pricing, nationwide</span>
+            </div>
+            <div class="strip-divider" aria-hidden="true"></div>
+            <div class="strip-item">
+              <span class="strip-value">10-14 days</span>
+              <span class="strip-label">From flight to report in your inbox</span>
+            </div>
+            <div class="strip-divider" aria-hidden="true"></div>
+            <div class="strip-item">
+              <span class="strip-value">70+ sites</span>
+              <span class="strip-label">Commercial installations across South Africa</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ============ CERTIFICATION MARQUEE ============ -->
+      <div class="cert-marquee-wrap">
+        <p class="cert-marquee-heading">Certifications &amp; Compliance</p>
+        <div class="cert-marquee" aria-label="Certifications and compliance">
+          <div class="cert-marquee__track">
+            <div class="cert-marquee__item">
+              <img src="website%20assets/Cert%20Clip%20Arts/SACAA%20Licensed%20Pilot%20Clip%20Art.png" alt="SACAA Licensed Pilot" />
+              <span>SACAA Licensed Pilot</span>
+            </div>
+            <div class="cert-marquee__item">
+              <img src="website%20assets/Cert%20Clip%20Arts/SACAA%20Certified%20Operator%20-%20ROC%20Clip%20Art.png" alt="SACAA Certified Operator" />
+              <span>SACAA Certified Operator</span>
+            </div>
+            <div class="cert-marquee__item">
+              <img src="website%20assets/Cert%20Clip%20Arts/IEC%20TS%2062446-32017%20-%20Thermal%20Imaging%20Compliant%20Clip%20Art.png" alt="IEC TS 62446-3:2017 Compliant" />
+              <span>IEC TS 62446-3:2017 Compliant</span>
+            </div>
+            <div class="cert-marquee__item">
+              <img src="website%20assets/Cert%20Clip%20Arts/Public%20Liability%20Cover%20Clip%20Art.png" alt="Public Liability Insured" />
+              <span>Public Liability Insured</span>
+            </div>
+            <div class="cert-marquee__item">
+              <img src="website%20assets/Cert%20Clip%20Arts/B-BBEE%20Certified%20Clip%20Art.png" alt="B-BBEE Certified" />
+              <span>B-BBEE Certified</span>
+            </div>
+            <!-- cloned for seamless loop -->
+            <div class="cert-marquee__item" aria-hidden="true">
+              <img src="website%20assets/Cert%20Clip%20Arts/SACAA%20Licensed%20Pilot%20Clip%20Art.png" alt="" />
+              <span>SACAA Licensed Pilot</span>
+            </div>
+            <div class="cert-marquee__item" aria-hidden="true">
+              <img src="website%20assets/Cert%20Clip%20Arts/SACAA%20Certified%20Operator%20-%20ROC%20Clip%20Art.png" alt="" />
+              <span>SACAA Certified Operator</span>
+            </div>
+            <div class="cert-marquee__item" aria-hidden="true">
+              <img src="website%20assets/Cert%20Clip%20Arts/IEC%20TS%2062446-32017%20-%20Thermal%20Imaging%20Compliant%20Clip%20Art.png" alt="" />
+              <span>IEC TS 62446-3:2017 Compliant</span>
+            </div>
+            <div class="cert-marquee__item" aria-hidden="true">
+              <img src="website%20assets/Cert%20Clip%20Arts/Public%20Liability%20Cover%20Clip%20Art.png" alt="" />
+              <span>Public Liability Insured</span>
+            </div>
+            <div class="cert-marquee__item" aria-hidden="true">
+              <img src="website%20assets/Cert%20Clip%20Arts/B-BBEE%20Certified%20Clip%20Art.png" alt="" />
+              <span>B-BBEE Certified</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
   </main>
 
   <!-- ============ FOOTER ============ -->
