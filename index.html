@@ -282,7 +282,7 @@
     .stats {
       display: flex; gap: 0; flex-wrap: wrap;
       border: 1px solid rgba(255,255,255,.18); border-radius: var(--radius);
-      overflow: hidden; max-width: 540px;
+      overflow: hidden; max-width: 720px;
       background: rgba(255,255,255,.06); backdrop-filter: blur(10px);
     }
     .stat {
@@ -294,6 +294,22 @@
       display: block; color: #fff; font-size: 1.75rem; font-weight: 700;
       line-height: 1; margin-bottom: 6px; letter-spacing: -.015em;
       font-family: 'DM Sans', sans-serif;
+      position: relative; overflow: hidden;
+    }
+    .stat-num::after {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 55%; height: 100%;
+      background: linear-gradient(100deg, transparent, rgba(255,255,255,.3), transparent);
+      transform: translateX(-130%) skewX(-15deg);
+      animation: stat-shimmer 3.6s ease-in-out infinite;
+    }
+    .stat:nth-child(2) .stat-num::after { animation-delay: .25s; }
+    .stat:nth-child(3) .stat-num::after { animation-delay: .5s; }
+    .stat:nth-child(4) .stat-num::after { animation-delay: .75s; }
+    @keyframes stat-shimmer {
+      0%   { transform: translateX(-130%) skewX(-15deg); }
+      28%  { transform: translateX(320%) skewX(-15deg); }
+      100% { transform: translateX(320%) skewX(-15deg); }
     }
     .stat-label { color: rgba(255,255,255,.6); font-size: .78rem; font-weight: 500; }
 
@@ -725,7 +741,7 @@
         radial-gradient(circle at 90% 100%, rgba(78,153,212,.08), transparent 60%);
     }
     .scale-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 48px;
     }
     .scale-num {
       font-family: 'DM Sans', sans-serif;
@@ -1242,6 +1258,7 @@
       .cert-marquee__item[aria-hidden="true"] { display: none; }
       /* Hide drone operator image on mobile */
       .insp-right { display: none; }
+
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -1403,16 +1420,20 @@
           </div>
           <div class="stats" role="list" aria-label="Portfolio statistics">
             <div class="stat" role="listitem">
-              <span class="stat-num">80,000+</span>
-              <span class="stat-label">Panels</span>
+              <span class="stat-num">1,000</span>
+              <span class="stat-label">MW cleaned</span>
             </div>
             <div class="stat" role="listitem">
-              <span class="stat-num">120 MW</span>
-              <span class="stat-label">Portfolio</span>
+              <span class="stat-num">500</span>
+              <span class="stat-label">Sites serviced</span>
             </div>
             <div class="stat" role="listitem">
-              <span class="stat-num">70</span>
-              <span class="stat-label">Sites</span>
+              <span class="stat-num">250</span>
+              <span class="stat-label">Inspections</span>
+            </div>
+            <div class="stat" role="listitem">
+              <span class="stat-num">10</span>
+              <span class="stat-label">Years in operation</span>
             </div>
           </div>
         </div>
@@ -1493,23 +1514,28 @@
     </section>
 
     <!-- ============ SCALE BAND ============ -->
-    <section class="scale-band">
+    <section id="stats" class="scale-band">
       <div class="container">
         <div class="scale-grid">
           <div class="reveal">
-            <span class="scale-num">80,000+</span>
-            <span class="scale-label">Panels managed</span>
-            <span class="scale-desc">Commercial rooftop and ground-mount sites</span>
+            <span class="scale-num" data-target="1000">1,000</span>
+            <span class="scale-label">MW cleaned</span>
+            <span class="scale-desc">Total generation capacity serviced</span>
           </div>
           <div class="reveal">
-            <span class="scale-num">120 MW</span>
-            <span class="scale-label">Portfolio managed</span>
-            <span class="scale-desc">C&amp;I, PPA-backed, and EPC-managed</span>
+            <span class="scale-num" data-target="500">500</span>
+            <span class="scale-label">Sites serviced</span>
+            <span class="scale-desc">Commercial, C&amp;I, and utility-scale</span>
           </div>
           <div class="reveal">
-            <span class="scale-num">70</span>
-            <span class="scale-label">Commercial sites served</span>
-            <span class="scale-desc">Inspected, cleaned, or maintained since 2024</span>
+            <span class="scale-num" data-target="250">250</span>
+            <span class="scale-label">Inspections completed</span>
+            <span class="scale-desc">Technical, thermal, and drone surveys</span>
+          </div>
+          <div class="reveal">
+            <span class="scale-num" data-target="10">10</span>
+            <span class="scale-label">Years in operation</span>
+            <span class="scale-desc">Serving the South African solar market</span>
           </div>
         </div>
       </div>
@@ -1742,7 +1768,8 @@
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            io.unobserve(entry.target);
+          } else {
+            entry.target.classList.remove('visible');
           }
         });
       }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
@@ -1850,6 +1877,34 @@
         form.innerHTML = '<p style="padding:24px 0;font-size:1.1rem;color:var(--navy);font-weight:600;">Thanks — we’ll be in touch within 24 hours.</p>';
       }
     }
+  </script>
+
+  <script>
+    (function () {
+      var nums = document.querySelectorAll('.scale-num[data-target]');
+      if (!nums.length) return;
+      var done = false;
+      function fmt(n) { return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+      function run() {
+        if (done) return; done = true;
+        var dur = 1500, t0 = null;
+        function tick(now) {
+          if (!t0) t0 = now;
+          var p = Math.min((now - t0) / dur, 1);
+          var ease = 1 - Math.pow(1 - p, 3);
+          nums.forEach(function (el) {
+            el.textContent = fmt(Math.round(ease * +el.dataset.target)) + (el.dataset.suffix || '');
+          });
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+      var obs = new IntersectionObserver(function (es) {
+        if (es.some(function (e) { return e.isIntersecting; })) run();
+      }, { threshold: 0.3 });
+      var sec = document.getElementById('stats');
+      if (sec) obs.observe(sec);
+    })();
   </script>
 
 </body>
