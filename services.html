@@ -192,6 +192,35 @@
       color: rgba(255,255,255,.3); font-size: .82rem;
     }
 
+    /* ---------- SERVICE SUB-NAV ---------- */
+    .svc-subnav {
+      position: sticky;
+      top: 72px;
+      z-index: 40;
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .svc-subnav-inner {
+      display: flex; align-items: center;
+      gap: 0; overflow-x: auto;
+      scrollbar-width: none;
+      max-width: var(--max); margin: 0 auto; padding: 0 24px;
+    }
+    .svc-subnav-inner::-webkit-scrollbar { display: none; }
+    .svc-subnav a {
+      flex-shrink: 0;
+      padding: 15px 20px;
+      font-size: .88rem; font-weight: 500;
+      color: var(--muted);
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+      transition: color 200ms var(--ease), border-color 200ms var(--ease);
+    }
+    .svc-subnav a:hover { color: var(--navy); }
+    .svc-subnav a.active { color: var(--navy); font-weight: 600; border-bottom-color: var(--navy); }
+
     /* ---------- PAGE TITLE BAND ---------- */
     .page-title-band {
       background: var(--navy-deep); color: #fff;
@@ -204,7 +233,7 @@
     }
 
     /* ---------- SERVICE SPLIT SECTIONS ---------- */
-    .svc-section { background: var(--surface); }
+    .svc-section { background: var(--surface); scroll-margin-top: 130px; }
     .svc-section:nth-child(even) { background: var(--bg-cool); }
     .svc-split {
       display: grid; grid-template-columns: 1fr 1fr;
@@ -287,6 +316,16 @@
     </div>
   </header>
 
+  <!-- ============ SERVICE SUB-NAV ============ -->
+  <div class="svc-subnav" id="svcSubnav" aria-label="Service sections">
+    <div class="svc-subnav-inner">
+      <a href="#cleaning">PV Cleaning</a>
+      <a href="#technical-inspections">Technical Annual Inspections</a>
+      <a href="#drone-inspections">Drone Inspections</a>
+      <a href="#maintenance">Maintenance</a>
+    </div>
+  </div>
+
   <main>
 
     <!-- ============ PAGE TITLE ============ -->
@@ -298,7 +337,7 @@
     </div>
 
     <!-- ============ 01 — PV CLEANING (image left) ============ -->
-    <section class="svc-section">
+    <section id="cleaning" class="svc-section">
       <div class="container">
         <div class="svc-split reveal">
           <img src="New%20HD%20photos/IMG_20251103_091147.jpg"
@@ -315,10 +354,10 @@
     </section>
 
     <!-- ============ 02 — TECHNICAL ANNUAL INSPECTIONS (image right) ============ -->
-    <section class="svc-section">
+    <section id="technical-inspections" class="svc-section">
       <div class="container">
         <div class="svc-split flip reveal">
-          <img src="New%20HD%20photos/20260210_101319.jpg"
+          <img src="website%20assets/meet-the-team-1.png"
                alt="Kleen Up Solar technician performing a technical annual inspection on site"
                class="svc-split-img" />
           <div class="svc-split-body">
@@ -332,7 +371,7 @@
     </section>
 
     <!-- ============ 03 — DRONE INSPECTIONS (image left) ============ -->
-    <section class="svc-section">
+    <section id="drone-inspections" class="svc-section">
       <div class="container">
         <div class="svc-split reveal">
           <img src="New%20HD%20photos/20260512_160013.jpg"
@@ -349,7 +388,7 @@
     </section>
 
     <!-- ============ 04 — MAINTENANCE (image right) ============ -->
-    <section class="svc-section">
+    <section id="maintenance" class="svc-section">
       <div class="container">
         <div class="svc-split flip reveal">
           <img src="New%20HD%20photos/20260316_145855.jpg"
@@ -422,6 +461,26 @@
           btn.setAttribute('aria-expanded', 'false');
         }
       });
+    })();
+
+    // -------- sub-nav active link on scroll --------
+    (function () {
+      var links = document.querySelectorAll('.svc-subnav a');
+      var sections = Array.from(links).map(function (a) {
+        return document.querySelector(a.getAttribute('href'));
+      });
+      function update() {
+        var scrollY = window.scrollY + 150;
+        var active = sections[0];
+        sections.forEach(function (s) {
+          if (s && s.offsetTop <= scrollY) active = s;
+        });
+        links.forEach(function (a) {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + active.id);
+        });
+      }
+      window.addEventListener('scroll', update, { passive: true });
+      update();
     })();
 
     (function () {
