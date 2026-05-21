@@ -1126,29 +1126,6 @@
       to   { transform: translateX(-50%); }
     }
 
-    /* Hero circular badge */
-    .hero-badge {
-      position: absolute;
-      right: clamp(24px, 7vw, 110px);
-      top: 50%;
-      transform: translateY(-50%);
-      width: 164px; height: 164px;
-      z-index: 3;
-      opacity: 0;
-      animation: badge-fade-in 1s ease 1s forwards;
-      pointer-events: none;
-    }
-    .badge-spin-group {
-      transform-origin: 82px 82px;
-      animation: badge-spin 24s linear infinite;
-    }
-    @keyframes badge-spin {
-      to { transform: rotate(360deg); }
-    }
-    @keyframes badge-fade-in {
-      to { opacity: 1; }
-    }
-    @media (max-width: 900px) { .hero-badge { display: none; } }
   </style>
 
   <!-- LocalBusiness JSON-LD -->
@@ -1257,36 +1234,6 @@
         </div>
       </div>
 
-      <!-- Circular rotating badge -->
-      <svg class="hero-badge" viewBox="0 0 164 164" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <defs>
-          <path id="badge-path" d="M 82,82 m -70,0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0"/>
-        </defs>
-        <g class="badge-spin-group">
-          <circle cx="82" cy="82" r="70" stroke="rgba(255,255,255,0.18)" stroke-width="0.75" fill="none"/>
-          <circle cx="82" cy="82" r="52" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" fill="none"/>
-          <text font-family="'Inter', sans-serif" font-size="10.5" font-weight="400"
-                fill="rgba(255,255,255,0.78)" letter-spacing="1">
-            <textPath href="#badge-path" textLength="440" lengthAdjust="spacing">
-              Cleaning today · Powering tomorrow™ · Kleen Up Solar ·
-            </textPath>
-          </text>
-        </g>
-        <!-- Centre sun — counter-rotates to stay upright -->
-        <g style="transform-origin:82px 82px;animation:badge-spin 24s linear infinite reverse">
-          <circle cx="82" cy="82" r="6" fill="#F5A623" opacity="0.9"/>
-          <g stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" opacity="0.8">
-            <line x1="82" y1="70" x2="82" y2="74"/>
-            <line x1="82" y1="90" x2="82" y2="94"/>
-            <line x1="70" y1="82" x2="74" y2="82"/>
-            <line x1="90" y1="82" x2="94" y2="82"/>
-            <line x1="73.5" y1="73.5" x2="76.3" y2="76.3"/>
-            <line x1="87.7" y1="87.7" x2="90.5" y2="90.5"/>
-            <line x1="90.5" y1="73.5" x2="87.7" y2="76.3"/>
-            <line x1="76.3" y1="87.7" x2="73.5" y2="90.5"/>
-          </g>
-        </g>
-      </svg>
     </section>
 
     <!-- ============ TRUSTED BY (animated marquee) ============ -->
