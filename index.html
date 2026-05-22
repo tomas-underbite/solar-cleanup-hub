@@ -136,6 +136,7 @@
       margin-top: 7px;
       margin-left: 1px;
     }
+    footer .logo-tm { color: #fff; }
     .nav-links {
       display: flex; gap: 30px; align-items: center;
       list-style: none; margin: 0; padding: 0;
@@ -169,9 +170,9 @@
       padding: 11px 22px; font-size: .74rem;
       font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
       border-radius: 2px;
-      background: #ffffff; color: #0A2540; border: 1.5px solid #0A2540;
+      background: #0A2540; color: #fff; border: 1px solid #0A2540;
     }
-    .nav .btn:hover { background: #0A2540; color: #fff; border-color: #0A2540; }
+    .nav .btn:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
 
     .btn-ghost {
       display: inline-block; background: transparent; color: #fff;
@@ -252,77 +253,76 @@
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    /* ---------- HERO (white, airy) ---------- */
+    /* ---------- HERO ---------- */
     .hero {
-      position: relative; min-height: 90vh;
+      position: relative; min-height: 65vh;
       display: flex; align-items: center;
-      background: #ffffff; overflow: hidden;
+      background: #0b1c2a; overflow: hidden;
     }
-    /* Photograph occupies the right edge of the hero */
-    .hero-photo {
-      position: absolute; top: 0; right: 0; bottom: 0;
-      width: 46%;
+    .hero-bg {
+      position: absolute; inset: 0;
       background-image: url('website%20assets/Goodwood%20HD.webp');
-      background-size: cover; background-position: center;
+      background-size: cover; background-position: center 38%;
+      will-change: transform;
     }
-    /* Soft gradient that fades the photo's left edge into the white column */
-    .hero-fade {
-      position: absolute; top: 0; bottom: 0; right: 0;
-      width: 52%; pointer-events: none;
-      background: linear-gradient(to right,
-        #ffffff 0%,
-        rgba(255,255,255,.97) 16%,
-        rgba(255,255,255,.6) 32%,
-        rgba(255,255,255,0) 46%);
-    }
-    /* Pull the hero copy toward the viewport edge for more white space */
-    .hero > .container {
-      max-width: none;
-      padding-left: clamp(24px, 5vw, 80px);
-      padding-right: 24px;
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(6,15,24,.62) 0%, transparent 22%),
+        linear-gradient(105deg, rgba(6,15,24,.92) 0%, rgba(6,15,24,.68) 50%, rgba(6,15,24,.32) 100%);
     }
     .hero-content {
       position: relative; z-index: 2;
-      padding: 168px 0 104px; max-width: 620px;
+      padding: 112px 0 77px; max-width: 760px;
     }
     .hero-title {
-      color: #0A2540;
+      color: #fff;
       font-family: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
       font-weight: 700;
       font-size: clamp(1.75rem, 3.6vw, 2.8rem);
       line-height: 1.08; letter-spacing: -.035em;
-      margin: 0 0 26px;
+      margin: 0 0 22px;
       white-space: nowrap;
     }
     .hero-sub {
-      color: #0A2540; font-weight: 400;
-      font-size: clamp(1.05rem, 1.5vw, 1.28rem);
-      line-height: 1.55; max-width: 460px;
-      margin: 0 0 60px; opacity: .82;
+      color: rgba(255,255,255,.82); font-weight: 400;
+      font-size: 1.18rem;
+      line-height: 1.6; max-width: 620px;
+      margin: 0 0 44px;
     }
-    .hero-stats {
-      display: flex; gap: 18px; flex-wrap: wrap;
-      max-width: 560px;
+    .stats {
+      display: flex; gap: 0; flex-wrap: wrap;
+      border: 1px solid rgba(255,255,255,.18); border-radius: var(--radius);
+      overflow: hidden; max-width: 720px;
+      background: rgba(255,255,255,.06); backdrop-filter: blur(10px);
     }
-    .hero-stat {
-      flex: 1 1 0; min-width: 148px;
-      background: #0A2540; color: #fff;
-      border-radius: 16px;
-      padding: 22px 22px 20px;
+    .stat {
+      flex: 1 1 130px; padding: 18px 22px;
+      border-right: 1px solid rgba(255,255,255,.14);
     }
-    .hero-stat-num {
-      display: block;
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      display: block; color: #fff; font-size: 1.75rem; font-weight: 700;
+      line-height: 1; margin-bottom: 6px; letter-spacing: -.015em;
       font-family: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-weight: 700; font-size: 1.7rem;
-      line-height: 1; letter-spacing: -.02em;
-      margin-bottom: 10px;
+      position: relative; overflow: hidden;
     }
-    .hero-stat-label {
-      display: block;
-      color: rgba(255,255,255,.72);
-      font-size: .82rem; font-weight: 500; line-height: 1.35;
-      max-width: 120px;
+    .stat-num::after {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 55%; height: 100%;
+      background: linear-gradient(100deg, transparent, rgba(255,255,255,.3), transparent);
+      transform: translateX(-130%) skewX(-15deg);
+      animation: stat-shimmer 3.6s ease-in-out infinite;
     }
+    .stat:nth-child(2) .stat-num::after { animation-delay: .25s; }
+    .stat:nth-child(3) .stat-num::after { animation-delay: .5s; }
+    .stat:nth-child(4) .stat-num::after { animation-delay: .75s; }
+    @keyframes stat-shimmer {
+      0%   { transform: translateX(-130%) skewX(-15deg); }
+      28%  { transform: translateX(320%) skewX(-15deg); }
+      100% { transform: translateX(320%) skewX(-15deg); }
+    }
+    .stat-label { color: rgba(255,255,255,.6); font-size: .78rem; font-weight: 500; }
 
     /* ---------- TRUSTED BY (marquee) ---------- */
     .trusted-by {
@@ -1217,7 +1217,7 @@
       padding-bottom: 28px; margin-bottom: 28px;
       border-bottom: 1px solid rgba(255,255,255,.12);
     }
-    .foot-top .foot-logo { display: inline-block; }
+    .foot-top .foot-logo { display: inline-flex; align-items: flex-start; }
     .foot-top .foot-logo img { width: 140px; height: auto; display: block; }
     .foot-hnav {
       display: flex; gap: 24px; flex-wrap: wrap;
@@ -1773,6 +1773,7 @@
       <div class="foot-top">
         <a href="index.html" class="foot-logo" aria-label="Kleen Up Solar home">
           <img src="website%20assets/Kleen%20Up%20Solar%20Logo.webp" alt="Kleen Up Solar" />
+          <span class="logo-tm" aria-hidden="true">™</span>
         </a>
         <ul class="foot-hnav" aria-label="Footer navigation">
           <li><a href="#services">Services</a></li>
@@ -1819,7 +1820,7 @@
           <li><a href="#">Cookie Policy</a></li>
         </ul>
       </div>
-      <p class="foot-tagline">Cleaning today, powering tomorrow&trade;</p>
+      <p class="foot-tagline">Cleaning today, powering tomorrow</p>
     </div>
   </footer>
 
