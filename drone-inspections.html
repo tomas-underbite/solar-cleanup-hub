@@ -500,26 +500,10 @@
       align-items: start;
     }
     .insp-left  { grid-column: 1; grid-row: 1; }
-    .insp-right { grid-column: 2; grid-row: 1; align-self: stretch; padding-top: 210px; }
+    .insp-right { grid-column: 2; grid-row: 1; align-self: center; }
     .insp-header-area {
       position: relative;
-      padding-right: 170px;
       margin-bottom: 18px;
-    }
-    .insp-drone-zone {
-      position: absolute;
-      right: -150px; top: -20px;
-      display: flex; flex-direction: column; align-items: center;
-    }
-    .insp-drone-flying-img {
-      height: 140px; width: auto;
-      transform: rotate(42deg);
-      transform-origin: center center;
-    }
-    .insp-drone-label {
-      font-size: .68rem; font-weight: 400;
-      color: rgba(44,51,69,.38); letter-spacing: .08em;
-      text-transform: uppercase; margin-top: 52px; text-align: center;
     }
     .insp-left p { color: var(--text); font-size: 1.02rem; }
     .insp-left ul {
@@ -537,9 +521,19 @@
       -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='5 12 10 17 19 7'/></svg>") no-repeat center / contain;
     }
     .insp-cta-wrap { text-align: left; margin-top: 24px; }
-    .insp-operator-img {
+    .insp-drone-figure {
+      margin: 0;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 28px;
+    }
+    .insp-drone-static-img {
       display: block; width: 100%; height: auto;
-      max-height: 520px; object-fit: contain; object-position: top center;
+      max-width: 620px; object-fit: contain; object-position: center;
+    }
+    .insp-drone-static-label {
+      font-size: 1.05rem; font-weight: 400;
+      color: rgba(44,51,69,.5); letter-spacing: .1em;
+      text-transform: uppercase; text-align: center;
     }
     .insp-blue-strip {
       grid-column: 1 / -1; grid-row: 2;
@@ -618,13 +612,10 @@
       .insp-left  { grid-column: 1; grid-row: 1; padding-bottom: 0; }
       .insp-right { grid-column: 1; grid-row: 2; align-self: start; padding-top: 0; }
       .insp-blue-strip { grid-column: 1; grid-row: 3; flex-direction: column; gap: 20px; padding: 28px 24px; }
-      .insp-header-area { padding-right: 0; }
-      .insp-drone-zone { display: none; }
-      .insp-operator-img { max-height: 360px; }
+      .insp-drone-static-img { max-width: 460px; }
     }
     @media (max-width: 480px) {
-      .insp-drone-flying-img { height: 110px; }
-      .insp-operator-img { max-height: 280px; }
+      .insp-drone-static-img { max-width: 320px; }
       .cert-marquee { overflow: visible; }
       .cert-marquee__track { animation: none; width: auto; flex-wrap: wrap; justify-content: center; gap: 28px 32px; padding: 0 16px; }
       .cert-marquee__item { min-width: 100px; }
@@ -636,6 +627,7 @@
     }
 
     /* ---------- CONTACT ---------- */
+    #contact .section-head h2 { white-space: nowrap; }
     .contact-grid {
       max-width: 620px; margin: 0 auto;
     }
@@ -732,12 +724,6 @@
           <div class="insp-left reveal">
             <div class="insp-header-area">
               <h1>Thermal drone inspection.</h1>
-              <div class="insp-drone-zone">
-                <img src="website%20assets/Drone.webp"
-                     alt="DJI Mavic 3 Thermal in flight"
-                     class="insp-drone-flying-img" loading="lazy" />
-                <span class="insp-drone-label">DJI Mavic 3 Thermal</span>
-              </div>
             </div>
             <p>We find every fault your monitoring system cannot see: string open circuits, hotspots, soiling shadows, bypass diode failures. Each fault mapped to GPS coordinates and classified by severity, all from a single flight.</p>
             <ul>
@@ -753,11 +739,14 @@
             </div>
           </div>
 
-          <!-- COL 2 ROW 1: operator image -->
+          <!-- COL 2 ROW 1: drone -->
           <div class="insp-right reveal">
-            <img src="website%20assets/drone%20operator.webp"
-                 alt="SACAA-certified drone operator on site"
-                 class="insp-operator-img" loading="lazy" />
+            <figure class="insp-drone-figure">
+              <img src="website%20assets/Drone.webp"
+                   alt="DJI Mavic 3 Thermal drone"
+                   class="insp-drone-static-img" loading="lazy" />
+              <figcaption class="insp-drone-static-label">DJI Mavic 3 Thermal</figcaption>
+            </figure>
           </div>
 
           <!-- FULL WIDTH ROW 2: stats bar -->
