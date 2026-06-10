@@ -12,3 +12,4 @@ collections_config:
   motion_design_vid_project:
     path: Motion Design Vid/project
     icon: motion_sensor_urgent
+    hidden: true
