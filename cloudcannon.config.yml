@@ -1,0 +1,14 @@
+paths:
+  static: ''
+  uploads: uploads
+timezone: Africa/Johannesburg
+markdown:
+  engine: commonmark
+  options: {}
+collections_config:
+  pages:
+    path: ''
+    icon: wysiwyg
+  motion_design_vid_project:
+    path: Motion Design Vid/project
+    icon: motion_sensor_urgent
