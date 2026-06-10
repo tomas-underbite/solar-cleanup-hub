@@ -9,6 +9,14 @@ Thermal Drone for Solar Panel Inspection_files/
 # Internal strategy / brief docs (keep private)
 *.md
 
+# Client business documents — never publish (PII / commercial terms)
+*.pdf
+*.docx
+kus_customers*
+
+# Old / reference material — not part of the deployed site
+_archive/
+
 # Unreferenced / superseded assets
 ChatGPT Image *.png
 tmpmtxwxb7w.webp
