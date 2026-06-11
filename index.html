@@ -751,23 +751,32 @@
       border-color: var(--navy);
     }
     .svc-more:hover .arr { transform: translateX(3px); }
-    .svc-card-wrap {
-      position: relative;
-    }
-    .svc-hover-img {
-      position: absolute; top: calc(100% + 10px); left: 50%;
-      transform: translateX(-50%) translateY(-6px) scale(0.95);
+    /* PV card hover image: sits behind the text, fades in on hover */
+    .svc-pv-card .svc-hover-img {
+      position: absolute; inset: 2px;
+      width: calc(100% - 4px); height: calc(100% - 4px);
+      object-fit: cover;
       opacity: 0; pointer-events: none;
-      width: 100%; max-width: 320px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-lg);
-      transition: opacity 220ms var(--ease), transform 220ms var(--ease);
-      z-index: 20;
+      border-radius: calc(var(--radius) - 1px);
+      transform: scale(1.03);
+      transition: opacity 250ms var(--ease), transform 250ms var(--ease);
     }
-    .svc-card-wrap:hover .svc-hover-img {
-      opacity: 0.82;
-      transform: translateX(-50%) translateY(0) scale(1);
-      pointer-events: auto;
+    .svc-pv-card:hover .svc-hover-img {
+      opacity: 0.85;
+      transform: scale(1);
+    }
+    /* Text inverts to white once the image is showing */
+    .svc-pv-card:hover h3 a,
+    .svc-pv-card:hover ul li,
+    .svc-pv-card:hover .svc-more {
+      color: #fff;
+      text-shadow: 0 1px 6px rgba(11,28,42,.55);
+      transition: color 250ms var(--ease);
+    }
+    .svc-pv-card:hover h3 a { border-bottom-color: rgba(255,255,255,.55); }
+    .svc-pv-card:hover .svc-more {
+      border-color: rgba(255,255,255,.65);
+      background: rgba(11,28,42,.28);
     }
 
     /* ---------- SOLAR BAND (atmospheric animated curves) ---------- */
@@ -1620,17 +1629,15 @@
     <section id="services" class="svc-teaser reveal" style="background:var(--bg-cool);">
       <div class="container">
         <div class="svc-teaser-grid">
-          <div class="svc-card-wrap">
+          <div class="svc-teaser-item reveal svc-pv-card">
             <img src="website assets/PV cleaning %233.jpg" alt="PV panel cleaning" class="svc-hover-img" loading="lazy" />
-            <div class="svc-teaser-item reveal">
-              <h3><a href="pv-cleaning.html">PV Cleaning</a></h3>
-              <ul data-editable="source" data-path="/index.html" data-key="svc-pv-cleaning-points">
-                <li>Specialised water-fed brush systems</li>
-                <li>Capable of cleaning 1,000+ panels per day</li>
-                <li>Restores peak generation across utility, C&amp;I, residential</li>
-              </ul>
-              <a href="pv-cleaning.html" class="svc-more">View more <span class="arr">→</span></a>
-            </div>
+            <h3><a href="pv-cleaning.html">PV Cleaning</a></h3>
+            <ul data-editable="source" data-path="/index.html" data-key="svc-pv-cleaning-points">
+              <li>Specialised water-fed brush systems</li>
+              <li>Capable of cleaning 1,000+ panels per day</li>
+              <li>Restores peak generation across utility, C&amp;I, residential</li>
+            </ul>
+            <a href="pv-cleaning.html" class="svc-more">View more <span class="arr">→</span></a>
           </div>
           <div class="svc-teaser-item reveal">
             <h3><a href="technical-inspections.html">Technical Annual Inspections</a></h3>
