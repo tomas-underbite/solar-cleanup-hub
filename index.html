@@ -751,6 +751,24 @@
       border-color: var(--navy);
     }
     .svc-more:hover .arr { transform: translateX(3px); }
+    .svc-card-wrap {
+      position: relative;
+    }
+    .svc-hover-img {
+      position: absolute; bottom: calc(100% + 10px); left: 50%;
+      transform: translateX(-50%) translateY(6px) scale(0.95);
+      opacity: 0; pointer-events: none;
+      width: 100%; max-width: 320px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      transition: opacity 220ms var(--ease), transform 220ms var(--ease);
+      z-index: 20;
+    }
+    .svc-card-wrap:hover .svc-hover-img {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0) scale(1);
+      pointer-events: auto;
+    }
 
     /* ---------- SOLAR BAND (atmospheric animated curves) ---------- */
     .scale-band {
@@ -1602,14 +1620,17 @@
     <section id="services" class="svc-teaser reveal" style="background:var(--bg-cool);">
       <div class="container">
         <div class="svc-teaser-grid">
-          <div class="svc-teaser-item reveal">
-            <h3><a href="pv-cleaning.html">PV Cleaning</a></h3>
-            <ul data-editable="source" data-path="/index.html" data-key="svc-pv-cleaning-points">
-              <li>Specialised water-fed brush systems</li>
-              <li>Capable of cleaning 1,000+ panels per day</li>
-              <li>Restores peak generation across utility, C&amp;I, residential</li>
-            </ul>
-            <a href="pv-cleaning.html" class="svc-more">View more <span class="arr">→</span></a>
+          <div class="svc-card-wrap">
+            <img src="website assets/PV cleaning %233.jpg" alt="PV panel cleaning" class="svc-hover-img" loading="lazy" />
+            <div class="svc-teaser-item reveal">
+              <h3><a href="pv-cleaning.html">PV Cleaning</a></h3>
+              <ul data-editable="source" data-path="/index.html" data-key="svc-pv-cleaning-points">
+                <li>Specialised water-fed brush systems</li>
+                <li>Capable of cleaning 1,000+ panels per day</li>
+                <li>Restores peak generation across utility, C&amp;I, residential</li>
+              </ul>
+              <a href="pv-cleaning.html" class="svc-more">View more <span class="arr">→</span></a>
+            </div>
           </div>
           <div class="svc-teaser-item reveal">
             <h3><a href="technical-inspections.html">Technical Annual Inspections</a></h3>
