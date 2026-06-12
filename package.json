@@ -1,0 +1,10 @@
+{
+  "name": "kleenup-solar",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node server.js .",
+    "build": "rm -rf dist && mkdir -p dist && cp -r *.html robots.txt sitemap.xml 'website assets' 'New HD photos' dist/",
+    "start": "node server.js dist"
+  }
+}
